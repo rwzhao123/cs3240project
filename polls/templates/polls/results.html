@@ -15,18 +15,18 @@
       </li>
         <li class="nav-item">
          <a class="nav-link" href="/polls/suggestions">Other Tab (ToDo)span class="sr-only">(current)</span></a>
+ <li class="nav-item">
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link disabled" href=""><p>Logged in as: {{ user.username }}</p><span class="sr-only">(current)</span></a>
+                </li>
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Login as a
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Tutor</a>
-          <a class="dropdown-item" href="#">Student/a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Administrator</a>
-        </div>
-      </li>
+            <a class="nav-link" href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a>
+            {% else %}
+                    <a class="nav-link" href="{% url 'social:begin' 'google-oauth2' %}">Login<span class="sr-only">(current)</span></a>
+                </a>
+            {% endif %}
+        </li>
 
     </ul>
     <form class="form-inline my-2 my-lg-0">
