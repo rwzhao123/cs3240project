@@ -81,3 +81,6 @@ def index(request):
     }
 
     return render(request, "polls/index.html", context)
+
+def student_profile(request):
+    return render(request, "polls/student_profile.html")
