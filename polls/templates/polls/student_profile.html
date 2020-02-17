@@ -2,7 +2,10 @@
 
 
 {% load bootstrap4 %}
- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+<html lang="en">
+  <head>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Quick Tutor</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -20,6 +23,7 @@
         <li class="nav-item">
          <a class="nav-link" href="/polls/student_profile">My Student Profile<span class="sr-only">(current)</span></a>
         </li>
+
  <li class="nav-item">
             {% if user.is_authenticated %}
                 <li class="nav-item">
@@ -46,25 +50,42 @@
           <a class="navbar-brand" href="#"><p class="text-info">Copyright/License: MIT</p></a>
           <a class="navbar-brand" href="#"><p class="text-info">Version: 1.0</p></a>
     </nav>
+      <div class="container">
+   <h2><p class="text-info">Here you can view and edit your information(student).</p></h2>
+
+   <form action="/polls/suggestions/list/" method="post">
+    {% csrf_token %}
+       <div class="container">
+          <h4> <p class="text-info">Student First Name: {{ Student.student_first_name }}</p></h4>
+            <h4> <p class="text-info">Student Last Name: {{ Student.student_last_name }}</p></h4>
+            <h4> <p class="text-info">Student Year: {{ Student.student_year_in_school }}</p></h4>
+
+        </div>
 
 
-<div class="container">
-  <h1><p class="text-info">All Suggestions Entered So Far:</p></h1>
-
-<ul>
-{% for entry in suggestion_text %}
-    <li>{{ entry.suggestion_text }}</li>
-{% endfor %}
-</ul>
-
-<a class="btn btn-info" href="/polls/suggestions" role="button">Enter another Suggestion</a>
 
 
+
+       <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
 </div>
-
- <!-- Required meta tags -->
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Suggest Another Poll</title>
+  </head>
+
+</form>
+
+  </body>
+</html>
+
+
