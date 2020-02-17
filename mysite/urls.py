@@ -18,8 +18,13 @@ from django.urls import path
 
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
+    path('', include('social_django.urls', namespace='social')),
+    path('/logout/', LogoutView.as_view(template_name='polls/login.html'), {'next_page': settings.LOGOUT_REDIRECT_URL},
+    name='logout'),
 ]

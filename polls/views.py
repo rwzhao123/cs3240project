@@ -70,3 +70,14 @@ def suggestions_list(request):
         "suggestion_text" : list_of_suggestions
     }
     return render(request, "polls/list.html", context)
+
+from django.shortcuts import render
+
+
+def index(request):
+    context = {
+        'questions': Question.objects.order_by('-date')
+        if request.user.is_authenticated else []
+    }
+
+    return render(request, "polls/index.html", context)

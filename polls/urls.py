@@ -1,6 +1,10 @@
 from django.urls import path
 
 from . import views
+from django.contrib.auth.views import LogoutView
+from django.contrib import admin
+from django.urls import include, path
+from django.conf import settings
 
 app_name = 'polls'
 urlpatterns = [
@@ -10,4 +14,7 @@ urlpatterns = [
     path('<int:question_id>/vote/', views.vote, name='vote'),
     path('suggestions/', views.suggestions, name='suggestions'),
     path('suggestions/list/', views.suggestions_list, name='suggestions_lists'),
+    path('', include('social_django.urls', namespace='social')),
+    path(r'^logout/$', LogoutView, {'next_page': settings.LOGOUT_REDIRECT_URL},
+         name='logout'),
 ]

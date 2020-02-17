@@ -2,8 +2,9 @@
 {% load static %}
 {% load bootstrap4 %}
 
-
-     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<html lang="en">
+  <head>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Quick Tutor</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -11,23 +12,24 @@
 <div class="p-3 mb-2 bg-gradient-secondary text-white">.bg-gradient-secondary</div>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-
+      <li class="nav-item">
          <a class="nav-link" href="/polls/">Find a Tutor<span class="sr-only">(current)</span></a>
       </li>
         <li class="nav-item">
-         <a class="nav-link" href="/polls/suggestions">Other Tab (ToDo) <span class="sr-only">(current)</span></a>
+         <a class="nav-link" href="/polls/suggestions">Other Tab (ToDo)<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link disabled" href=""><p>Logged in as: {{ user.username }}</p><span class="sr-only">(current)</span></a>
+                </li>
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Login as a
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Tutor</a>
-          <a class="dropdown-item" href="#">Student</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Administrator</a>
-        </div>
-      </li>
+            <a class="nav-link" href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a>
+            {% else %}
+                    <a class="nav-link" href="{% url 'social:begin' 'google-oauth2' %}">Login<span class="sr-only">(current)</span></a>
+                </a>
+            {% endif %}
+        </li>
 
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -41,6 +43,8 @@
           <a class="navbar-brand" href="#"><p class="text-info">Copyright/License: MIT</p></a>
           <a class="navbar-brand" href="#"><p class="text-info">Version: 1.0</p></a>
     </nav>
+
+
  <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <div class="container">
