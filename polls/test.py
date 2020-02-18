@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import Student
+from polls.models import Student
 
 class StudentTestCase(TestCase):
     def setUp(self):
