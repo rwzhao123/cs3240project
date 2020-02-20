@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 
-from .models import Choice, Question, Suggestion
+from .models import Choice, Question, Suggestion, Student
 
 
 class IndexView(generic.ListView):
@@ -83,4 +83,11 @@ def index(request):
     return render(request, "polls/index.html", context)
 
 def student_profile(request):
-    return render(request, "polls/student_profile.html")
+    context = {
+        'names': Student.objects.order_by('-date')
+        if request.user.is_authenticated else []
+    }
+    return render(request, "polls/student_profile.html", context)
+
+def create_student(request):
+    return render(request, "polls/create_student.html")

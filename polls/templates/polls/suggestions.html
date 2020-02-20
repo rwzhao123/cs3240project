@@ -1,7 +1,8 @@
 <!doctype html>
 
-
+{% load static %}
 {% load bootstrap4 %}
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
 
 <html lang="en">
   <head>
@@ -14,14 +15,14 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-         <a class="nav-link" href="/polls/">Find a Tutor<span class="sr-only">(current)</span></a>
+         <a class="nav-link" href="/quick-tutor/">Find a Tutor<span class="sr-only">(current)</span></a>
       </li>
         <li class="nav-item">
-         <a class="nav-link" href="/polls/suggestions">Other Tab (ToDo)<span class="sr-only">(current)</span></a>
+         <a class="nav-link" href="/quick-tutor/suggestions">Other Tab (ToDo)<span class="sr-only">(current)</span></a>
         </li>
 
         <li class="nav-item">
-         <a class="nav-link" href="/polls/student_profile">My Student Profile<span class="sr-only">(current)</span></a>
+         <a class="nav-link" href="/quick-tutor/student_profile">My Student Profile<span class="sr-only">(current)</span></a>
         </li>
  <li class="nav-item">
             {% if user.is_authenticated %}
@@ -52,13 +53,13 @@
       <div class="container">
    <h1><p class="text-info">Here you can suggest a new poll.</p></h1>
 
-   <form action="/polls/suggestions/list/" method="post">
+   <form action="/quick-tutor/suggestions/list/" method="post">
     {% csrf_token %}
-    <label for="polls/suggestions/list"><p class="text-info">It could be anyting, from your favorite dog breed to your least favorite
+    <label for="quick-tutor/suggestions/list"><p class="text-info">It could be anyting, from your favorite dog breed to your least favorite
     drink.</p></label>
 
        <div class="input-group mb-3">
-       <input id="polls/suggestions/list" type="text" name="suggestion_text" class="form-control"
+       <input id="quick-tutor/suggestions/list" type="text" name="suggestion_text" class="form-control"
               aria-describedby="button-addon2"value="{{ suggestion_text }}" y="basic-addon2">
       <div class="input-group-append">
          <button type= "submit" class="btn btn-outline-success">Submit</button>

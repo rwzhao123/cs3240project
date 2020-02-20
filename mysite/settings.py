@@ -136,6 +136,6 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'ApGrpI_WrZ6YbPeh7efmGN5R'
 
 LOGIN_URL = '/auth/login/google-oauth2/'
 
-LOGIN_REDIRECT_URL = '/polls/'
-LOGOUT_REDIRECT_URL = '/polls/'
+LOGIN_REDIRECT_URL = '/quick-tutor/'
+LOGOUT_REDIRECT_URL = '/quick-tutor/'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
