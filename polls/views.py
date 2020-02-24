@@ -84,3 +84,6 @@ def index(request):
 
 def student_profile(request):
     return render(request, "polls/student_profile.html")
+
+def tutor_profile(request):
+    return render(request, "")

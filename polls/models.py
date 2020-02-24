@@ -3,6 +3,8 @@ import datetime
 # Create your models here.
 from django.db import models
 from django.utils import timezone
+from django import forms
+
 
 
 class Question(models.Model):
@@ -63,4 +65,33 @@ class Student(models.Model):
     def is_upperclass(self):
         return self.student_year_in_school in {self.THIRD_YEAR, self.FOURTH_YEAR}
 
+class Tutor(models.Model):
+    tutor_first_name = models.CharField(label = "First Name")
+    tutor_last_name = models.CharField(label = "Last Name")
+    tutor_email = models.CharField(label = "Email")
+    tutor_skills = models.CharField(label = "Skills")
+    tutor_availability = models.CharField(label = "Availability")
 
+class UpdateTutorProfile(forms.ModelForm):
+    username = forms.CharField()
+    email = forms.CharField()
+    first_name = forms.CharField()
+    last_name = forms.CharField()
+    skills = forms.CharField()
+    availability = forms.CharField()
+
+    class Meta:
+        model = Tutor
+        fields = ('tutor_first_name', 'tutor_email', 'tutor_last_name', 'skills', 'availability')
+
+    def change_fields(self):
+        availability = self.clean_data.get('availiability')
+        skills = self.clean_data.get('skills')
+
+    def save(self, commit = True):
+        user = super(RegistrationForm, self).save(commit=False) # look at this again
+        user.availability = self.clean_data.get('availability')
+        user.skills = self.clean_data.get('skills')
+        if commit:
+            user.save()
+        return user
