@@ -6,8 +6,11 @@ services:
     - postgresql
 install:
 - pip install -r requirements.txt
+
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
+  - psql -c "CREATE USER kddgyphr WITH PASSWORD "VAwGR4cdvbUtY1x8o4czPyU-NACRxZFH ;"
+  - psql -c "ALTER USER kddgyphr CREATEDB;"
 script:
 - python manage.py test
 
