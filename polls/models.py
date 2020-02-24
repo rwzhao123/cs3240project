@@ -64,3 +64,7 @@ class Student(models.Model):
         return self.student_year_in_school in {self.THIRD_YEAR, self.FOURTH_YEAR}
 
 
+
+from ratings.handlers import ratings
+from ratings.forms import SliderVoteForm
+ratings.register(Tutor, score_range=(1, 10), form_class=SliderVoteForm)
