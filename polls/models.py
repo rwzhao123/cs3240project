@@ -34,32 +34,25 @@ class Suggestion(models.Model):
     def __str__(self):
         return self.name_text
 
+
 class Student(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
-    def __str__(self):
-        return "Student: ",self.first_name, self.last_name
 
-    FIRST_YEAR= '1Y'
-    SECOND_YEAR = '2Y'
-    THIRD_YEAR = '3Y'
-    FOURTH_YEAR = '4Y'
-    GRADUATE = 'GR'
-    YEAR_IN_SCHOOL_CHOICES = [
-        (FIRST_YEAR, 'First Year'),
-        (SECOND_YEAR, 'Second Year'),
-        (THIRD_YEAR, 'Third Year'),
-        (FOURTH_YEAR, 'Fourth Year'),
-        (GRADUATE, 'Graduate'),
-    ]
-    year_in_school = models.CharField(
-        max_length=2,
-        choices=YEAR_IN_SCHOOL_CHOICES,
-        default=FIRST_YEAR,
+    YEAR = (
+        ('1Y', 'First Year'),
+        ('2Y', 'Second Year'),
+        ('3Y', 'Third Year'),
+        ('4Y', 'Fourth Year'),
+        ('GR', 'Graduate Student'),
     )
+    year = models.CharField(max_length=2, choices=YEAR, default="1Y")
 
-    def is_upperclass(self):
-        return self.year_in_school in {self.THIRD_YEAR, self.FOURTH_YEAR}
+
+
+    def __str__(self):
+        return self.last_name
+
 
 

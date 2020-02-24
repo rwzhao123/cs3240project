@@ -18,5 +18,5 @@ urlpatterns = [
     path(r'^logout/$', LogoutView, {'next_page': settings.LOGOUT_REDIRECT_URL},
          name='logout'),
     path('student_profile/', views.student_profile),
-    path('register_as_student/', views.create_student)
+    path('register_as_student/', views.create_student),
 ]

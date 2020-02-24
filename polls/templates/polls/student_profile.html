@@ -53,21 +53,16 @@
           <a class="navbar-brand" href="#"><p class="text-info">Version: 1.0</p></a>
       </nav>
       <div class="container">
-        <h2><p class="text-white ">Your Information (Student) </p></h2>
+        <h2><p class="text-white ">Your Information for {{ user.username }} (Student) </p></h2>
           <div class="col-md-3 mb-4">
               {% csrf_token %}
           <div class="container">
-              {% if names.count < 2%}
-                <p class="text-white "> You are logged in, but it looks like you haven't registered as a student.
-                This is necessary, as it allows us to match you with a tutor. You can do so below.</p>
-               <a class="btn btn-info" href="/quick-tutor/register_as_student" role="button">Register as Student</a>
-              {% else %}
-                    {% for firstname in first_name %}
-                     <p class="text-white ">Student First Name: {{ Student.first_name }}</p>
-                     <p class="text-white ">Student Last Name: {{ Student.last_name }}</p>
-                     <p class="text-white ">Student Year: {{ Student.year_in_school }}</p>
-                     {% endfor %}
-              {% endif %}
+              <p class="text-white ">First Name: {{student.first_name}}</p>
+              <p class="text-white ">Last Name: {{student.last_name}}</p>
+              <p class="text-white ">Email: {{student.email}}</p>
+              <p class="text-white ">Year: {{student.year}}</p>
+
+
 
         </div>
     </div>
