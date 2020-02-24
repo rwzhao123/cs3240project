@@ -72,10 +72,10 @@ def suggestions_list(request):
     return render(request, "polls/list.html", context)
 
 def chat(request):
-    return render(request, 'polls/chat.html')
+    return render(request, 'quick-tutor/chat.html')
 
 def room(request, room_name):
-    return render(request, 'polls/room.html', {
+    return render(request, 'quick-tutor/room.html', {
         'room_name': room_name
     })
 
