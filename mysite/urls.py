@@ -25,7 +25,8 @@ urlpatterns = [
     path('quick-tutor/', include('polls.urls')),
     path('admin/', admin.site.urls),
     path('', include('social_django.urls', namespace='social')),
+
+
     path('/logout/', LogoutView.as_view(template_name='quick-tutor/login.html'), {'next_page': settings.LOGOUT_REDIRECT_URL},
     name='logout'),
-
 ]
