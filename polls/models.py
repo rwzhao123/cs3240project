@@ -33,3 +33,26 @@ class Suggestion(models.Model):
     suggestion_text = models.TextField()
     def __str__(self):
         return self.name_text
+
+
+class Student(models.Model):
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
+
+    YEAR = (
+        ('1Y', 'First Year'),
+        ('2Y', 'Second Year'),
+        ('3Y', 'Third Year'),
+        ('4Y', 'Fourth Year'),
+        ('GR', 'Graduate Student'),
+    )
+    year = models.CharField(max_length=2, choices=YEAR, default="1Y")
+
+
+
+    def __str__(self):
+        return self.last_name
+
+
+

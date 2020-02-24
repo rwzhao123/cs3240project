@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 
-from .models import Choice, Question, Suggestion
+from .models import Choice, Question, Suggestion, Student
 
 
 class IndexView(generic.ListView):
@@ -86,3 +86,14 @@ def index(request):
     }
 
     return render(request, "polls/index.html", context)
+
+
+
+from django.views.generic import ListView
+
+
+def student_profile(request):
+    return render(request, "polls/student_profile.html")
+
+def create_student(request):
+    return render(request, "polls/create_student.html")

@@ -91,8 +91,12 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'kddgyphr',
+        'USER': 'kddgyphr',
+        'PASSWORD': 'VAwGR4cdvbUtY1x8o4czPyU-NACRxZFH',
+        'HOST': 'rajje.db.elephantsql.com',
+        'PORT': '5432',
     }
 }
 
@@ -147,6 +151,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'ApGrpI_WrZ6YbPeh7efmGN5R'
 
 LOGIN_URL = '/auth/login/google-oauth2/'
 
-LOGIN_REDIRECT_URL = '/polls/'
-LOGOUT_REDIRECT_URL = '/polls/'
+
+LOGIN_REDIRECT_URL = '/quick-tutor/'
+LOGOUT_REDIRECT_URL = '/quick-tutor/'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
