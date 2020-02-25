@@ -11,8 +11,8 @@ install:
 script:
 - python manage.py test
 
-deploy:
-  provider: heroku
-  api_key:
-    secure: 7f20f782-93fd-4916-b884-a4d9c6f04cb2
-    app: quick-tutor
+# deploy:
+#   provider: heroku
+#   api_key:
+#     secure: 7f20f782-93fd-4916-b884-a4d9c6f04cb2
+#     app: quick-tutor
