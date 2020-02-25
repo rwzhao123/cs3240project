@@ -5,6 +5,8 @@ python:
 
 install:
 - pip install -r requirements.txt
+- sudo systemctl start postgresql
+- sudo systemctl enable postgresql
 
 script:
 - python manage.py test
