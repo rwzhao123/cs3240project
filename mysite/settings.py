@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'django_forms_bootstrap',
     'social_django',
-    'channels'
+    
 ]
 
 MIDDLEWARE = [
@@ -92,10 +92,10 @@ CHANNEL_LAYERS = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'kddgyphr',
-        'USER': 'kddgyphr',
-        'PASSWORD': 'VAwGR4cdvbUtY1x8o4czPyU-NACRxZFH',
-        'HOST': 'rajje.db.elephantsql.com',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'cs3240',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
