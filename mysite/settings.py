@@ -144,10 +144,12 @@ django_heroku.settings(locals())
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.open_id.OpenIdAuth',
 )
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '413689538109-f336o1anduvb8lt2h00o53cr97ehkdkj.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'ApGrpI_WrZ6YbPeh7efmGN5R'
+
 
 LOGIN_URL = '/auth/login/google-oauth2/'
 

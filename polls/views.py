@@ -4,8 +4,14 @@ from django.template import loader
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from django.db import transaction
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 from .models import Choice, Question, Suggestion, Student
+
+from .forms import UserForm, ProfileForm
+
 
 
 class IndexView(generic.ListView):
@@ -95,5 +101,21 @@ from django.views.generic import ListView
 def student_profile(request):
     return render(request, "polls/student_profile.html")
 
+
+@login_required
+def update_profile(request):
+    if request.method == 'POST':
+        user_form = UserForm(instance=request.user)
+        profile_form = ProfileForm(request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return render(request, "polls/student_profile.html")
+    else:
+        user_form = UserForm(instance = request.user)
+        profile_form = ProfileForm(instance = request.user.profile)
+        return render(request, "polls/student_profile.html")
+
 def create_student(request):
     return render(request, "polls/create_student.html")
+
