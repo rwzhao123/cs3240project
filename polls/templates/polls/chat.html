@@ -1,11 +1,10 @@
-
-<!doctype html>
-
-{% load static %}
+<!-- chat/templates/quick-tutor/chat.html -->
+<!DOCTYPE html>
 {% load bootstrap4 %}
-<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<html lang="en">
+  <head>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Quick Tutor</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -17,16 +16,11 @@
          <a class="nav-link" href="/quick-tutor/">Find a Tutor<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" href="/quick-tutor/chat">Chat<span class="sr-only">(current)</span></a>
-       </li>
+            <a class="nav-link" href="/quick-tutor/chat">Chat<span class="sr-only">(current)</span></a>
+         </li>
         <li class="nav-item">
          <a class="nav-link" href="/quick-tutor/suggestions">Other Tab (ToDo)<span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-         <a class="nav-link" href="/quick-tutor/student_profile">My Student Profile<span class="sr-only">(current)</span></a>
-        </li>
-
-        <li class="nav-item">
+ <li class="nav-item">
             {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link disabled" href=""><p>Logged in as: {{ user.username }}</p><span class="sr-only">(current)</span></a>
@@ -38,17 +32,7 @@
                 </a>
             {% endif %}
         </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Login as a
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Tutor</a>
-          <a class="dropdown-item" href="#">Student</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Administrator</a>
-        </div>
-      </li>
+
 
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -62,40 +46,50 @@
           <a class="navbar-brand" href="#"><p class="text-info">Copyright/License: MIT</p></a>
           <a class="navbar-brand" href="#"><p class="text-info">Version: 1.0</p></a>
     </nav>
-
-<div class="container">
-  <h1><p class="text-info">{{ question.question_text }}</p></h1>
-
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
-<form action="{% url 'quick-tutor:vote' question.id %}" method="post">
-{% csrf_token %}
-{% for choice in question.choice_set.all %}
-    <div class="input-group">
-  <div class="input-group-prepend">
-        <div class="input-group-text">
-         <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
-        </div>
-      </div>
-
-    </div>
-
-
-{% endfor %}
-
-
-
+    <head>
+            <meta charset="utf-8"/>
+            <title>Chat Rooms</title>
+        </head>
+        <body>
+            What class's chat room would you like to enter?<br/>
+            <input id="room-name-input" type="text" size="100"/><br/>
+            <input id="room-name-submit" type="button" value="Enter"/>
+        
+            <script>
+                document.querySelector('#room-name-input').focus();
+                document.querySelector('#room-name-input').onkeyup = function(e) {
+                    if (e.keyCode === 13) {  // enter, return
+                        document.querySelector('#room-name-submit').click();
+                    }
+                };
+        
+                document.querySelector('#room-name-submit').onclick = function(e) {
+                    var roomName = document.querySelector('#room-name-input').value;
+                    window.location.pathname = 'quick-tutor/chat/' + roomName + '/';
+                };
+            </script>
 
 
-<input class="btn btn-info" type="submit" value="Vote">
-</form>
 
+
+
+       <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
 </div>
-
-<!-- Required meta tags -->
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Suggest Another Poll</title>
+  </head>
+
+</form>
+</body>
+</html>

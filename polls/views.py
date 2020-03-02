@@ -9,7 +9,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 from .models import Choice, Question, Suggestion, Student
+
 from .forms import UserForm, ProfileForm
+
 
 
 class IndexView(generic.ListView):
@@ -75,8 +77,13 @@ def suggestions_list(request):
     }
     return render(request, "polls/list.html", context)
 
-from django.shortcuts import render
+def chat(request):
+    return render(request, 'polls/chat.html')
 
+def room(request, room_name):
+    return render(request, 'polls/room.html', {
+        'room_name': room_name
+    })
 
 def index(request):
     context = {
@@ -86,8 +93,14 @@ def index(request):
 
     return render(request, "polls/index.html", context)
 
+
+
+from django.views.generic import ListView
+
+
 def student_profile(request):
     return render(request, "polls/student_profile.html")
+
 
 @login_required
 def update_profile(request):
@@ -102,3 +115,7 @@ def update_profile(request):
         user_form = UserForm(instance = request.user)
         profile_form = ProfileForm(instance = request.user.profile)
         return render(request, "polls/student_profile.html")
+
+def create_student(request):
+    return render(request, "polls/create_student.html")
+

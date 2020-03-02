@@ -40,7 +40,9 @@ class Suggestion(models.Model):
     def __str__(self):
         return self.name_text
 
+
 class Student(models.Model):
+
     user = models.OneToOneField(User, unique=True, null=False, db_index=True, on_delete=models.CASCADE, related_name='profile')
     student_first_name = models.CharField(max_length=200, blank = True)
     student_last_name = models.CharField(max_length=200, blank = True)
@@ -67,7 +69,22 @@ class Student(models.Model):
         max_length=2,
         choices=YEAR_IN_SCHOOL_CHOICES,
         default=FIRST_YEAR,
-    )
+
+
+    YEAR = (
+        ('1Y', 'First Year'),
+        ('2Y', 'Second Year'),
+        ('3Y', 'Third Year'),
+        ('4Y', 'Fourth Year'),
+        ('GR', 'Graduate Student')))
+
+
+
+
+
+    def __str__(self):
+        return self.last_name
+
 
     def is_upperclass(self):
         return self.student_year_in_school in {self.THIRD_YEAR, self.FOURTH_YEAR}
@@ -81,8 +98,6 @@ class Student(models.Model):
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, created, **kwargs):
         instance.profile.save()
-
-
 
 
 
