@@ -19,7 +19,7 @@ urlpatterns = [
          name='logout'),
 
     path('student_profile/', views.student_profile),
-    path(r'^profile/$',views.update_profile)
+    path(r'^profile/$',views.update_profile),
 
 
     path('chat/', views.chat, name='chat'),
