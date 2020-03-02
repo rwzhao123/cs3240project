@@ -59,8 +59,19 @@
           <h4> <p class="text-info">Student First Name: {{ Student.student_first_name }}</p></h4>
             <h4> <p class="text-info">Student Last Name: {{ Student.student_last_name }}</p></h4>
             <h4> <p class="text-info">Student Year: {{ Student.student_year_in_school }}</p></h4>
+      </div>
+   </form>
+          <div class="container">
+              <h2><p class="text-info">Here youcan view and edit you information(tutor)</p></h2>
+          </div>
+   <form method="post">
+       {% csrf_token %}
+       {{ user_form.as_p }}
+       {{ profile_form.as_p }}
+       <button type="submit">Save Changes</button>
 
-        </div>
+   </form>
+
 
 
 
