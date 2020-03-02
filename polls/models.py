@@ -3,6 +3,12 @@ import datetime
 # Create your models here.
 from django.db import models
 from django.utils import timezone
+from django import forms
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserChangeForm
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 
 class Question(models.Model):
@@ -36,23 +42,65 @@ class Suggestion(models.Model):
 
 
 class Student(models.Model):
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
-    email = models.CharField(max_length=200)
+
+    user = models.OneToOneField(User, unique=True, null=False, db_index=True, on_delete=models.CASCADE, related_name='profile')
+    student_first_name = models.CharField(max_length=200, blank = True)
+    student_last_name = models.CharField(max_length=200, blank = True)
+    student_email = models.CharField(max_length=200, blank = True)
+    student_tutor = models.BooleanField(default=False)
+    skills = models.CharField(max_length=200, blank = True)
+    availability = models.CharField(max_length=200, blank = True)
+
+
+
+    FIRST_YEAR= '1Y'
+    SECOND_YEAR = '2Y'
+    THIRD_YEAR = '3Y'
+    FOURTH_YEAR = '4Y'
+    GRADUATE = 'GR'
+    YEAR_IN_SCHOOL_CHOICES = [
+        (FIRST_YEAR, 'First Year'),
+        (SECOND_YEAR, 'Second Year'),
+        (THIRD_YEAR, 'Third Year'),
+        (FOURTH_YEAR, 'Fourth Year'),
+        (GRADUATE, 'Graduate'),
+    ]
+    student_year_in_school = models.CharField(
+        max_length=2,
+        choices=YEAR_IN_SCHOOL_CHOICES,
+        default=FIRST_YEAR,
+
 
     YEAR = (
         ('1Y', 'First Year'),
         ('2Y', 'Second Year'),
         ('3Y', 'Third Year'),
         ('4Y', 'Fourth Year'),
-        ('GR', 'Graduate Student'),
-    )
-    year = models.CharField(max_length=2, choices=YEAR, default="1Y")
+        ('GR', 'Graduate Student')))
+
+
 
 
 
     def __str__(self):
         return self.last_name
+
+
+    def is_upperclass(self):
+        return self.student_year_in_school in {self.THIRD_YEAR, self.FOURTH_YEAR}
+    def is_tutor(self):
+        return self.student_tutor
+    @receiver(post_save,sender = User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Student.objects.create(user =instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, created, **kwargs):
+        instance.profile.save()
+
+
+
 
 
 
