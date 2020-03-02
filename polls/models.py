@@ -68,13 +68,13 @@ class Student(models.Model):
     student_year_in_school = models.CharField(
         max_length=2,
         choices=YEAR_IN_SCHOOL_CHOICES,
-        default=FIRST_YEAR,
+        default=FIRST_YEAR,)
 
 
 
 
     def __str__(self):
-        return self.last_name
+        return self.student_last_name
 
 
     def is_upperclass(self):
