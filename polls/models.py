@@ -47,7 +47,6 @@ class Student(models.Model):
         ('4Y', 'Fourth Year'),
         ('GR', 'Graduate Student'),
     )
-    year = models.CharField(max_length=2, choices=YEAR, default="1Y")
 
 
 
