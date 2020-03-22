@@ -5,9 +5,9 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('polls', '0004_student'),
-    ]
+    # dependencies = [
+    #     ('polls', '0004_student'),
+    # ]
 
     operations = [
         migrations.RenameField(
