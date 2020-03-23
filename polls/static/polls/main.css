@@ -1,17 +1,13 @@
-/*body {
-     background: linear-gradient(to right, #000000 0%, #434343 100%)
-}
-
-*/
-
 /*--------------------------- Color variations ----------------------*/
 /* Medium Layout: 1280px */
 /* Tablet Layout: 768px */
 /* Mobile Layout: 320px */
 /* Wide Mobile Layout: 480px */
 /* =================================== */
-/*  Basic Style
+/*  Basic Style 
 /* =================================== */
+
+
 ::-moz-selection {
   /* Code for Firefox */
   background-color: #7c32ff;
@@ -749,6 +745,7 @@ th {
 
 .navbar {
   padding: 25px 15px; }
+
   @media (max-width: 992px) {
     .navbar .navbar-collapse {
       background: #222222;
@@ -875,7 +872,8 @@ th {
     padding: 10px 3px; }
 
 .home-banner-area {
-  background: url(../img/home-banner-bg.png) no-repeat;
+  background: url("images/home-banner-bg.png") no-repeat;
+  height: 800px;
   background-size: cover;
   background-position: center center;
   max-height: 1200px; }
@@ -915,6 +913,7 @@ th {
     margin-top: 30px; } }
 
 .home-banner-right img {
+    margin-top: 150px;
   margin-right: auto !important;
   margin-left: auto !important;
   display: block; }
@@ -923,9 +922,9 @@ th {
       display: none; } }
 
 .banner-area {
-  background: url(../img/banner-bg.png) no-repeat center;
+  background: url("images/banner-bg.png") no-repeat center;
   background-position: right;
-  min-height: 510px; }
+  height: 510px; }
 
 .banner-right {
   margin-top: 200px;
@@ -1122,7 +1121,7 @@ th {
 /* Start Video Area
 =========================================================================================== */
 .video-area {
-  background: url(../img/video-area-bg.png) no-repeat center; }
+  background: url("images/video-area-bg.png") no-repeat center; }
   @media (max-width: 991px) {
     .video-area {
       background: #828bb2;
@@ -1285,7 +1284,7 @@ th {
     margin-bottom: 0; }
 
 .registration-area {
-  background: url(../img/registration-bg.png) no-repeat center;
+  background: url("images/registration-bg.png") no-repeat center;
   padding: 157px 0px; }
   @media (max-width: 991px) {
     .registration-area {
@@ -1636,7 +1635,7 @@ th {
 /* =================================== */
 /*============ Start Blog Home Styles  =============*/
 .blog-home-banner {
-  background: url(../img/blog/blog-home-banner.jpg) bottom;
+  background: url("images/blog/blog-home-banner.jpg") bottom;
   background-size: cover;
   padding: 130px 0px; }
   .blog-home-banner h1 span {
@@ -2822,7 +2821,7 @@ h6 {
       cursor: pointer;
       border: 1px solid #f1f1f1; }
     .primary-checkbox input:checked + label {
-      background: url(../img/elements/primary-check.png) no-repeat center center/cover;
+      background: url("images/elements/primary-check.png") no-repeat center center/cover;
       border: none; }
 
 .confirm-checkbox {
@@ -2853,7 +2852,7 @@ h6 {
       cursor: pointer;
       border: 1px solid #f1f1f1; }
     .confirm-checkbox input:checked + label {
-      background: url(../img/elements/success-check.png) no-repeat center center/cover;
+      background: url("images/elements/success-check.png") no-repeat center center/cover;
       border: none; }
 
 .disabled-checkbox {
@@ -2887,7 +2886,7 @@ h6 {
       cursor: not-allowed;
       z-index: 3; }
     .disabled-checkbox input:checked + label {
-      background: url(../img/elements/disabled-check.png) no-repeat center center/cover;
+      background: url("images/elements/disabled-check.png") no-repeat center center/cover;
       border: none; }
 
 .primary-radio {
@@ -2918,7 +2917,7 @@ h6 {
       cursor: pointer;
       border: 1px solid #f1f1f1; }
     .primary-radio input:checked + label {
-      background: url(../img/elements/primary-radio.png) no-repeat center center/cover;
+      background: url("images/elements/primary-radio.png") no-repeat center center/cover;
       border: none; }
 
 .confirm-radio {
@@ -2949,7 +2948,7 @@ h6 {
       cursor: pointer;
       border: 1px solid #f1f1f1; }
     .confirm-radio input:checked + label {
-      background: url(../img/elements/success-radio.png) no-repeat center center/cover;
+      background: url("images/elements/success-radio.png") no-repeat center center/cover;
       border: none; }
 
 .disabled-radio {
@@ -2983,7 +2982,7 @@ h6 {
       cursor: not-allowed;
       z-index: 3; }
     .disabled-radio input:checked + label {
-      background: url(../img/elements/disabled-radio.png) no-repeat center center/cover;
+      background: url("images/elements/disabled-radio.png") no-repeat center center/cover;
       border: none; }
 
 .default-select {
@@ -3066,7 +3065,7 @@ h6 {
 
 .footer-area {
   padding: 339px 0px 120px;
-  background: url(../img/footer-bg.png) no-repeat center; }
+  background: url("images/footer-bg.png") no-repeat center; }
   @media (max-width: 991px) {
     .footer-area {
       background: #222222;

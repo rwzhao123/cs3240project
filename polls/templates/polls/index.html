@@ -1,7 +1,24 @@
 <!--<!doctype html>-->
-<!--{% load static %}-->
-<!--{% load bootstrap4 %}-->
-<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+{% load static %}
+{% load bootstrap4 %}
+<link rel="stylesheet"  href="{% static 'polls/availability-calendar.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/bootstrap.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/font-awesome.min.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/hexagons.min.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/ion.rangeSlider.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/ion.rangeSlider.skinFlat.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/jquerysctipttop.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/linearicons.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/magnific-popup.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/main.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/main.css.map' %}">
+<link rel="stylesheet"  href="{% static 'polls/nice-select.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/owl.carousel.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/static/polls/main.scss' %}">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css" />
+<link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+
 <!--<html lang="en">-->
 <!--  <head>-->
 <!--      <nav class="navbar navbar-expand-lg navbar-light bg-light">-->
@@ -69,6 +86,7 @@
 <!--{% endif %}-->
 <!--</div>-->
 
+
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
@@ -76,7 +94,7 @@
   <!-- Mobile Specific Meta -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <!-- Favicon -->
-  <link rel="shortcut icon" href="img/fav.png" />
+  <link rel="shortcut icon" href="{% static '/polls/images/fav.png' %}" />
   <!-- Author Meta -->
   <meta name="author" content="colorlib" />
   <!-- Meta Description -->
@@ -93,15 +111,15 @@
       CSS
       =============================================
     -->
-  <link rel="stylesheet" href="css/linearicons.css" />
-  <link rel="stylesheet" href="css/font-awesome.min.css" />
-  <link rel="stylesheet" href="css/bootstrap.css" />
-  <link rel="stylesheet" href="css/magnific-popup.css" />
-  <link rel="stylesheet" href="css/owl.carousel.css" />
-  <link rel="stylesheet" href="css/nice-select.css">
-  <link rel="stylesheet" href="css/hexagons.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css" />
-  <link rel="stylesheet" href="css/main.css" />
+<!--  <link rel="stylesheet" href="{% static 'polls/acss/linearicons.css}" />-->
+<!--  <link rel="stylesheet" href="{% static 'polls/acss/font-awesome.min.css}" />-->
+<!--  <link rel="stylesheet" href="{% static 'polls/acss/bootstrap.css}" />-->
+<!--  <link rel="stylesheet" href="{% static 'polls/acss/magnific-popup.css}" />-->
+<!--  <link rel="stylesheet" href="{% static 'polls/acss/owl.carousel.css}" />-->
+<!--  <link rel="stylesheet" href="{% static 'polls/acss/nice-select.css}">-->
+<!--  <link rel="stylesheet" href="{% static 'polls/acss/hexagons.min.css}" />-->
+<!--  <link rel="stylesheet" href="{% static 'polls/ahttps://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css}" />-->
+<!--  <link rel="stylesheet" href="{% static 'polls/acss/main.css}" />-->
 </head>
 
 <body>
@@ -109,9 +127,9 @@
   <header class="default-header">
     <nav class="navbar navbar-expand-lg  navbar-light">
       <div class="container">
-        <a class="navbar-brand" href="index.html">
-          <img src="img/logo.png" alt="" />
-        </a>
+<!--        <a class="navbar-brand" href="index.html">-->
+<!--          <img src="{% static '/polls/images/qt_logo.png' %}" alt="" />-->
+<!--        </a>-->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="lnr lnr-menu"></span>
@@ -119,48 +137,62 @@
 
         <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
           <ul class="navbar-nav">
-            <li><a href="index.html">Home</a></li>
+            <li><a href="/quick-tutor/">Home</a></li>
             <li><a href="about.html">About</a></li>
-            <li><a href="courses.html">Courses</a></li>
+            <li><a href="courses.html">Find a Tutor</a></li>
             <!-- Dropdown -->
             <li class="dropdown">
               <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-                Pages
+                Join a Chat Room
               </a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="elements.html">Elements</a>
-                <a class="dropdown-item" href="course-details.html">Course Details</a>
+                <a class="dropdown-item" href="elements.html">Enter As a Student </a>
+                <a class="dropdown-item" href="course-details.html">Enter As a Tutor</a>
               </div>
             </li>
-            <li class="dropdown">
-              <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-                Blog
-              </a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="blog-home.html">Blog Home</a>
-                <a class="dropdown-item" href="blog-single.html">Blog Details</a>
-              </div>
-            </li>
-            <li><a href="contacts.html">Contacts</a></li>
+
+
+<!--             <li><a href="courses.html">Login/Register</a></li>-->
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link disabled" href=""><p>Logged in as: {{ user.username }}</p><span class="sr-only">(current)</span></a>
+                </li>
+
+            <a class="nav-link" href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a>
+            {% else %}
+                    <li><a href="{% url 'social:begin' 'google-oauth2' %}">Login/Register</a></li>
+                </a>
+            {% endif %}
+        </li>
+
+
+
+            <li><a href="contacts.html">Contact Us</a></li>
 
             <li>
-              <button class="search">
-                <span class="lnr lnr-magnifier" id="search"></span>
+              <button class="search" >
+                <span class="lnr lnr-magnifier"></span>
               </button>
+
+
+
             </li>
           </ul>
         </div>
       </div>
     </nav>
-    <div class="search-input" id="search-input-box">
-      <div class="container">
-        <form class="d-flex justify-content-between">
-          <input type="text" class="form-control" id="search-input" placeholder="Search Here" />
-          <button type="submit" class="btn"></button>
-          <span class="lnr lnr-cross" id="close-search" title="Close Search"></span>
-        </form>
-      </div>
-    </div>
+
+<!--<div class="search-input" id="search-input-box">-->
+<!--      <div class="container">-->
+
+<!--        <form class="d-flex justify-content-between">-->
+<!--          <input type="text" class="form-control" id="search-input" placeholder="Search Here" />-->
+<!--&lt;!&ndash;          <button class="navbar-toggle" type="submit" data-toggle="collapse" data-target="bs-navbar-collapse" ></button>&ndash;&gt;-->
+<!--          <button type="submit" class="btn"></button>-->
+<!--          <span class="lnr lnr-cross" id="close-search" title="Close Search"></span>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--    </div>-->
   </header>
   <!-- ================ End Header Area ================= -->
 
@@ -170,20 +202,18 @@
       <div class="row justify-content-center fullscreen align-items-center">
         <div class="col-lg-5 col-md-8 home-banner-left">
           <h1 class="text-white">
-            Take the first step <br />
-            to learn with us
+           Tutoring. Whenever. Whenever.
           </h1>
           <p class="mx-auto text-white  mt-20 mb-40">
-            In the history of modern astronomy, there is probably no one
-            greater leap forward than the building and launch of the space
-            telescope known as the Hubble.
+            UVA classes are hard. Let us help. We can match you with the right tutor, in real time, for a great price.
           </p>
         </div>
         <div class="offset-lg-2 col-lg-5 col-md-12 home-banner-right">
-          <img class="img-fluid" src="img/header-img.png" alt="" />
+          <img class = "img-fluid" src="{% static '/polls/images/header-img.png' %}" alt="">
         </div>
       </div>
     </div>
+
   </section>
   <!-- ================ End banner Area ================= -->
 
@@ -195,31 +225,32 @@
           <div class="feature-item d-flex">
             <i class="ti-book"></i>
             <div class="ml-20">
-              <h4>New Classes</h4>
+              <h4>Instant Help for Most UVA Classes</h4>
               <p>
-                In the history of modern astronomy, there is probably no one greater leap forward.
+                We provide tutors for most, if not all undergraduate UVA classes, from Commerce to Computer Science and
+                Economics to English.
               </p>
             </div>
           </div>
         </div>
         <div class="col-lg-2 col-md-6">
           <div class="feature-item d-flex">
-            <i class="ti-cup"></i>
+            <i class="ti-location-pin"></i>
             <div class="ml-20">
-              <h4>Top Courses</h4>
+              <h4>Real-Time GPS Tracking and Matching</h4>
               <p>
-                In the history of modern astronomy, there is probably no one greater leap forward.
+                We can match you up instantly, with live location updates and tutor finding.
               </p>
             </div>
           </div>
         </div>
         <div class="col-lg-2 col-md-6">
           <div class="feature-item d-flex border-right-0">
-            <i class="ti-desktop"></i>
+            <i class="ti-comments"></i>
             <div class="ml-20">
-              <h4>Full E-Books</h4>
+              <h4>Built In Chat Room Feature</h4>
               <p>
-                In the history of modern astronomy, there is probably no one greater leap forward.
+                Login to Classrooms and chat with other students that need help.
               </p>
             </div>
           </div>
@@ -235,8 +266,7 @@
       <div class="row justify-content-center section-title">
         <div class="col-lg-12">
           <h2>
-            Popular Courses <br />
-            Available Right Now
+           Tutors Available Right Now
           </h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
@@ -247,7 +277,7 @@
       <div class="owl-carousel popuar-course-carusel">
         <div class="single-popular-course">
           <div class="thumb">
-            <img class="f-img img-fluid mx-auto" src="img/popular-course/p1.jpg" alt="" />
+            <img class="f-img img-fluid mx-auto" src="{% static '/polls/images/popular-course/p1.jpg' %}" alt="" />
           </div>
           <div class="details">
             <div class="d-flex justify-content-between mb-20">
@@ -282,7 +312,7 @@
 
         <div class="single-popular-course">
           <div class="thumb">
-            <img class="f-img img-fluid mx-auto" src="img/popular-course/p2.jpg" alt="" />
+            <img class="f-img img-fluid mx-auto" src="{% static '/polls/images/popular-course/p2.jpg' %}" alt="" />
           </div>
           <div class="details">
             <div class="d-flex justify-content-between mb-20">
@@ -317,7 +347,7 @@
 
         <div class="single-popular-course">
           <div class="thumb">
-            <img class="f-img img-fluid mx-auto" src="img/popular-course/p3.jpg" alt="" />
+             <img class="f-img img-fluid mx-auto" src="{% static '/polls/images/popular-course/p3.jpg' %}" alt="" />
           </div>
           <div class="details">
             <div class="d-flex justify-content-between mb-20">
@@ -352,7 +382,7 @@
 
         <div class="single-popular-course">
           <div class="thumb">
-            <img class="f-img img-fluid mx-auto" src="img/popular-course/p4.jpg" alt="" />
+             <img class="f-img img-fluid mx-auto" src="{% static '/polls/images/popular-course/p4.jpg' %}" alt="" />
           </div>
           <div class="details">
             <div class="d-flex justify-content-between mb-20">
@@ -409,10 +439,10 @@
           <div class="owl-carousel video-carousel">
             <div class="single-video">
               <div class="video-part">
-                <img class="img-fluid" src="img/video-img.jpg" alt="">
+                <img class="img-fluid" src="{% static '/polls/images/video-img.jpg' %}" alt="">
                 <div class="overlay"></div>
                 <a class="popup-youtube play-btn" href="https://www.youtube.com/watch?v=VufDd-QL1c0">
-                  <img class="play-icon" src="img/play-btn.png" alt="">
+                  <img class="play-icon" src="{% static '/polls/images/play-btn.png' %}" alt="">
                 </a>
               </div>
               <h4 class="text-white mb-20 mt-30">Learn Angular js Course for Legendary Persons</h4>
@@ -424,10 +454,10 @@
 
             <div class="single-video">
               <div class="video-part">
-                <img class="img-fluid" src="img/video-img.jpg" alt="">
+                <img class="img-fluid" src="{% static '/polls/images/video-img.jpg' %}" alt="">
                 <div class="overlay"></div>
                 <a class="popup-youtube play-btn" href="https://www.youtube.com/watch?v=VufDd-QL1c0">
-                  <img class="play-icon" src="img/play-btn.png" alt="">
+                  <img class="play-icon" src="{% static '/polls/images/play-btn.png' %}" alt="">
                 </a>
               </div>
               <h4 class="text-white mb-20 mt-30">Learn Angular js Course for Legendary Persons</h4>
@@ -557,7 +587,7 @@
           <div class="col-lg-5">
             <div class="item">
               <div class="testi-item">
-                <img src="img/quote.png" alt="" />
+                <img src="{% static '/polls/images/quote.png' %}" alt="" />
                 <div class="mt-40 text">
                   <p>
                     As conscious traveling Paup ers we must always be oncerned
@@ -573,7 +603,7 @@
           </div>
 
           <div class="offset-lg-1 col-lg-6">
-            <img src="img/testimonial/t1.jpg" alt="" />
+            <img src="{% static '/polls/images/testimonial/t1.png.jpg' %}" alt="" />
           </div>
         </div>
 
@@ -581,7 +611,7 @@
           <div class="col-lg-5">
             <div class="item">
               <div class="testi-item">
-                <img src="img/quote.png" alt="" />
+                <img src="{% static '/polls/images/quote.png' %}" alt="" />
                 <div class="mt-40 text">
                   <p>
                     As conscious traveling Paup ers we must always be oncerned
@@ -597,7 +627,7 @@
           </div>
 
           <div class="offset-lg-1 col-lg-6">
-            <img src="img/testimonial/t1.jpg" alt="" />
+            <img src="{% static '/polls/images/testimonial/t1.jpg' %}" alt="" />
           </div>
         </div>
       </div>
@@ -668,7 +698,7 @@
         </div>
         <div class="col-lg-4 col-md-6">
           <div class="single-blog-post">
-            <img src="img/blog-post/b1.jpg" class="img-fluid" alt="" />
+            <img src="{% static '/polls/images/blog-post/b1.jpg' %}" class="img-fluid" alt="" />
             <div class="overlay"></div>
             <div class="top-text">
               <p>29th, oct, 2018</p>
@@ -692,7 +722,7 @@
         </div>
         <div class="col-lg-4 col-md-6 mt--160">
           <div class="single-blog-post">
-            <img src="img/blog-post/b2.jpg" class="img-fluid" alt="" />
+            <img src="{% static '/polls/images/blog-post/b2.jpg' %}" class="img-fluid" alt="" />
             <div class="overlay"></div>
             <div class="top-text">
               <p>29th, oct, 2018</p>
@@ -716,7 +746,7 @@
         </div>
         <div class="col-lg-4 col-md-6 mt--260">
           <div class="single-blog-post">
-            <img src="img/blog-post/b3.jpg" class="img-fluid" alt="" />
+            <img src="{% static '/polls/images/blog-post/b3.jpg' %}" class="img-fluid" alt="" />
             <div class="overlay"></div>
             <div class="top-text">
               <p>29th, oct, 2018</p>
