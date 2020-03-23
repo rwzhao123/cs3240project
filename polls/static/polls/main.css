@@ -880,7 +880,7 @@ th {
   @media (min-width: 1921px) {
     .home-banner-area .fullscreen {
       align-items: start !important;
-      padding-top: 250px;
+      padding-top: 200px;
       max-height: 1200px !important; } }
   @media (max-width: 768px) {
     .home-banner-area .fullscreen {
@@ -913,7 +913,7 @@ th {
     margin-top: 30px; } }
 
 .home-banner-right img {
-    margin-top: 150px;
+  margin-top: 125px;
   margin-right: auto !important;
   margin-left: auto !important;
   display: block; }

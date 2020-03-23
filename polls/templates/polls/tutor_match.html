@@ -66,13 +66,13 @@
                 Join a Chat Room
               </a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="elements.html">Enter As a Student </a>
-                <a class="dropdown-item" href="course-details.html">Enter As a Tutor</a>
+                 <a class="dropdown-item" href="/quick-tutor/chat">Enter As a Student </a>
+                <a class="dropdown-item" href="/quick-tutor/chat">Enter As a Tutor</a>
               </div>
             </li>
 
 
-<!--             <li><a href="courses.html">Login/Register</a></li>-->
+<!--             <li><a href="tutor_match.html">Login/Register</a></li>-->
             {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link disabled" href=""><p>Logged in as: {{ user.username }}</p><span class="sr-only">(current)</span></a>
@@ -87,7 +87,7 @@
 
 
 
-            <li><a href="contacts.html">Contact Us</a></li>
+            <li><a href="/quick-tutor/contact_us/">Contact Us</a></li>
 
             <li>
               <button class="search" >

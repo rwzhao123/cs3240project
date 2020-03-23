@@ -119,3 +119,11 @@ def update_profile(request):
 def create_student(request):
     return render(request, "polls/create_student.html")
 
+def about(request):
+    return render(request, "polls/about.html")
+
+def tutor_match(request):
+    return render(request, "polls/tutor_match.html")
+
+def contact_us(request):
+    return render(request, "polls/contact_us.html")

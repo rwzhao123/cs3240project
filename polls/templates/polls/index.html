@@ -106,7 +106,8 @@
   <!-- Site Title -->
   <title>Eclipse Education</title>
 
-  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:900|Roboto:400,400i,500,700" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:900|Roboto:400,400i,500,700" rel="stylesheet" />'
+    <script src="jquery.min.js"></script>
   <!--
       CSS
       =============================================
@@ -138,21 +139,21 @@
         <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
           <ul class="navbar-nav">
             <li><a href="/quick-tutor/">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="courses.html">Find a Tutor</a></li>
+            <li><a href="/quick-tutor/about">About</a></li>
+            <li><a href="/quick-tutor/tutor_match">Find a Tutor</a></li>
             <!-- Dropdown -->
             <li class="dropdown">
               <a class="dropdown-toggle" href="#" data-toggle="dropdown">
                 Join a Chat Room
               </a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="elements.html">Enter As a Student </a>
-                <a class="dropdown-item" href="course-details.html">Enter As a Tutor</a>
+                <a class="dropdown-item" href="/quick-tutor/chat">Enter As a Student </a>
+                <a class="dropdown-item" href="/quick-tutor/chat">Enter As a Tutor</a>
               </div>
             </li>
 
 
-<!--             <li><a href="courses.html">Login/Register</a></li>-->
+<!--             <li><a href="tutor_match.html">Login/Register</a></li>-->
             {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link disabled" href=""><p>Logged in as: {{ user.username }}</p><span class="sr-only">(current)</span></a>
@@ -167,7 +168,7 @@
 
 
 
-            <li><a href="contacts.html">Contact Us</a></li>
+              <li><a href="/quick-tutor/contact_us/">Contact Us</a></li>
 
             <li>
               <button class="search" >
@@ -202,7 +203,7 @@
       <div class="row justify-content-center fullscreen align-items-center">
         <div class="col-lg-5 col-md-8 home-banner-left">
           <h1 class="text-white">
-           Tutoring. Whenever. Whenever.
+           Tutoring. Whenever. Wherever.
           </h1>
           <p class="mx-auto text-white  mt-20 mb-40">
             UVA classes are hard. Let us help. We can match you with the right tutor, in real time, for a great price.
@@ -260,316 +261,88 @@
   </section>
   <!-- ================ End Feature Area ================= -->
 
-  <!-- ================ Start Popular Course Area ================= -->
-  <section class="popular-course-area section-gap">
-    <div class="container-fluid">
-      <div class="row justify-content-center section-title">
-        <div class="col-lg-12">
-          <h2>
-           Tutors Available Right Now
-          </h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-        </div>
-      </div>
-      <div class="owl-carousel popuar-course-carusel">
-        <div class="single-popular-course">
-          <div class="thumb">
-            <img class="f-img img-fluid mx-auto" src="{% static '/polls/images/popular-course/p1.jpg' %}" alt="" />
-          </div>
-          <div class="details">
-            <div class="d-flex justify-content-between mb-20">
-              <p class="name">programming language</p>
-              <p class="value">$150</p>
-            </div>
-            <a href="#">
-              <h4>Learn Angular JS Course for Legendary Persons</h4>
-            </a>
-            <div class="bottom d-flex mt-15">
-              <ul class="list">
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-              </ul>
-              <p class="ml-20">25 Reviews</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="single-popular-course">
-          <div class="thumb">
-            <img class="f-img img-fluid mx-auto" src="{% static '/polls/images/popular-course/p2.jpg' %}" alt="" />
-          </div>
-          <div class="details">
-            <div class="d-flex justify-content-between mb-20">
-              <p class="name">programming language</p>
-              <p class="value">$150</p>
-            </div>
-            <a href="#">
-              <h4>Learn Angular JS Course for Legendary Persons</h4>
-            </a>
-            <div class="bottom d-flex mt-15">
-              <ul class="list">
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-              </ul>
-              <p class="ml-20">25 Reviews</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="single-popular-course">
-          <div class="thumb">
-             <img class="f-img img-fluid mx-auto" src="{% static '/polls/images/popular-course/p3.jpg' %}" alt="" />
-          </div>
-          <div class="details">
-            <div class="d-flex justify-content-between mb-20">
-              <p class="name">programming language</p>
-              <p class="value">$150</p>
-            </div>
-            <a href="#">
-              <h4>Learn Angular JS Course for Legendary Persons</h4>
-            </a>
-            <div class="bottom d-flex mt-15">
-              <ul class="list">
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-              </ul>
-              <p class="ml-20">25 Reviews</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="single-popular-course">
-          <div class="thumb">
-             <img class="f-img img-fluid mx-auto" src="{% static '/polls/images/popular-course/p4.jpg' %}" alt="" />
-          </div>
-          <div class="details">
-            <div class="d-flex justify-content-between mb-20">
-              <p class="name">programming language</p>
-              <p class="value">$150</p>
-            </div>
-            <a href="#">
-              <h4>Learn Angular JS Course for Legendary Persons</h4>
-            </a>
-            <div class="bottom d-flex mt-15">
-              <ul class="list">
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-              </ul>
-              <p class="ml-20">25 Reviews</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- ================ End Popular Course Area ================= -->
-
-  <!-- ================ Start Video Area ================= -->
-  <section class="video-area section-gap-bottom">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-5">
-          <div class="section-title text-white">
-            <h2 class="text-white">
-              Watch Our Trainers <br>
-              in Live Action
-            </h2>
-            <p>
-              In the history of modern astronomy, there is probably no one greater leap forward than the building and
-              launch of the space telescope known as the Hubble.
-            </p>
-          </div>
-        </div>
-        <div class="offset-lg-1 col-md-6 video-left">
-          <div class="owl-carousel video-carousel">
-            <div class="single-video">
-              <div class="video-part">
-                <img class="img-fluid" src="{% static '/polls/images/video-img.jpg' %}" alt="">
-                <div class="overlay"></div>
-                <a class="popup-youtube play-btn" href="https://www.youtube.com/watch?v=VufDd-QL1c0">
-                  <img class="play-icon" src="{% static '/polls/images/play-btn.png' %}" alt="">
-                </a>
-              </div>
-              <h4 class="text-white mb-20 mt-30">Learn Angular js Course for Legendary Persons</h4>
-              <p class="text-white mb-20">
-                In the history of modern astronomy, there is probably no one greater leap forward than the building and
-                launch of the space telescope known as the Hubble.
-              </p>
-            </div>
-
-            <div class="single-video">
-              <div class="video-part">
-                <img class="img-fluid" src="{% static '/polls/images/video-img.jpg' %}" alt="">
-                <div class="overlay"></div>
-                <a class="popup-youtube play-btn" href="https://www.youtube.com/watch?v=VufDd-QL1c0">
-                  <img class="play-icon" src="{% static '/polls/images/play-btn.png' %}" alt="">
-                </a>
-              </div>
-              <h4 class="text-white mb-20 mt-30">Learn Angular js Course for Legendary Persons</h4>
-              <p class="text-white mb-20">
-                In the history of modern astronomy, there is probably no one greater leap forward than the building and
-                launch of the space telescope known as the Hubble.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- ================ End Video Area ================= -->
-
-  <!-- ================ Start Feature Area ================= -->
+ <!-- ================ Start Feature Area ================= -->
   <section class="other-feature-area">
     <div class="container">
       <div class="feature-inner row">
         <div class="col-lg-12">
           <div class="section-title text-left">
             <h2>
-              Features That <br />
-              Can Avail By Everyone
+              Tutors Availible Now
             </h2>
             <p>
-              If you are looking at blank cassettes on the web, you may be
-              very confused at the difference in price. You may see some for
-              as low as $.17 each.
+              UVA Undergraduates and Graduate Students ready to match with you and help. At $10 an hour, it's a steal.
             </p>
           </div>
         </div>
         <div class="col-lg-4 col-md-6">
           <div class="other-feature-item">
-            <i class="ti-key"></i>
-            <h4>Lifetime Access</h4>
+            <i class="ti-desktop"></i>
+            <h4>Jaime P.</h4>
             <div>
               <p>
-                Lorem ipsum dolor sit amet consec tetur adipisicing elit, sed
-                do eiusmod tempor incididunt labore. Lorem ipsum dolor sit
-                amet consec tetur adipisicing elit, sed do eiusmod tempor
-                incididunt labore.
+                Hi! I'm Jaime Peng! I love computer science, and math, and can help you with any CS class, any math class,
+                or any other intro engineering class!
               </p>
             </div>
           </div>
         </div>
         <div class="col-lg-4 col-md-6 mt--160">
           <div class="other-feature-item">
-            <i class="ti-files"></i>
-            <h4>Source File Included</h4>
+            <i class="ti-pie-chart"></i>
+            <h4>Emma L.</h4>
             <div>
               <p>
-                Lorem ipsum dolor sit amet consec tetur adipisicing elit, sed
-                do eiusmod tempor incididunt labore. Lorem ipsum dolor sit
-                amet consec tetur adipisicing elit, sed do eiusmod tempor
-                incididunt labore.
+               Hello, I am Emma Lehman, and I can help you with all of your economics classes! I am a third year econ major,
+                and have gotten A's in all my econ classes. Let me help ya!
               </p>
             </div>
           </div>
         </div>
         <div class="col-lg-4 col-md-6 mt--260">
           <div class="other-feature-item">
-            <i class="ti-medall-alt"></i>
-            <h4>Student Membership</h4>
+            <i class="ti-book"></i>
+            <h4>Norman B.</h4>
             <div>
               <p>
-                Lorem ipsum dolor sit amet consec tetur adipisicing elit, sed
-                do eiusmod tempor incididunt labore. Lorem ipsum dolor sit
-                amet consec tetur adipisicing elit, sed do eiusmod tempor
-                incididunt labore.
+                Hi all! My name is Norman Bates and I am a third year english and history major. I can help with any english questions,
+                history, or alike!
               </p>
             </div>
           </div>
         </div>
         <div class="col-lg-4 col-md-6">
           <div class="other-feature-item">
-            <i class="ti-briefcase"></i>
-            <h4>35000+ Courses</h4>
+            <i class="ti-pulse"></i>
+            <h4>Muhammad J.</h4>
             <div>
               <p>
-                Lorem ipsum dolor sit amet consec tetur adipisicing elit, sed
-                do eiusmod tempor incididunt labore. Lorem ipsum dolor sit
-                amet consec tetur adipisicing elit, sed do eiusmod tempor
-                incididunt labore.
+                Greeting UVA! I am Muhammad Jones, and I am a foruth year pre-med student. I can help with any of the pre-med classses,
+                like O-Chem and Physics!
               </p>
             </div>
           </div>
         </div>
         <div class="col-lg-4 col-md-6 mt--160">
           <div class="other-feature-item">
-            <i class="ti-crown"></i>
-            <h4>Expert Mentors</h4>
+            <i class="ti-desktop"></i>
+            <h4>Xia F.</h4>
             <div>
               <p>
-                Lorem ipsum dolor sit amet consec tetur adipisicing elit, sed
-                do eiusmod tempor incididunt labore. Lorem ipsum dolor sit
-                amet consec tetur adipisicing elit, sed do eiusmod tempor
-                incididunt labore.
+               Hi UVA. My Name is Xia Feng and I am a fourth year CS Major. I am also a TA for algorithms and OS, and can help
+                with any CS class!
               </p>
             </div>
           </div>
         </div>
         <div class="col-lg-4 col-md-6 mt--260">
           <div class="other-feature-item">
-            <i class="ti-headphone-alt"></i>
-            <h4>Live Supports</h4>
+            <i class="ti-briefcase"></i>
+            <h4>Kendall W.</h4>
             <div>
               <p>
-                Lorem ipsum dolor sit amet consec tetur adipisicing elit, sed
-                do eiusmod tempor incididunt labore. Lorem ipsum dolor sit
-                amet consec tetur adipisicing elit, sed do eiusmod tempor
-                incididunt labore.
+                Hello everyone! I am Kendall White, a third year prelaw and public policy major. Let me know if I can help
+                with any of these realted classes!
               </p>
             </div>
           </div>
@@ -579,33 +352,49 @@
   </section>
   <!-- ================ End Feature Area ================= -->
 
+  <!-- ================ Start Video Area ================= -->
+  <section class="video-area section-gap-bottom">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-5">
+          <div class="section-title text-white">
+            <h2 class="text-white">
+              We meet you. <br>
+              Yes, in real time.
+            </h2>
+            <p>
+              We use a system, much like Uber, to match you with your desired tutor. The Tutor comes to you, and can meet you anywhere
+              on grounds.
+            </p>
+          </div>
+        </div>
+        <div class="offset-lg-1 col-md-6 video-left">
+          <div class="owl-carousel video-carousel">
+            <div class="single-video">
+              <div class="video-part">
+                <img class="img-fluid" src="{% static '/polls/images/uva.jpg' %}" alt="">
+
+              <h4 class="text-white mb-20 mt-30">Rates start at $10/hour, and the higher ratings the tutors receive, the more money they can make!</h4>
+              <p class="text-white mb-20">
+                Once you are matched, the tutor and you will both confirm that you are on the clock. You purchase time through the system,
+                and if you do not need the full time purchased, it is returned to your "stash" for later use on the app!
+              </p>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ================ End Video Area ================= -->
+
+
+
   <!-- ================ Start Testimonials Area ================= -->
   <section class="testimonials-area section-gap">
     <div class="container">
-      <div class="testi-slider owl-carousel" data-slider-id="1">
-        <div class="row align-items-center">
-          <div class="col-lg-5">
-            <div class="item">
-              <div class="testi-item">
-                <img src="{% static '/polls/images/quote.png' %}" alt="" />
-                <div class="mt-40 text">
-                  <p>
-                    As conscious traveling Paup ers we must always be oncerned
-                    about our dear Mother Earth. If you think about it, you
-                    travel across her face and She is the host to your
-                    journey.
-                  </p>
-                </div>
-                <h4>Fanny Spencer</h4>
-                <p>Chief Executive, Amazon</p>
-              </div>
-            </div>
-          </div>
 
-          <div class="offset-lg-1 col-lg-6">
-            <img src="{% static '/polls/images/testimonial/t1.png.jpg' %}" alt="" />
-          </div>
-        </div>
 
         <div class="row align-items-center">
           <div class="col-lg-5">
@@ -614,14 +403,13 @@
                 <img src="{% static '/polls/images/quote.png' %}" alt="" />
                 <div class="mt-40 text">
                   <p>
-                    As conscious traveling Paup ers we must always be oncerned
-                    about our dear Mother Earth. If you think about it, you
-                    travel across her face <br />
-                    and She is the host to your journey.
+                    Wow. What can I say. This app saved me, it really did. As a first year CS major, classes are hard
+                    <br />
+                    Quick tutor allowed me to match with a experienced UVA student and pass my class!
                   </p>
                 </div>
-                <h4>Fanny Spencer</h4>
-                <p>Chief Executive, Amazon</p>
+                <h4>Sam Hamilton</h4>
+                <p>First Year, Computer Science</p>
               </div>
             </div>
           </div>
@@ -635,34 +423,123 @@
   </section>
   <!-- ================ End Testimonials Area ================= -->
 
-  <!-- ================ Start Registration Area ================= -->
+
+
+  <!-- ================ Start Blog Post Area ================= -->
+  <section class="blog-post-area section-gap">
+    <div class="container-fluid">
+      <div class="feature-inner row">
+        <div class="col-lg-12">
+          <div class="section-title text-left">
+            <h2>
+              Most Popular Classes <br />
+
+            </h2>
+            <p>
+              These are our most in demand and useful tutors! They are the most experienced and knowledgeable students UVA has to offer!
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="single-blog-post">
+            <img src="{% static '/polls/images/blog-post/b1.jpg' %}" class="img-fluid" alt="" />
+            <div class="overlay"></div>
+            <div class="top-text">
+              <p> Tutored Since Fall 2020</p>
+              <p>787 Hours Tutored</p>
+              <p>Over 100 Students Helped</p>
+            </div>
+            <div class="text">
+              <h4 class="text-white">CS 2150: Program and Data Representation</h4>
+              <div>
+                <p>
+                 Looks at the way data is represented at the lowest and highest levels.
+                </p>
+              </div>
+              <a href="#" class="primary-btn">
+                View Details
+                <i class="fa fa-long-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mt--160">
+          <div class="single-blog-post">
+            <img src="{% static '/polls/images/blog-post/b2.jpg' %}" class="img-fluid" alt="" />
+            <div class="overlay"></div>
+            <div class="top-text">
+              <p> Tutored Since Spring 2020</p>
+              <p>Over 750 Hours Tutored</p>
+              <p>Over 90 Students Helped</p>
+            </div>
+            <div class="text">
+              <h4 class="text-white">CHEM 2410: Organic Chemistry</h4>
+              <div>
+                <p>
+                Looks at Carbon structures and their properties.
+                </p>
+              </div>
+              <a href="#" class="primary-btn">
+                View Details
+                <i class="fa fa-long-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mt--260">
+          <div class="single-blog-post">
+            <img src="{% static '/polls/images/blog-post/b3.jpg' %}" class="img-fluid" alt="" />
+            <div class="overlay"></div>
+            <div class="top-text">
+              <p> Tutored Since Fall 2019</p>
+              <p>Over 500 Hours Tutored</p>
+              <p>Over 75 Students Helped</p>
+            </div>
+            <div class="text">
+              <h4 class="text-white">APMA 1110: Calculus II</h4>
+              <div>
+                <p>
+                  Surveys Intgeral Calculus and it's applications.
+                </p>
+              </div>
+              <a href="#" class="primary-btn">
+                View Details
+                <i class="fa fa-long-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ================ End Blog Post Area ================= -->
+
+   <!-- ================ Start Registration Area ================= -->
   <section class="registration-area">
     <div class="container">
       <div class="row align-items-end">
         <div class="col-lg-5">
           <div class="section-title text-left text-white">
             <h2 class="text-white">
-              Watch Our Trainers <br>
-              in Live Action
+              Register Now!<br>
+              Be a student, tutor, or both.
             </h2>
             <p>
-              If you are looking at blank cassettes on the web, you may be
-              very confused at the difference in price. You may see some for
-              as low as $.17 each.
+             You can be payed by the hour, get to know other UVA students, and brush up on all your skills!
             </p>
           </div>
         </div>
         <div class="offset-lg-3 col-lg-4 col-md-6">
           <div class="course-form-section">
-            <h3 class="text-white">Courses for Free</h3>
-            <p class="text-white">It is high time for learning</p>
+            <h3 class="text-white">Join Now</h3>
+            <p class="text-white">UVA is hard. We can help.</p>
             <form class="course-form-area contact-page-form course-form text-right" id="myForm" action="mail.html" method="post">
               <div class="form-group col-md-12">
                 <input type="text" class="form-control" id="name" name="name" placeholder="Name" onfocus="this.placeholder = ''"
                  onblur="this.placeholder = 'Name'">
               </div>
               <div class="form-group col-md-12">
-                <input type="text" class="form-control" id="subject" name="subject" placeholder="Phone Number" onfocus="this.placeholder = ''"
+                <input type="text" class="form-control" id="subject" name="subject" placeholder="Role" onfocus="this.placeholder = ''"
                  onblur="this.placeholder = 'Phone Number'">
               </div>
               <div class="form-group col-md-12">
@@ -680,98 +557,6 @@
   </section>
   <!-- ================ End Registration Area ================= -->
 
-  <!-- ================ Start Blog Post Area ================= -->
-  <section class="blog-post-area section-gap">
-    <div class="container-fluid">
-      <div class="feature-inner row">
-        <div class="col-lg-12">
-          <div class="section-title text-left">
-            <h2>
-              Features That <br />
-              Can Avail By Everyone
-            </h2>
-            <p>
-              There is a moment in the life of any aspiring astronomer that it is time to buy that first telescope.
-              It’s exciting to think about setting up your own viewing station.
-            </p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <div class="single-blog-post">
-            <img src="{% static '/polls/images/blog-post/b1.jpg' %}" class="img-fluid" alt="" />
-            <div class="overlay"></div>
-            <div class="top-text">
-              <p>29th, oct, 2018</p>
-              <p>121 likes</p>
-              <p>05 comments</p>
-            </div>
-            <div class="text">
-              <h4 class="text-white">Smart Kitchen Setup</h4>
-              <div>
-                <p>
-                  Lorem ipsum dolor sit amet consec tetur adipisicing elit,
-                  sed do.
-                </p>
-              </div>
-              <a href="#" class="primary-btn">
-                View Details
-                <i class="fa fa-long-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 mt--160">
-          <div class="single-blog-post">
-            <img src="{% static '/polls/images/blog-post/b2.jpg' %}" class="img-fluid" alt="" />
-            <div class="overlay"></div>
-            <div class="top-text">
-              <p>29th, oct, 2018</p>
-              <p>121 likes</p>
-              <p>05 comments</p>
-            </div>
-            <div class="text">
-              <h4 class="text-white">Smart Kitchen Setup</h4>
-              <div>
-                <p>
-                  Lorem ipsum dolor sit amet consec tetur adipisicing elit,
-                  sed do.
-                </p>
-              </div>
-              <a href="#" class="primary-btn">
-                View Details
-                <i class="fa fa-long-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 mt--260">
-          <div class="single-blog-post">
-            <img src="{% static '/polls/images/blog-post/b3.jpg' %}" class="img-fluid" alt="" />
-            <div class="overlay"></div>
-            <div class="top-text">
-              <p>29th, oct, 2018</p>
-              <p>121 likes</p>
-              <p>05 comments</p>
-            </div>
-            <div class="text">
-              <h4 class="text-white">Smart Kitchen Setup</h4>
-              <div>
-                <p>
-                  Lorem ipsum dolor sit amet consec tetur adipisicing elit,
-                  sed do.
-                </p>
-              </div>
-              <a href="#" class="primary-btn">
-                View Details
-                <i class="fa fa-long-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- ================ End Blog Post Area ================= -->
 
   <!-- ================ start footer Area ================= -->
   <footer class="footer-area section-gap">
@@ -815,7 +600,7 @@
 				</div>
 				<div class="col-lg-4 col-md-6 single-footer-widget">
 					<h4>Newsletter</h4>
-					<p>You can trust us. we only send promo offers,</p>
+					<p>Let's stay in touch.</p>
 					<div class="form-wrap" id="mc_embed_signup">
 						<form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
 						 method="get" class="form-inline">
@@ -837,10 +622,10 @@
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
 				<div class="col-lg-4 col-md-12 footer-social">
-					<a href="#"><i class="fa fa-facebook"></i></a>
-					<a href="#"><i class="fa fa-twitter"></i></a>
-					<a href="#"><i class="fa fa-dribbble"></i></a>
-					<a href="#"><i class="fa fa-behance"></i></a>
+					<a href="#"><i class="ti-facebook"></i></a>
+					<a href="#"><i class="ti-twitter"></i></a>
+					<a href="#"><i class="ti-instagram"></i></a>
+					<a href="#"><i class="ti-linkedin"></i></a>
 				</div>
 			</div>
 		</div>

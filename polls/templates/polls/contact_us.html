@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
+
+{% load static %}
+{% load bootstrap4 %}
+<link rel="stylesheet"  href="{% static 'polls/availability-calendar.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/bootstrap.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/font-awesome.min.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/hexagons.min.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/ion.rangeSlider.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/ion.rangeSlider.skinFlat.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/jquerysctipttop.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/linearicons.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/magnific-popup.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/main.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/main.css.map' %}">
+<link rel="stylesheet"  href="{% static 'polls/nice-select.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/owl.carousel.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/static/polls/main.scss' %}">
+
 <head>
 	<!-- Mobile Specific Meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -22,76 +40,83 @@
       CSS
       =============================================
     -->
-	<link rel="stylesheet" href="css/linearicons.css" />
-	<link rel="stylesheet" href="css/font-awesome.min.css" />
-	<link rel="stylesheet" href="css/bootstrap.css" />
-	<link rel="stylesheet" href="css/magnific-popup.css" />
-	<link rel="stylesheet" href="css/owl.carousel.css" />
-	<link rel="stylesheet" href="css/nice-select.css">
-	<link rel="stylesheet" href="css/hexagons.min.css" />
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css" />
-	<link rel="stylesheet" href="css/main.css" />
+
 </head>
 
 <body>
-	<!-- ================ Start Header Area ================= -->
-	<header class="default-header">
-		<nav class="navbar navbar-expand-lg  navbar-light">
-			<div class="container">
-				<a class="navbar-brand" href="index.html">
-					<img src="img/logo.png" alt="" />
-				</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-				 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="lnr lnr-menu"></span>
-				</button>
+ <!-- ================ Start Header Area ================= -->
+  <header class="default-header">
+    <nav class="navbar navbar-expand-lg  navbar-light">
+      <div class="container">
+<!--        <a class="navbar-brand" href="index.html">-->
+<!--          <img src="{% static '/polls/images/qt_logo.png' %}" alt="" />-->
+<!--        </a>-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="lnr lnr-menu"></span>
+        </button>
 
-				<div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
-					<ul class="navbar-nav">
-						<li><a href="index.html">Home</a></li>
-						<li><a href="about.html">About</a></li>
-						<li><a href="courses.html">Courses</a></li>
-						<!-- Dropdown -->
-						<li class="dropdown">
-							<a class="dropdown-toggle" href="#" data-toggle="dropdown">
-								Pages
-							</a>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" href="elements.html">Elements</a>
-								<a class="dropdown-item" href="course-details.html">Course Details</a>
-							</div>
-						</li>
-						<li class="dropdown">
-							<a class="dropdown-toggle" href="#" data-toggle="dropdown">
-								Blog
-							</a>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" href="blog-home.html">Blog Home</a>
-								<a class="dropdown-item" href="blog-single.html">Blog Details</a>
-							</div>
-						</li>
-						<li><a href="contacts.html">Contacts</a></li>
+        <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+            <li><a href="/quick-tutor/">Home</a></li>
+            <li><a href="/quick-tutor/about">About</a></li>
+            <li><a href="/quick-tutor/tutor_match">Find a Tutor</a></li>
+            <!-- Dropdown -->
+            <li class="dropdown">
+              <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                Join a Chat Room
+              </a>
+              <div class="dropdown-menu">
+                  <a class="dropdown-item" href="/quick-tutor/chat">Enter As a Student </a>
+                <a class="dropdown-item" href="/quick-tutor/chat">Enter As a Tutor</a>
+              </div>
+            </li>
 
-						<li>
-							<button class="search">
-								<span class="lnr lnr-magnifier" id="search"></span>
-							</button>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<div class="search-input" id="search-input-box">
-			<div class="container">
-				<form class="d-flex justify-content-between">
-					<input type="text" class="form-control" id="search-input" placeholder="Search Here" />
-					<button type="submit" class="btn"></button>
-					<span class="lnr lnr-cross" id="close-search" title="Close Search"></span>
-				</form>
-			</div>
-		</div>
-	</header>
-	<!-- ================ End Header Area ================= -->
+
+<!--             <li><a href="tutor_match.html">Login/Register</a></li>-->
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link disabled" href=""><p>Logged in as: {{ user.username }}</p><span class="sr-only">(current)</span></a>
+                </li>
+
+            <a class="nav-link" href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a>
+            {% else %}
+                    <li><a href="{% url 'social:begin' 'google-oauth2' %}">Login/Register</a></li>
+                </a>
+            {% endif %}
+        </li>
+
+
+
+              <li><a href="/quick-tutor/contact_us/">Contact Us</a></li>
+
+            <li>
+              <button class="search" >
+                <span class="lnr lnr-magnifier"></span>
+              </button>
+
+
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+<!--<div class="search-input" id="search-input-box">-->
+<!--      <div class="container">-->
+
+<!--        <form class="d-flex justify-content-between">-->
+<!--          <input type="text" class="form-control" id="search-input" placeholder="Search Here" />-->
+<!--&lt;!&ndash;          <button class="navbar-toggle" type="submit" data-toggle="collapse" data-target="bs-navbar-collapse" ></button>&ndash;&gt;-->
+<!--          <button type="submit" class="btn"></button>-->
+<!--          <span class="lnr lnr-cross" id="close-search" title="Close Search"></span>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--    </div>-->
+  </header>
+  <!-- ================ End Header Area ================= -->
+
 
 	<!-- ================ start banner Area ================= -->
 	<section class="banner-area">

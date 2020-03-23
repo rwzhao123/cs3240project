@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'django_forms_bootstrap',
     'social_django',
+
     
 ]
 
@@ -157,5 +158,6 @@ LOGIN_URL = '/auth/login/google-oauth2/'
 LOGIN_REDIRECT_URL = '/quick-tutor/'
 LOGOUT_REDIRECT_URL = '/quick-tutor/'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
 
 
