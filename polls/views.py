@@ -106,17 +106,18 @@ def student_profile(request):
 
 @login_required
 def update_profile(request):
+    print("this was called")
     if request.method == 'POST':
-        user_form = UserForm(instance=request.user)
+        user_form = UserForm(request.POST,instance=request.user)
         profile_form = ProfileForm(request.POST)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            return render(request, "polls/student_profile.html")
+            return render(request,"polls/student_profile.html",{"user_form": user_form, "profile_form": profile_form})
     else:
         user_form = UserForm(instance = request.user)
         profile_form = ProfileForm(instance = request.user.profile)
-        return render(request, "polls/student_profile.html")
+        return render(request,"polls/student_profile.html",{"user_form": user_form, "profile_form": profile_form})
 
 def create_student(request):
     return render(request, "polls/create_student.html")

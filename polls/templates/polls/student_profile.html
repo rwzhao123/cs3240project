@@ -72,12 +72,14 @@
       </div>
    </form>
           <div class="container">
-              <h2><p class="text-info">Here you can view and edit you information(tutor)</p></h2>
+              <h2><p class="text-info">Do you want to be a tutor?</p></h2>
           </div>
    <form method="post">
        {% csrf_token %}
-       {{user_form}}
-       {{ profile_form}}
+       <input type = "radio" id = "True" name = "tutor" value = "yes">
+      <label for = "True"> Yes </label><br>
+       <input type = "radio" id = "False" name = "tutor" value = "no">
+       <label for = "False"> No </label><br>
        <button type="submit">Save Changes</button>
 
    </form>

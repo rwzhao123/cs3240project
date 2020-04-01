@@ -6,8 +6,8 @@ from django import forms
 
 class UserForm(forms.ModelForm):
     class Meta:
-        model = User
-        fields = ('first_name', 'last_name', 'email')
+        model = Student
+        fields = ('student_first_name', 'student_last_name', 'student_email')
 
 class ProfileForm(forms.ModelForm):
     class Meta:
