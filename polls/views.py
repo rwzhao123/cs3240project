@@ -97,6 +97,8 @@ def index(request):
 
 from django.views.generic import ListView
 
+class StudentView(ListView):
+    template_name = ""
 
 def student_profile(request):
     return render(request, "polls/student_profile.html")

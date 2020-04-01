@@ -53,22 +53,22 @@
           <a class="navbar-brand" href="#"><p class="text-info">Version: 1.0</p></a>
       </nav>
       <div class="container">
-        <h2><p class="text-white ">Your Information for {{ user.username }} (Student) </p></h2>
+        <h2><p class="text-black ">Your Information for {{ user.username }} (Student) </p></h2>
           <div class="col-md-3 mb-4">
               {% csrf_token %}
           <div class="container">
-              <p class="text-white ">First Name: {{student.first_name}}</p>
-              <p class="text-white ">Last Name: {{student.last_name}}</p>
-              <p class="text-white ">Email: {{student.email}}</p>
-              <p class="text-white ">Year: {{student.year}}</p>
+              <p class="text-black ">First Name: {{user.first_name}}</p>
+              <p class="text-black ">Last Name: {{user.last_name}}</p>
+              <p class="text-black ">Email: {{user.email}}</p>
+              <p class="text-black ">Year: {{user.year}}</p>
 
 
-   <form action="/polls/suggestions/list/" method="post">
+   <form action="/quick-tutor/student_profile/" method="post">
     {% csrf_token %}
        <div class="container">
-          <h4> <p class="text-info">Student First Name: {{ Student.student_first_name }}</p></h4>
-            <h4> <p class="text-info">Student Last Name: {{ Student.student_last_name }}</p></h4>
-            <h4> <p class="text-info">Student Year: {{ Student.student_year_in_school }}</p></h4>
+          <h4> <p class="text-info">Student First Name: {{ user.first_name }}</p></h4>
+            <h4> <p class="text-info">Student Last Name: {{ user.last_name }}</p></h4>
+            <h4> <p class="text-info">Student Year: {{ user.student_year_in_school }}</p></h4>
       </div>
    </form>
           <div class="container">
@@ -76,8 +76,8 @@
           </div>
    <form method="post">
        {% csrf_token %}
-       {{ user_form.as_p }}
-       {{ profile_form.as_p }}
+       {{user_form}}
+       {{ profile_form}}
        <button type="submit">Save Changes</button>
 
    </form>

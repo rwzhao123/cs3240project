@@ -81,10 +81,15 @@ class Student(models.Model):
         return self.student_year_in_school in {self.THIRD_YEAR, self.FOURTH_YEAR}
     def is_tutor(self):
         return self.student_tutor
+
     @receiver(post_save,sender = User)
     def create_user_profile(sender, instance, created, **kwargs):
+        print("user created")
         if created:
-            Student.objects.create(user =instance)
+            s = Student(user = instance)
+            s.save()
+            print(created)
+            #Student.objects.create(user =instance)
 
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, created, **kwargs):
