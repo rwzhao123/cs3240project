@@ -60,37 +60,22 @@
               <p class="text-black ">First Name: {{user.first_name}}</p>
               <p class="text-black ">Last Name: {{user.last_name}}</p>
               <p class="text-black ">Email: {{user.email}}</p>
-              <p class="text-black ">Year: {{user.year}}</p>
-
 
    <form action="/quick-tutor/student_profile/" method="post">
     {% csrf_token %}
-       <div class="container">
-          <h4> <p class="text-info">Student First Name: {{ user.first_name }}</p></h4>
-            <h4> <p class="text-info">Student Last Name: {{ user.last_name }}</p></h4>
-            <h4> <p class="text-info">Student Year: {{ user.student_year_in_school }}</p></h4>
-      </div>
-   </form>
-          <div class="container">
-              <h2><p class="text-info">Do you want to be a tutor?</p></h2>
-          </div>
-   <form method="post">
-       {% csrf_token %}
-       <input type = "radio" id = "True" name = "tutor" value = "yes">
-      <label for = "True"> Yes </label><br>
-       <input type = "radio" id = "False" name = "tutor" value = "no">
-       <label for = "False"> No </label><br>
+        {{profile_form.as_p}}
+        {{choice_form.as_p}}
+
        <button type="submit">Save Changes</button>
 
    </form>
 
-   =======
+  
 
 
         </div>
     </div>
-    <!-- Grid column -->
-    >>>>>>> master
+
 
 
 

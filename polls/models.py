@@ -44,9 +44,7 @@ class Suggestion(models.Model):
 class Student(models.Model):
 
     user = models.OneToOneField(User, unique=True, null=False, db_index=True, on_delete=models.CASCADE, related_name='profile')
-    student_first_name = models.CharField(max_length=200, blank = True)
-    student_last_name = models.CharField(max_length=200, blank = True)
-    student_email = models.CharField(max_length=200, blank = True)
+
     student_tutor = models.BooleanField(default=False)
     skills = models.CharField(max_length=200, blank = True)
     availability = models.CharField(max_length=200, blank = True)
