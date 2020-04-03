@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Choice, Question, Suggestion, Student
 
 #from .forms import UserForm, ProfileForm, ChoiceForm
-from .forms import ProfileForm, ChoiceForm
+from .forms import ProfileForm
 
 
 
@@ -113,26 +113,27 @@ def update_profile(request):
         print("yay")
         #user_form = UserForm(request.POST,instance=request.user)
         profile_form = ProfileForm(request.POST)
-        choice_form = ChoiceForm(request.POST)
-        if profile_form.is_valid() and choice_form.is_valid():
+        #choice_form = ChoiceForm(request.POST)
+        if profile_form.is_valid():
         #if user_form.is_valid() and profile_form.is_valid() and choice_form.is_valid():
             print("here")
-            #user_form.save()
+            ##user_form.save()
             post = profile_form.save(commit=False)
             post.user = request.user
-            profile_form.save()
+            
+            post.save()
 
-            instance = choice_form.save(commit=False)
-            instance.user = request.user
-            choice_form.save()
-            return render(request,"polls/student_profile.html",{"profile_form": profile_form, "choice_form": choice_form})
+            #instance = choice_form.save(commit=False)
+            #instance.user = request.user
+            #choice_form.save()
+            return render(request,"polls/student_profile.html",{"profile_form": profile_form})
             #return render(request,"polls/student_profile.html",{"user_form": user_form, "profile_form": profile_form, "choice_form": choice_form})
     else:
         print("no here")
         #user_form = UserForm(instance = request.user)
         profile_form = ProfileForm(instance = request.user.profile)
-        choice_form=ChoiceForm(instance=request.user)
-        return render(request,"polls/student_profile.html",{"profile_form": profile_form, "choice_form": choice_form})
+        #choice_form=ChoiceForm(instance=request.user)
+        return render(request,"polls/student_profile.html",{"profile_form": profile_form})
 
         #return render(request,"polls/student_profile.html",{"user_form": user_form, "profile_form": profile_form, "choice_form": choice_form})
 

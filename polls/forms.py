@@ -12,10 +12,10 @@ from django import forms
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ('student_year_in_school', 'skills', 'availability')
+        fields = ('student_year_in_school', 'skills', 'availability', 'student_tutor')
 
-class ChoiceForm(forms.ModelForm):
-    class Meta:
-        model = Student
-        fields = ('student_tutor',)
+#class ChoiceForm(forms.ModelForm):
+    #class Meta:
+        #model = Student
+        #fields = ('student_tutor',)
         # student_tutor = forms.ChoiceField(widget=forms.RadioSelect, choices=TUTOR_CHOICES)

@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.core.exceptions import ObjectDoesNotExist
 
 
 
@@ -43,7 +44,7 @@ class Suggestion(models.Model):
 
 class Student(models.Model):
 
-    user = models.OneToOneField(User, unique=True, null=False, db_index=True, on_delete=models.CASCADE, related_name='profile')
+    user = models.OneToOneField(User, unique=True, null=True, db_index=True, on_delete=models.CASCADE, related_name='profile')
 
     student_tutor = models.BooleanField(default=False)
     skills = models.CharField(max_length=200, blank = True)
@@ -71,8 +72,8 @@ class Student(models.Model):
 
 
 
-    def __str__(self):
-        return self.student_last_name
+    #def __str__(self):
+        #return self.student_last_name
 
 
     def is_upperclass(self):
@@ -82,11 +83,16 @@ class Student(models.Model):
 
     @receiver(post_save,sender = User)
     def create_user_profile(sender, instance, created, **kwargs):
-        print("user created")
-        if created:
+        try:
+            instance.profile.save()
+        except ObjectDoesNotExist:
             s = Student(user = instance)
             s.save()
-            print(created)
+        print("user created")
+        #if created:
+            #s = Student(user = instance)
+            #s.save()
+            #print(created)
             #Student.objects.create(user =instance)
 
     @receiver(post_save, sender=User)
