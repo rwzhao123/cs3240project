@@ -131,7 +131,8 @@ def edit_info(request):
         profile_form = ProfileForm(request.POST, instance= request.user.profile)
         if profile_form.is_valid():
             profile_form.save()
-            return render(request, "polls/student_profile.html")
+            return HttpResponseRedirect("/quick-tutor/student_profile")
+            #return render(request, "polls/student_profile.html")
     else:
         print("this happend")
 
