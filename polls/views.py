@@ -114,7 +114,7 @@ def update_profile(request):
             #instance = choice_form.save(commit=False)
             #instance.user = request.user
             #choice_form.save()
-            #eturn render(request,"polls/student_profile.html")
+            #return render(request,"polls/student_profile.html", {"profile_form": profile_form})
             #return render(request,"polls/edit_student_profile.html",{"user_form": user_form, "profile_form": profile_form, "choice_form": choice_form})
     #else:
         #print("no here")
