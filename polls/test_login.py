@@ -11,13 +11,13 @@ from django.test import TestCase
 
 
 
-class TestSuite(TestCase):
-    def setUp(self):
-        user = User.objects.create_user(
-            username='jacob', email='jacob@gmail.com', password='top_secret')
+#class TestSuite(TestCase):
+   # def setUp(self):
+        #user = User.objects.create_user(
+            #username='jacob', email='jacob@gmail.com', password='top_secret')
 
-    def test_user_can_login(self):
-        response = self.client.post("/login", {"username": "jacob", "password": "top_secret"})
+    #def test_user_can_login(self):
+        #response = self.client.post("/login", {"username": "jacob", "password": "top_secret"})
 
 
 
