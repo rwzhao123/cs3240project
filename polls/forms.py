@@ -15,7 +15,7 @@ class ProfileForm(forms.ModelForm):
         fields = ('student_year_in_school', 'skills', 'availability', 'student_tutor')
 
     def save(self, commit= True):
-        student = super(ProfileForm, self).save(commit=False)
+        student = super(ProfileForm, self).save(commit=True)
         student.student_year_in_school = self.cleaned_data['student_year_in_school']
         student.skills = self.cleaned_data['skills']
         student.availability = self.cleaned_data['availability']
