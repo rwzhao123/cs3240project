@@ -22,8 +22,8 @@ urlpatterns = [
     path('student_profile/', views.update_profile),
     path('edit_student_profile/', views.edit_info, name = 'edit_info'),
     path(r'^profile/$',views.update_profile),
-    #path('my_requests/', views.create_request),
-
+    path('student_profile/requests', views.student_requests),
+    path('student_profile/requests/new_request', views.create_request),
 
     path('chat/', views.chat, name='chat'),
     path('chat/<str:room_name>/', views.room, name='room'),

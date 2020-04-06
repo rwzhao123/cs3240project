@@ -36,6 +36,7 @@ class ResultsView(generic.DetailView):
         """
         return Question.objects.filter(pub_date__lte=timezone.now())
 
+
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
@@ -150,6 +151,16 @@ def tutor_match(request):
 def contact_us(request):
     return render(request, "polls/contact_us.html")
 
+def student_requests(request):
+    r = TutorRequest.objects.all(filter=request.Student)
+    args = {'sr' : r}
+    return render(request, "polls/student_request.html", args )
+
+
+def create_request(request):
+    TutorRequest.objects.create(student = request.Student, pub_date = timezone.now())
+    return render(request, "polls/request.html")
+
 def send_request(request):
     if request.method == "POST":
         request_form = RequestForm(request.POST, instance=request.TutorRequest)
@@ -157,4 +168,6 @@ def send_request(request):
             request_form.save()
     else:
         request_form = RequestForm(instance=request.TutorRequest)
+        args = {'request_form': request_form}
+        return render(request, "polls/request.html")
 

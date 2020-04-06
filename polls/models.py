@@ -111,8 +111,7 @@ class TutorRequest(models.Model):
     in_progress = models.BooleanField(default= False)
     student = models.ForeignKey(Student, on_delete = models.CASCADE)
 
-    def create_request(sender, instance,**kwargs):
-        TutorRequest.objects.create(student=instance, pub_date=timezone.now())
+
 
 
 
