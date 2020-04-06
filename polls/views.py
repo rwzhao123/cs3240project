@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.template import loader
 from django.urls import reverse
 from django.views import generic
@@ -8,7 +8,8 @@ from django.db import transaction
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-from .models import Choice, Question, Suggestion, Student
+from .models import Choice, Question, Suggestion, Student, TutorRequest
+from .forms import RequestForm
 
 #from .forms import UserForm, ProfileForm, ChoiceForm
 from .forms import ProfileForm
@@ -18,22 +19,11 @@ from .forms import ProfileForm
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
-    context_object_name = 'latest_question_list'
-
-    def get_queryset(self):
-        """
-        Return the last five published questions (not including those set to be
-        published in the future).
-        """
-        return Question.objects.filter(
-            pub_date__lte=timezone.now()
-        ).order_by('-pub_date')[:5]
 
 
 class DetailView(generic.DetailView):
     model = Question
     template_name = 'polls/detail.html'
-
 
 
 class ResultsView(generic.DetailView):
@@ -88,12 +78,8 @@ def room(request, room_name):
     })
 
 def index(request):
-    context = {
-        'questions': Question.objects.order_by('-date')
-        if request.user.is_authenticated else []
-    }
-
-    return render(request, "polls/index.html", context)
+    print("this was called")
+    return render(request, "polls/index.html")
 
 
 
@@ -103,39 +89,54 @@ class StudentView(ListView):
     template_name = ""
 
 def student_profile(request):
-    return render(request, "polls/student_profile.html")
+    return render(request, "polls/edit_student_profile.html")
 
+#def my_requests(request):
 
 @login_required
 def update_profile(request):
     print("this was called")
-    if request.method == 'POST':
-        print("yay")
+    #if request.method == 'POST':
+        #print("yay")
         #user_form = UserForm(request.POST,instance=request.user)
-        profile_form = ProfileForm(request.POST, instance = request.user.profile)
+        #profile_form = ProfileForm(request.POST, instance = request.user.profile)
         #choice_form = ChoiceForm(request.POST)
-        if profile_form.is_valid():
+        #if profile_form.is_valid():
         #if user_form.is_valid() and profile_form.is_valid() and choice_form.is_valid():
-            print("here")
+            #print("here")
             ##user_form.save()
-            post = profile_form.save(commit=False)
-            post.user = request.user
+            #post = profile_form.save(commit=False)
+            #post.user = request.user
             
-            post.save()
+            #post.save()
 
             #instance = choice_form.save(commit=False)
             #instance.user = request.user
             #choice_form.save()
-            return render(request,"polls/student_profile.html",{"profile_form": profile_form})
-            #return render(request,"polls/student_profile.html",{"user_form": user_form, "profile_form": profile_form, "choice_form": choice_form})
-    else:
-        print("no here")
+            #eturn render(request,"polls/student_profile.html")
+            #return render(request,"polls/edit_student_profile.html",{"user_form": user_form, "profile_form": profile_form, "choice_form": choice_form})
+    #else:
+        #print("no here")
         #user_form = UserForm(instance = request.user)
-        profile_form = ProfileForm(instance = request.user.profile)
+        #profile_form = ProfileForm(instance = request.user.profile)
         #choice_form=ChoiceForm(instance=request.user)
-        return render(request,"polls/student_profile.html",{"profile_form": profile_form})
+    return render(request,"polls/student_profile.html")
 
-        #return render(request,"polls/student_profile.html",{"user_form": user_form, "profile_form": profile_form, "choice_form": choice_form})
+        #return render(request,"polls/edit_student_profile.html",{"user_form": user_form, "profile_form": profile_form, "choice_form": choice_form})
+@login_required
+def edit_info(request):
+    if request.method ==  "POST":
+        print("in here")
+        profile_form = ProfileForm(request.POST, instance= request.user.profile)
+        if profile_form.is_valid():
+            profile_form.save()
+            return render(request, "polls/student_profile.html")
+    else:
+        print("this happend")
+
+        profile_form = ProfileForm(instance=request.user.profile)
+        print(profile_form)
+        return render(request,"polls/edit_student_profile.html", {"profile_form" : profile_form})
 
 def create_student(request):
     return render(request, "polls/create_student.html")
@@ -148,3 +149,12 @@ def tutor_match(request):
 
 def contact_us(request):
     return render(request, "polls/contact_us.html")
+
+def send_request(request):
+    if request.method == "POST":
+        request_form = RequestForm(request.POST, instance=request.TutorRequest)
+        if request_form.is_valid():
+            request_form.save()
+    else:
+        request_form = RequestForm(instance=request.TutorRequest)
+

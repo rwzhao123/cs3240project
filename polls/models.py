@@ -42,6 +42,7 @@ class Suggestion(models.Model):
         return self.name_text
 
 
+
 class Student(models.Model):
 
     user = models.OneToOneField(User, unique=True, null=True, db_index=True, on_delete=models.CASCADE, related_name='profile')
@@ -81,6 +82,9 @@ class Student(models.Model):
     def is_tutor(self):
         return self.student_tutor
 
+
+
+
     @receiver(post_save,sender = User)
     def create_user_profile(sender, instance, created, **kwargs):
         try:
@@ -89,15 +93,32 @@ class Student(models.Model):
             s = Student(user = instance)
             s.save()
         print("user created")
-        #if created:
-            #s = Student(user = instance)
-            #s.save()
-            #print(created)
-            #Student.objects.create(user =instance)
+        if created:
+            s = Student(user = instance)
+            s.save()
+            print(created)
+            Student.objects.create(user =instance)
 
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, created, **kwargs):
         instance.profile.save()
+
+
+class TutorRequest(models.Model):
+    subject = models.CharField(max_length = 200)
+    subject_text = models.TextField()
+    pub_date = models.DateTimeField('date published')
+    in_progress = models.BooleanField(default= False)
+    student = models.ForeignKey(Student, on_delete = models.CASCADE)
+
+    def create_request(sender, instance,**kwargs):
+        TutorRequest.objects.create(student=instance, pub_date=timezone.now())
+
+
+
+
+
+
 
 
 

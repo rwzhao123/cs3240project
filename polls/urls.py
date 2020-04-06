@@ -1,5 +1,5 @@
 from django.urls import path
-
+from django.conf.urls import url
 from . import views
 from django.contrib.auth.views import LogoutView
 from django.contrib import admin
@@ -8,6 +8,7 @@ from django.conf import settings
 
 app_name = 'quick-tutor'
 urlpatterns = [
+    url(r'$^', views.index),
     path('', views.IndexView.as_view(), name='index'),
     path('<int:pk>/', views.DetailView.as_view(), name='detail'),
     path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
@@ -19,7 +20,9 @@ urlpatterns = [
          name='logout'),
 
     path('student_profile/', views.update_profile),
+    path('edit_student_profile/', views.edit_info, name = 'edit_info'),
     path(r'^profile/$',views.update_profile),
+    #path('my_requests/', views.create_request),
 
 
     path('chat/', views.chat, name='chat'),
