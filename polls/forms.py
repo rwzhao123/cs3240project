@@ -12,17 +12,30 @@ from django import forms
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ('student_year_in_school', 'skills', 'availability', 'student_tutor')
+        fields = ('preferred_name', 'student_year_in_school', 'need_help_with', 'location', 'availability', 'student_tutor', 'skills')
 
     def save(self, commit= True):
         student = super(ProfileForm, self).save(commit=True)
+        student.preferred_name = self.cleaned_data['preferred_name']
         student.student_year_in_school = self.cleaned_data['student_year_in_school']
-        student.skills = self.cleaned_data['skills']
+        student.need_help_with = self.cleaned_data['need_help_with']
         student.availability = self.cleaned_data['availability']
         student.student_tutor = self.cleaned_data['student_tutor']
+        student.location = self.cleaned_data['location']
         if commit:
             student.save()
         return student
+
+class TutorForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = ('requested',)
+    def save(self, commit=True):
+        requests = super(TutorForm, self).save(commit=True)
+        requests.requested = self.cleaned_data['requested']
+        if commit:
+            requests.save()
+        return requests
 
 
 class RequestForm(forms.ModelForm):

@@ -22,7 +22,7 @@ urlpatterns = [
     path('student_profile/', views.update_profile),
     path('edit_student_profile/', views.edit_info, name = 'edit_info'),
     path(r'^profile/$',views.update_profile),
-    path('student_profile/requests', views.student_requests),
+    path('student_profile/requests/', views.student_requests),
     path('student_profile/requests/new_request', views.create_request),
 
     path('chat/', views.chat, name='chat'),
@@ -32,7 +32,9 @@ urlpatterns = [
     path('register_as_student/', views.create_student),
 
     path('about/', views.about),
-    path('tutor_match/', views.tutor_match),
+    path('tutor_match/', views.AllStudentsView.as_view(), name='match'),
+    path('tutor_page/', views.show_requests, name = 'show_requests'),
+
     path('contact_us/', views.contact_us),
 
 ]

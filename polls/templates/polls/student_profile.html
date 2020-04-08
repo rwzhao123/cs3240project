@@ -47,11 +47,7 @@
               </form>
           </div>
       </nav>
-      <nav class="navbar fixed-bottom navbar-light bg-light">
-          <a class="navbar-brand" href="#"><p class="text-info">Author: QTees</p></a>
-          <a class="navbar-brand" href="#"><p class="text-info">Copyright/License: MIT</p></a>
-          <a class="navbar-brand" href="#"><p class="text-info">Version: 1.0</p></a>
-      </nav>
+
       <div class="container">
         <h2><p class="text-black "> Welcome {{ user.first_name }}!</p></h2>
           <h3><p class = "text-black"> Profile Information </p></h3>
@@ -59,12 +55,16 @@
               {% csrf_token %}
           <div class="container">
               <p class="text-black ">First Name: {{user.first_name}}</p>
+              <p class="text-black " >Preferred Name: {{user.profile.preferred_name}}</p>
               <p class="text-black ">Last Name: {{user.last_name}}</p>
+              <p class="text-black ">Year: {{user.profile.student_year_in_school}}</p>
               <p class="text-black ">Email: {{user.email}}</p>
-
+              <p class="text-black ">Need help with (for students only): {{user.profile.need_help_with}}</p>
+              <p class="text-black ">Location: {{user.profile.location}}</p>
               <p class="text-black ">Availability: {{user.profile.availability}}</p>
-              <p class="text-black ">Skills: {{user.profile.skills}}</p>
-              <p class="text-black ">Are you a Tutor: {{user.profile.student_tutor}}</p>
+              <p class="text-black ">Are you a tutor: {{user.profile.student_tutor}}</p>
+              <p class="text-black ">Skills (for tutors only): {{user.profile.skills}}</p>
+
         </div>
         <a class="nav-link" href = "/quick-tutor/edit_student_profile" >Edit Information</a>
     </div>

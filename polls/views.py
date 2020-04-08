@@ -12,7 +12,7 @@ from .models import Choice, Question, Suggestion, Student, TutorRequest
 from .forms import RequestForm
 
 #from .forms import UserForm, ProfileForm, ChoiceForm
-from .forms import ProfileForm
+from .forms import ProfileForm, TutorForm
 
 
 
@@ -152,10 +152,24 @@ def tutor_match(request):
 def contact_us(request):
     return render(request, "polls/contact_us.html")
 
+@login_required
+def show_requests(request):
+    if request.method == "POST":
+        print("TUTOR PAGE")
+        tutor_form = TutorForm(request.POST, instance=request.user.profile)
+        if tutor_form.is_valid():
+            tutor_form.save()
+            return HttpResponseRedirect("/quick-tutor/tutor_match") # later change this to be a page that says like tutor is on their way
+    else:
+        print("hm what is this")
+        tutor_form = TutorForm(instance=request.user.profile)
+        print(tutor_form)
+        return render(request, "polls/tutor_page.html", {"tutor_form": tutor_form})
+
 def student_requests(request):
     r = TutorRequest.objects.all(filter=request.Student)
     args = {'sr' : r}
-    return render(request, "polls/student_request.html", args )
+    return render(request, "polls/student_requests.html", args)
 
 
 def create_request(request):
@@ -172,3 +186,10 @@ def send_request(request):
         args = {'request_form': request_form}
         return render(request, "polls/request.html")
 
+
+
+class AllStudentsView(generic.ListView):
+    student_list = Student.objects.all()
+    template_name = 'polls/tutor_match.html'
+    def get_queryset(self):
+        return Student.objects.all()
