@@ -12,7 +12,7 @@ from django import forms
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ('preferred_name', 'student_year_in_school', 'need_help_with', 'location', 'availability', 'student_tutor', 'skills')
+        fields = ('preferred_name', 'student_year_in_school', 'need_help_with', 'location', 'availability', 'student_tutor', 'skills', 'requested')
 
     def save(self, commit= True):
         student = super(ProfileForm, self).save(commit=True)

@@ -122,10 +122,10 @@
         <div class="row justify-content-center align-items-center">
           <div class="col-lg-12 banner-right">
             <h1 class="text-white">
-              Who's Available?
+              Your tutor has been notified and will come find you shortly.
             </h1>
             <p class="mx-auto text-white  mt-20 mb-40">
-              In the history of modern astronomy, there is probably no one greater leap forward than the building.
+              Please do not move so your tutor is able to locate you.
             </p>
             <div class="link-nav">
               <span class="box">
@@ -205,12 +205,10 @@
             <div class="d-flex justify-content-between mb-20">
               <p class="name">{{student.location}}</p>
               <p class="value">$10</p>
-              <a href="{% url 'add_student' student.user.username %}"> add student to requested </a>
-
-              <a href="/quick-tutor/tutor_match/confirm">
-                <h4>{{student.preferred_name}} -- {{student.skills}} </h4>
-              </a>
-  
+            </div>
+            <a href="#">
+              <h4>{{student.preferred_name}} -- {{student.skills}} </h4>
+            </a>
             <div class="bottom d-flex mt-15">
               <ul class="list">
                 <li>

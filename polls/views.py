@@ -152,6 +152,16 @@ def tutor_match(request):
 def contact_us(request):
     return render(request, "polls/contact_us.html")
 
+def confirm_match(request):
+    return render(request, "polls/confirm_match.html")
+
+def add_student(request, student):
+    requested_user=User.objects.filter(username=student)[0]
+    requested_student = requested_user.Student
+    requested_student.requested.add(request.user)
+    return HttpResponseRedirect("quick-tutor/tutor_match/confirm")
+    
+
 @login_required
 def show_requests(request):
     if request.method == "POST":
