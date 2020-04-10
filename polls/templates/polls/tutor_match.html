@@ -205,7 +205,7 @@
             <div class="d-flex justify-content-between mb-20">
               <p class="name">{{student.location}}</p>
               <p class="value">$10</p>
-              <a href="{% url 'add_student' student.user.username %}"> add student to requested </a>
+              <a href="{% url 'quick-tutor:add_student' student.user.id %}"> add student to requested </a>
 
               <a href="/quick-tutor/tutor_match/confirm">
                 <h4>{{student.preferred_name}} -- {{student.skills}} </h4>

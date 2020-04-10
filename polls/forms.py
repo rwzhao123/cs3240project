@@ -10,6 +10,7 @@ from django import forms
         #fields = ('student_first_name', 'student_last_name', 'student_email')
 
 class ProfileForm(forms.ModelForm):
+    #requested=forms.ModelMultipleChoiceField(queryset=User.objects.all()[:2])
     class Meta:
         model = Student
         fields = ('preferred_name', 'student_year_in_school', 'need_help_with', 'location', 'availability', 'student_tutor', 'skills', 'requested')
@@ -31,6 +32,7 @@ class TutorForm(forms.ModelForm):
         model = Student
         fields = ('requested',)
     def save(self, commit=True):
+        print("requested stuff here")
         requests = super(TutorForm, self).save(commit=True)
         requests.requested = self.cleaned_data['requested']
         if commit:

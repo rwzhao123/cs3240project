@@ -91,17 +91,9 @@ class Student(models.Model):
 
     @receiver(post_save,sender = User)
     def create_user_profile(sender, instance, created, **kwargs):
-        try:
-            instance.profile.save()
-        except ObjectDoesNotExist:
-            s = Student(user = instance)
-            s.save()
-        print("user created")
         if created:
             s = Student(user = instance)
             s.save()
-            print(created)
-            Student.objects.create(user =instance)
 
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, created, **kwargs):

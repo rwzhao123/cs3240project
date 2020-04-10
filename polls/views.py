@@ -155,11 +155,14 @@ def contact_us(request):
 def confirm_match(request):
     return render(request, "polls/confirm_match.html")
 
-def add_student(request, student):
-    requested_user=User.objects.filter(username=student)[0]
-    requested_student = requested_user.Student
+def add_student(request, student_id):
+    requested_user = User.objects.get(id=student_id)
+    #requested_user=User.objects.get(id=student_id) 
+    requested_student = requested_user.profile
     requested_student.requested.add(request.user)
-    return HttpResponseRedirect("quick-tutor/tutor_match/confirm")
+    print("hello")
+    print(requested_student)
+    return redirect('quick-tutor:confirm')
     
 
 @login_required

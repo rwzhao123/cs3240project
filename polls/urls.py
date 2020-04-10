@@ -31,11 +31,11 @@ urlpatterns = [
 
     path('register_as_student/', views.create_student),
 
-    url(r'^tutor_matches/(?P<student>[a-zA-Z0-9]+)/$', views.add_student, name='add_student'),
+    path('tutor_match/<int:student_id>/', views.add_student, name='add_student'),
 
     path('about/', views.about),
     path('tutor_match/', views.AllStudentsView.as_view(), name='match'),
-    path('tutor_match/confirm', views.confirm_match),
+    path('tutor_match/confirm/', views.confirm_match, name='confirm'),
     path('tutor_page/', views.show_requests, name = 'show_requests'),
 
     path('contact_us/', views.contact_us),
