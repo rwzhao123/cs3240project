@@ -13,7 +13,7 @@ class ProfileForm(forms.ModelForm):
     #requested=forms.ModelMultipleChoiceField(queryset=User.objects.all()[:2])
     class Meta:
         model = Student
-        fields = ('preferred_name', 'student_year_in_school', 'need_help_with', 'location', 'availability', 'student_tutor', 'skills', 'requested')
+        fields = ('preferred_name', 'student_year_in_school', 'need_help_with', 'location', 'availability', 'student_tutor', 'skills')
 
     def save(self, commit= True):
         student = super(ProfileForm, self).save(commit=True)
@@ -26,6 +26,23 @@ class ProfileForm(forms.ModelForm):
         if commit:
             student.save()
         return student
+
+# form to make requesting work
+class RequestForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = ('requested',)
+        requests = {'requests': forms.HiddenInput()}
+
+    #requested = forms.ModelMultipleChoiceField(queryset=User.objects.all())
+    def __init__(self, *args, **kwargs):
+        assert 'initial' in kwargs and 'requests' in kwargs['initial'] and type(kwargs['initial']['requests'] is User)
+        super(RequestForm, self).__init__(*args, **kwargs)
+        requests = kwargs['initial']['requests']
+        self.fields['requested'].queryset = User.objects.filter(requests=requests)
+
+
+    
 
 class TutorForm(forms.ModelForm):
     class Meta:
@@ -40,17 +57,17 @@ class TutorForm(forms.ModelForm):
         return requests
 
 
-class RequestForm(forms.ModelForm):
-    class Meta:
-        model = TutorRequest
-        fields = ('subject','subject_text', 'pub_date')
-    def save(self, commit=True):
-        tr = super(RequestForm,self).save(commit=False)
-        tr.subject = self.clean_data['subject']
-        tr.subject_text = self.clean_data['subject_text']
-        if commit:
-            tr.save()
-        return tr
+# class RequestForm(forms.ModelForm):
+#     class Meta:
+#         model = TutorRequest
+#         fields = ('subject','subject_text', 'pub_date')
+#     def save(self, commit=True):
+#         tr = super(RequestForm,self).save(commit=False)
+#         tr.subject = self.clean_data['subject']
+#         tr.subject_text = self.clean_data['subject_text']
+#         if commit:
+#             tr.save()
+#         return tr
 
 
 

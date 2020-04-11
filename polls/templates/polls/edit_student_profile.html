@@ -55,6 +55,7 @@
           <form method="post">
                {% csrf_token %}
                {{profile_form}}
+               {{request_form.as_p}}
 
               <button type="submit">Save Changes</button>
               <!-- <button type="submit"><a class="nav-link" href = "/quick-tutor/student_profile" >Save Changes</a></button> -->

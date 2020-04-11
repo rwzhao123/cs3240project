@@ -129,16 +129,21 @@ def edit_info(request):
     if request.method ==  "POST":
         print("in here")
         profile_form = ProfileForm(request.POST, instance= request.user.profile)
+        #request_form = RequestForm(request.POST, instance=request.user.profile)
         if profile_form.is_valid():
+        #if profile_form.is_valid() and request_form.is_valid():
             profile_form.save()
+            #request_form.save()
             return HttpResponseRedirect("/quick-tutor/student_profile")
             #return render(request, "polls/student_profile.html")
     else:
         print("this happend")
 
         profile_form = ProfileForm(instance=request.user.profile)
+        #request_form = RequestForm(instance=request.user.profile)
         print(profile_form)
         return render(request,"polls/edit_student_profile.html", {"profile_form" : profile_form})
+        #return render(request,"polls/edit_student_profile.html", {"profile_form" : profile_form, "request_form": request_form})
 
 def create_student(request):
     return render(request, "polls/create_student.html")
@@ -161,7 +166,7 @@ def add_student(request, student_id):
     requested_student = requested_user.profile
     requested_student.requested.add(request.user)
     print("hello")
-    print(requested_student)
+    print(requested_student.requested.all())
     return redirect('quick-tutor:confirm')
     
 
