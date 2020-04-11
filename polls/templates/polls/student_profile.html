@@ -64,10 +64,20 @@
               <p class="text-black ">Availability: {{user.profile.availability}}</p>
               <p class="text-black ">Are you a tutor: {{user.profile.student_tutor}}</p>
               <p class="text-black ">Skills (for tutors only): {{user.profile.skills}}</p>
-              <p class ="text-black ">Student requests (for tutors only): {{user.profile.requested.all}}</p>
+              <p class ="text-black ">Student requests (for tutors only)</p>
+              <ul>
+                  {% for student in user.profile.requested.all %}
+                    <li> Name: {{ student.first_name }} </li>
+                    <li> Contact: {{ student.email }} </li>
+                  {% endfor %}
+              </ul>
+
+
+
+
 
         </div>
-        <a class="nav-link" href = "/quick-tutor/edit_student_profile" >Edit Information</a>
+        <a class="nav-link" href = "/quick-tutor/student_profile/edit" >Edit Information</a>
     </div>
 
 

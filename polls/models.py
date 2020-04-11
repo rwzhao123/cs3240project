@@ -54,6 +54,7 @@ class Student(models.Model):
     location = models.CharField(max_length=200, default="Somewhere")
     
     requested = models.ManyToManyField(User, blank=True)
+    #my_requests = models.ForeignKey(TutorRequest, on_delete = models.CASCADE)
 
 
 
