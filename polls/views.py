@@ -70,6 +70,12 @@ def suggestions_list(request):
     }
     return render(request, "polls/list.html", context)
 
+
+def index(request):
+    print("this was called")
+    return render(request, "polls/index.html")
+
+
 def chat(request):
     return render(request, 'polls/chat.html')
 
@@ -77,12 +83,6 @@ def room(request, room_name):
     return render(request, 'polls/room.html', {
         'room_name': room_name
     })
-
-def index(request):
-    print("this was called")
-    return render(request, "polls/index.html")
-
-
 
 from django.views.generic import ListView
 

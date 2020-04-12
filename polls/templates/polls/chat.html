@@ -1,9 +1,8 @@
-<!-- chat/templates/quick-tutor/chat.html -->
 <!DOCTYPE html>
+
 {% load bootstrap4 %}
 
 <html lang="en">
-  <head>
         <header class="default-header">
                 <nav class="navbar navbar-expand-lg  navbar-light">
                   <div class="container">
@@ -64,39 +63,33 @@
             <!--      </div>-->
             <!--    </div>-->
               </header>
-      <nav class="navbar fixed-bottom navbar-light bg-light">
-      <a class="navbar-brand" href="#"><p class="text-info">Author: QTees</p></a>
-          <a class="navbar-brand" href="#"><p class="text-info">Copyright/License: MIT</p></a>
-          <a class="navbar-brand" href="#"><p class="text-info">Version: 1.0</p></a>
-    </nav>
-    <head>
-            <meta charset="utf-8"/>
-            <title>Chat Rooms</title>
-        </head>
-        <body>
-            What class's chat room would you like to enter?<br/>
-            <input id="room-name-input" type="text" size="100"/><br/>
-            <input id="room-name-submit" type="button" value="Enter"/>
-        
-            <script>
-                document.querySelector('#room-name-input').focus();
-                document.querySelector('#room-name-input').onkeyup = function(e) {
-                    if (e.keyCode === 13) {  // enter, return
-                        document.querySelector('#room-name-submit').click();
-                    }
-                };
-        
-                document.querySelector('#room-name-submit').onclick = function(e) {
-                    var roomName = document.querySelector('#room-name-input').value;
-                    window.location.pathname = 'quick-tutor/chat/' + roomName + '/';
-                };
-            </script>
 
 
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Rooms</title>
+</head>
+<body>
+    What chat room would you like to enter?<br>
+    <input id="room-name-input" type="text" size="100"><br>
+    <input id="room-name-submit" type="button" value="Enter">
+                
+    <script>
+        document.querySelector('#room-name-input').focus();
+        document.querySelector('#room-name-input').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.querySelector('#room-name-submit').click();
+            }
+        };
+                
+        document.querySelector('#room-name-submit').onclick = function(e) {
+            var roomName = document.querySelector('#room-name-input').value;
+            window.location.pathname = 'quick-tutor/chat/' + roomName + '/';
+        };
+     </script>
 
 
-
-       <!-- Optional JavaScript -->
+      <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -116,3 +109,5 @@
 </form>
 </body>
 </html>
+
+

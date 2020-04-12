@@ -43,8 +43,7 @@ INSTALLED_APPS = [
     'django_forms_bootstrap',
     'social_django',
 
-    'channels',
-    
+    'channels',    
 ]
 
 
@@ -87,7 +86,6 @@ CHANNEL_LAYERS = {
         },
     },
 }
-
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
