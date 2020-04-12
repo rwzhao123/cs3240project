@@ -14,7 +14,7 @@ Django==3.0.2
 django-bootstrap4==1.1.1
 django-forms-bootstrap==3.1.0
 django-heroku==0.3.1
-Docker==19.03.8
+docker==19.03.8
 Flask==1.1.1
 future==0.18.2
 gunicorn==20.0.4
