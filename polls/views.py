@@ -136,6 +136,9 @@ def contact_us(request):
 def confirm_match(request):
     return render(request, "polls/confirm_match.html")
 
+def error_match(request):
+    return render(request, "polls/error_match.html")
+
 def add_student(request, student_id):
 
 

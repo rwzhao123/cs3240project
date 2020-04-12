@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django_forms_bootstrap',
     'social_django',
 
-
+    'channels',
     
 ]
 

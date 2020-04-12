@@ -52,6 +52,7 @@ class Student(models.Model):
     skills = models.CharField(max_length=200, blank = True)
     availability = models.CharField(max_length=200, blank = True)
     location = models.CharField(max_length=200, default="Somewhere")
+    venmo = models.CharField(max_length=200, default="Venmo")
     
     requested = models.ManyToManyField(User, blank=True)
     #my_requests = models.ForeignKey(TutorRequest, on_delete = models.CASCADE)

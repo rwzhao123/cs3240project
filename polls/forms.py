@@ -13,7 +13,7 @@ class ProfileForm(forms.ModelForm):
     #requested=forms.ModelMultipleChoiceField(queryset=User.objects.all()[:2])
     class Meta:
         model = Student
-        fields = ('preferred_name', 'student_year_in_school', 'need_help_with', 'location', 'availability', 'student_tutor', 'skills')
+        fields = ('preferred_name', 'student_year_in_school', 'need_help_with', 'location', 'availability', 'student_tutor', 'skills', 'venmo')
 
     def save(self, commit= True):
         student = super(ProfileForm, self).save(commit=True)
@@ -23,6 +23,7 @@ class ProfileForm(forms.ModelForm):
         student.availability = self.cleaned_data['availability']
         student.student_tutor = self.cleaned_data['student_tutor']
         student.location = self.cleaned_data['location']
+        student.venmo = self.cleaned_data['venmo']
         if commit:
             student.save()
         return student
