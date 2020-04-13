@@ -13,12 +13,10 @@ build:
     FOO: bar
 release:
   command:
-    - ./deployment-tasks.sh
+    - ./python manage.py migrate
   image: worker
 run:
-  web: bundle exec puma -C config/puma.rb
-  worker: python myworker.py
+  web: gunicorn mysite.wsgi --log-level debu
   asset-syncer:
     command:
       - python asset-syncer.py
-    image: worker
