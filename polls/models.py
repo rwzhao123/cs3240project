@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.core.exceptions import ObjectDoesNotExist
 
 
 
@@ -41,15 +42,20 @@ class Suggestion(models.Model):
         return self.name_text
 
 
+
 class Student(models.Model):
 
-    user = models.OneToOneField(User, unique=True, null=False, db_index=True, on_delete=models.CASCADE, related_name='profile')
-    student_first_name = models.CharField(max_length=200, blank = True)
-    student_last_name = models.CharField(max_length=200, blank = True)
-    student_email = models.CharField(max_length=200, blank = True)
+    user = models.OneToOneField(User, unique=True, null=True, db_index=True, on_delete=models.CASCADE, related_name='profile')
+    preferred_name = models.CharField(max_length=200, default="Name")
     student_tutor = models.BooleanField(default=False)
+    need_help_with = models.CharField(max_length=200, blank = True)
     skills = models.CharField(max_length=200, blank = True)
     availability = models.CharField(max_length=200, blank = True)
+    location = models.CharField(max_length=200, default="Somewhere")
+    venmo = models.CharField(max_length=200, default="Venmo")
+    
+    requested = models.ManyToManyField(User, blank=True)
+    #my_requests = models.ForeignKey(TutorRequest, on_delete = models.CASCADE)
 
 
 
@@ -73,22 +79,43 @@ class Student(models.Model):
 
 
 
-    def __str__(self):
-        return self.student_last_name
+    #def __str__(self):
+        #return self.student_last_name
 
 
     def is_upperclass(self):
         return self.student_year_in_school in {self.THIRD_YEAR, self.FOURTH_YEAR}
     def is_tutor(self):
         return self.student_tutor
+
+
+
+
     @receiver(post_save,sender = User)
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
-            Student.objects.create(user =instance)
+            s = Student(user = instance)
+            s.save()
 
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, created, **kwargs):
         instance.profile.save()
+
+
+class TutorRequest(models.Model):
+    subject = models.CharField(max_length = 200)
+    subject_text = models.TextField()
+    pub_date = models.DateTimeField('date published')
+    in_progress = models.BooleanField(default= False)
+    student = models.ForeignKey(Student, on_delete = models.CASCADE)
+
+
+
+
+
+
+
+
 
 
 

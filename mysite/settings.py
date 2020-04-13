@@ -43,8 +43,9 @@ INSTALLED_APPS = [
     'django_forms_bootstrap',
     'social_django',
 
-    
+    'channels',    
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -81,11 +82,10 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
         },
     },
 }
-
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -155,7 +155,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'ApGrpI_WrZ6YbPeh7efmGN5R'
 LOGIN_URL = '/auth/login/google-oauth2/'
 
 
-LOGIN_REDIRECT_URL = '/quick-tutor/'
+LOGIN_REDIRECT_URL = '/quick-tutor/student_profile/'
 LOGOUT_REDIRECT_URL = '/quick-tutor/'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 

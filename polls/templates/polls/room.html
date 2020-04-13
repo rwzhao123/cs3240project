@@ -1,97 +1,118 @@
 <!DOCTYPE html>
+
 {% load bootstrap4 %}
 
 <html lang="en">
-  <head>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Quick Tutor</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-<div class="p-3 mb-2 bg-gradient-secondary text-white">.bg-gradient-secondary</div>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-         <a class="nav-link" href="/quick-tutor/">Find a Tutor<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-            <a class="nav-link" href="/quick-tutor/chat">Chat<span class="sr-only">(current)</span></a>
-         </li>
-        <li class="nav-item">
-         <a class="nav-link" href="/quick-tutor/suggestions">Other Tab (ToDo)<span class="sr-only">(current)</span></a>
- <li class="nav-item">
-            {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link disabled" href=""><p>Logged in as: {{ user.username }}</p><span class="sr-only">(current)</span></a>
-                </li>
-
-            <a class="nav-link" href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a>
-            {% else %}
-                    <a class="nav-link" href="{% url 'social:begin' 'google-oauth2' %}">Login<span class="sr-only">(current)</span></a>
-                </a>
-            {% endif %}
-        </li>
-
-
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
-      <nav class="navbar fixed-bottom navbar-light bg-light">
-      <a class="navbar-brand" href="#"><p class="text-info">Author: QTees</p></a>
-          <a class="navbar-brand" href="#"><p class="text-info">Copyright/License: MIT</p></a>
-          <a class="navbar-brand" href="#"><p class="text-info">Version: 1.0</p></a>
-    </nav>
-<head>
-    <meta charset="utf-8"/>
-    <title>Chat Room</title>
-</head>
-<body>
-    <textarea id="chat-log" cols="100" rows="20"></textarea><br/>
-    <input id="chat-message-input" type="text" size="100"/><br/>
-    <input id="chat-message-submit" type="button" value="Send"/>
-</body>
-<script>
-    var roomName = "{{ room_name|escapejs }}";
-
-    var chatSocket = new WebSocket(
-        'ws://' + window.location.host +
-        '/ws/chat/' + roomName + '/');
-
-    chatSocket.onmessage = function(e) {
-        var data = JSON.parse(e.data);
-        var message = data['message'];
-        document.querySelector('#chat-log').value += (message + '\n');
-    };
-
-    chatSocket.onclose = function(e) {
-        console.error('Chat socket closed unexpectedly');
-    };
-
-    document.querySelector('#chat-message-input').focus();
-    document.querySelector('#chat-message-input').onkeyup = function(e) {
-        if (e.keyCode === 13) {  // enter, return
-            document.querySelector('#chat-message-submit').click();
-        }
-    };
-
-    document.querySelector('#chat-message-submit').onclick = function(e) {
-        var messageInputDom = document.querySelector('#chat-message-input');
-        var message = messageInputDom.value;
-        chatSocket.send(JSON.stringify({
-            'message': message
-        }));
-
-        messageInputDom.value = '';
-    };
-</script>
+        <header class="default-header">
+                <nav class="navbar navbar-expand-lg  navbar-light">
+                  <div class="container">
+            <!--        <a class="navbar-brand" href="index.html">-->
+            <!--        </a>-->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="lnr lnr-menu"></span>
+                    </button>
+            
+                    <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
+                      <ul class="navbar-nav">
+                        <li><a href="/quick-tutor/">Home</a></li>
+                        <li><a href="/quick-tutor/about">About</a></li>
+                        <li><a href="/quick-tutor/tutor_match">Find a Tutor</a></li>
+                        <li><a href="/quick-tutor/chat">Join a Chat Room</a></li>
+            
+            
+            <!--             <li><a href="tutor_match.html">Login/Register</a></li>-->
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href=""><p>Logged in as: {{ user.username }}</p><span class="sr-only">(current)</span></a>
+                            </li>
+            
+                        <a class="nav-link" href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a>
+                        {% else %}
+                                <li><a href="{% url 'social:begin' 'google-oauth2' %}">Login/Register</a></li>
+                            </a>
+                        {% endif %}
+                    </li>
+            
+            
+            
+                        <li><a href="/quick-tutor/contact_us/">Contact Us</a></li>
+            
+                        <li>
+                          <button class="search" >
+                            <span class="lnr lnr-magnifier"></span>
+                          </button>
+            
+            
+            
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </nav>
+            
+            <!--<div class="search-input" id="search-input-box">-->
+            <!--      <div class="container">-->
+            
+            <!--        <form class="d-flex justify-content-between">-->
+            <!--          <input type="text" class="form-control" id="search-input" placeholder="Search Here" />-->
+            <!--&lt;!&ndash;          <button class="navbar-toggle" type="submit" data-toggle="collapse" data-target="bs-navbar-collapse" ></button>&ndash;&gt;-->
+            <!--          <button type="submit" class="btn"></button>-->
+            <!--          <span class="lnr lnr-cross" id="close-search" title="Close Search"></span>-->
+            <!--        </form>-->
+            <!--      </div>-->
+            <!--    </div>-->
+              </header>
 
 
 
 
+
+              <head>
+                    <meta charset="utf-8"/>
+                    <title>Chat Room</title>
+                </head>
+                <body>
+                    <textarea id="chat-log" cols="100" rows="20"></textarea><br>
+                    <input id="chat-message-input" type="text" size="100"><br>
+                    <input id="chat-message-submit" type="button" value="Send">
+                    {{ room_name|json_script:"room-name" }}
+                    <script>
+                        const roomName = JSON.parse(document.getElementById('room-name').textContent);
+                
+                        const chatSocket = new WebSocket(
+                            'ws://'
+                            + window.location.host
+                            + '/ws/chat/'
+                            + roomName
+                            + '/'
+                        );
+                
+                        chatSocket.onmessage = function(e) {
+                            const data = JSON.parse(e.data);
+                            document.querySelector('#chat-log').value += (data.message + '\n');
+                        };
+                
+                        chatSocket.onclose = function(e) {
+                            console.error('Chat socket closed unexpectedly');
+                        };
+                
+                        document.querySelector('#chat-message-input').focus();
+                        document.querySelector('#chat-message-input').onkeyup = function(e) {
+                            if (e.keyCode === 13) {  // enter, return
+                                document.querySelector('#chat-message-submit').click();
+                            }
+                        };
+                
+                        document.querySelector('#chat-message-submit').onclick = function(e) {
+                            const messageInputDom = document.querySelector('#chat-message-input');
+                            const message = messageInputDom.value;
+                            chatSocket.send(JSON.stringify({
+                                'message': message
+                            }));
+                            messageInputDom.value = '';
+                        };
+                    </script>
        <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -112,3 +133,7 @@
 </form>
 </body>
 </html>
+
+
+
+

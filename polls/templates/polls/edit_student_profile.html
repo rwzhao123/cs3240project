@@ -1,0 +1,114 @@
+<!doctype html>
+
+
+{% load bootstrap4 %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+
+<html lang="en">
+  <head>
+    <header class="default-header">
+        <nav class="navbar navbar-expand-lg  navbar-light">
+          <div class="container">
+    <!--        <a class="navbar-brand" href="index.html">-->
+    <!--          <img src="{% static '/polls/images/qt_logo.png' %}" alt="" />-->
+    <!--        </a>-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="lnr lnr-menu"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
+              <ul class="navbar-nav">
+                <li><a href="/quick-tutor/">Home</a></li>
+                <li><a href="/quick-tutor/about">About</a></li>
+                <li><a href="/quick-tutor/tutor_match">Find a Tutor</a></li>
+                <li><a href="/quick-tutor/chat">Join a Chat Room</a></li>
+    
+    
+    <!--             <li><a href="tutor_match.html">Login/Register</a></li>-->
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href=""><p>Logged in as: {{ user.username }}</p><span class="sr-only">(current)</span></a>
+                    </li>
+    
+                <a class="nav-link" href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a>
+                {% else %}
+                        <li><a href="{% url 'social:begin' 'google-oauth2' %}">Login/Register</a></li>
+                    </a>
+                {% endif %}
+            </li>
+    
+    
+    
+                <li><a href="/quick-tutor/contact_us/">Contact Us</a></li>
+    
+                <li>
+                  <button class="search" >
+                    <span class="lnr lnr-magnifier"></span>
+                  </button>
+    
+    
+    
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    
+    <!--<div class="search-input" id="search-input-box">-->
+    <!--      <div class="container">-->
+    
+    <!--        <form class="d-flex justify-content-between">-->
+    <!--          <input type="text" class="form-control" id="search-input" placeholder="Search Here" />-->
+    <!--&lt;!&ndash;          <button class="navbar-toggle" type="submit" data-toggle="collapse" data-target="bs-navbar-collapse" ></button>&ndash;&gt;-->
+    <!--          <button type="submit" class="btn"></button>-->
+    <!--          <span class="lnr lnr-cross" id="close-search" title="Close Search"></span>-->
+    <!--        </form>-->
+    <!--      </div>-->
+    <!--    </div>-->
+      </header>
+
+      <div class="container">
+        <h2><p class="text-black "> Edit Your Information </p></h2>
+          <div class="col-md-3 mb-4">
+
+          <form method="post">
+               {% csrf_token %}
+               {{profile_form}}
+               {{request_form.as_p}}
+
+              <button type="submit">Save Changes</button>
+              <!-- <button type="submit"><a class="nav-link" href = "/quick-tutor/student_profile" >Save Changes</a></button> -->
+
+          </form>
+
+          </div>
+
+
+
+
+
+
+       <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+
+      </div>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <title>Suggest Another Poll</title>
+  </head>
+
+</html>
+
+
