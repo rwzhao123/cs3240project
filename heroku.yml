@@ -14,9 +14,10 @@ build:
 release:
   command:
     - ./python manage.py migrate
-  image: worker
+  image: Dockerfile
 run:
   web: gunicorn mysite.wsgi --log-level debu
   asset-syncer:
     command:
       - python asset-syncer.py
+  image: Dockerfile
