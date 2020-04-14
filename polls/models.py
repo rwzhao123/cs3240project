@@ -8,6 +8,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django_extensions.db import models as dj_extensions_models
+
 
 
 
@@ -91,7 +93,14 @@ class Student(models.Model):
         instance.profile.save()
 
 
+class ChatMessage(dj_extensions_models.TimeStampedModel):
+    username = models.CharField(max_length=255, blank=True, null=True)
+    message = models.TextField()
 
+
+class UserEvent(dj_extensions_models.TimeStampedModel):
+    user_name = models.CharField(max_length=255, blank=True, null=True)
+    message = models.TextField()
 
 
 
