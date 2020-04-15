@@ -25,9 +25,10 @@ urlpatterns = [
     path('student_profile/requests/', views.student_requests),
     path('student_profile/requests/new_request', views.create_request),
 
-    path('chat/', views.chat, name='chat'),
-    path('chat/<str:room_name>/', views.room, name='room'),
-
+    #path('chat/', views.chat, name='chat'),
+    #path('chat/<str:room_name>/', views.room, name='room'),
+    path(r'^new/$', views.new_room, name='new_room'),
+    path(r'^(?P<label>[\w-]{,50})/$', views.chat_room, name='chat_room'),
 
     path('register_as_student/', views.create_student),
 
