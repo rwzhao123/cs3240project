@@ -31,6 +31,7 @@ urlpatterns = [
     path('register_as_student/', views.create_student),
 
     path('tutor_match/<int:student_id>/', views.add_student, name='add_student'),
+    path('tutor_match/<int:student_id>/', views.create_request, name ='create_request'),
     path('about/', views.about),
     path('tutor_match/', views.AllStudentsView.as_view(), name='match'),
     path('tutor_match/confirm/', views.confirm_match, name='confirm'),
@@ -39,6 +40,7 @@ urlpatterns = [
     path('student_page/', views.student_page, name = 'student_page'),
     path('student_page/<int:tutor_id>/', views.cancel_tutor, name = 'cancel_tutor'),
     path('student_page/confirm_cancel/', views.confirm_cancel, name = 'confirm_cancel'),
+
     path('contact_us/', views.contact_us),
 
 ]

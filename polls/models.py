@@ -105,12 +105,24 @@ class Student(models.Model):
 
 
 class TutorRequest(models.Model):
-    subject = models.CharField(max_length = 200)
-    subject_text = models.TextField()
-    pub_date = models.DateTimeField('date published')
-    in_progress = models.BooleanField(default= False)
-    student = models.ForeignKey(Student, on_delete = models.CASCADE)
 
+    tutor = models.ForeignKey(Student, related_name='requested_tutor', on_delete=models.CASCADE, default=1)
+    student = models.ForeignKey(Student, related_name='student_requester', on_delete=models.CASCADE, default=1)
+    subject = models.CharField(max_length=200, default="")
+    subject_text = models.TextField(default="")
+    pub_date = models.DateTimeField('date published', default=timezone.now())
+    contact_info = models.CharField(max_length=200, default="")
+    s_pending = 'Pending'
+    s_accepted = 'Accepted'
+    s_canceled = 'Canceled'
+    s_finished = 'Finished'
+    status_choices = [
+        (s_pending, 'Pending'),
+        (s_accepted, 'Accepted'),
+        (s_canceled, 'Canceled'),
+        (s_finished, 'Finished')]
+
+    in_progress = models.CharField(max_length=20, choices=status_choices, default=s_pending)
 
 
 
