@@ -12,6 +12,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 
+
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
@@ -81,8 +82,8 @@ class Student(models.Model):
 
 
 
-    #def __str__(self):
-        #return self.student_last_name
+    def __str__(self):
+        return self.user.username
 
 
     def is_upperclass(self):
@@ -112,18 +113,16 @@ class TutorRequest(models.Model):
     subject_text = models.TextField(default="")
     pub_date = models.DateTimeField('date published', default=timezone.now())
     contact_info = models.CharField(max_length=200, default="")
-    s_pending = 'Pending'
-    s_accepted = 'Accepted'
-    s_canceled = 'Canceled'
-    s_finished = 'Finished'
-    status_choices = [
-        (s_pending, 'Pending'),
-        (s_accepted, 'Accepted'),
-        (s_canceled, 'Canceled'),
-        (s_finished, 'Finished')]
 
-    in_progress = models.CharField(max_length=20, choices=status_choices, default=s_pending)
+    progress = models.CharField(max_length=20,default='Pending')
+    def update_request(self, progress_update):
+        print("this was called")
+        self.progress = progress_update
+        self.save()
 
+    def is_old(self):
+        now = timezone.now()
+        return not (now - datetime.timedelta(days=1) <= self.pub_date <= now)
 
 
 
