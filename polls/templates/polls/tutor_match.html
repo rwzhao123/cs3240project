@@ -1,6 +1,49 @@
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
+<style>
+/* Modal Header */
 
+.modal {
+
+  width: 600px;
+  max-width: 100%;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #7c32ff;
+  color: white;
+}
+
+/* Modal Body */
+.modal-body {padding: 2px 16px;}
+
+/* Modal Footer */
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #7c32ff;
+  color: white;
+}
+
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+/* Add Animation */
+@keyframes animatetop {
+  from {top: -300px; opacity: 0}
+  to {top: 0; opacity: 1}
+}
+</style>
 {% load static %}
 {% load bootstrap4 %}
 <link rel="stylesheet"  href="{% static 'polls/availability-calendar.css' %}">
@@ -197,6 +240,37 @@
               <p class="name">{{student.location}}</p>
               <p class="value">$10, Venmo: {{student.venmo}}</p>
               <a href="{% url 'quick-tutor:add_student' student.user.id %}"> Click HERE to request tutor</a>
+              <button id="myBtn"> click here to request tutor</button>
+
+              <div id="myModal" class="modal">
+
+                  <!-- Modal content -->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <p><font color = "white">Please provide some additional information to your Tutor </font></p><span class="close">&times;</span>
+                      </div>
+                      <div class="modal-body">
+
+                        <form action="{% url 'quick-tutor:create_request' student.user.id %}" method = "POST">
+                          {% csrf_token %}
+                          <p class = "name" > Tutor Selected:{{ student.preferred_name }}</p>
+                          <p class = "name"> Price: $10 to {{student.venmo}}</p>
+                          <label for = "tutor_subject"> What subject do you need help with?</label><br>
+                          <input type = "text" id="tutor_subject" name = "tutor_subject"><br>
+                          <label for = "tutor_additional">Additional Notes</label><br>
+                          <input type = "text" id = "tutor_additional" name = "tutor_additional"><br>
+                          <label for = "contact_method"> Please provide the easiest way to contact you</label><br>
+                          <input type = "text" id = "contact_method" name = "contact_method"><br>
+                          <button type = "submit" id="submitBtn">Request Tutor</button>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <p> <font color = "white">Thanks!</font></p>
+                      </div>
+                    </div>
+
+              </div>
+
 
               <a href="/quick-tutor/tutor_match/error">
                 <h4>{{student.preferred_name}} -- {{student.skills}} </h4>
@@ -219,9 +293,42 @@
         <p>No people are available.</p>
         {% endif %}
 
-       
+        </div>
+      </div>
+    </div>
+  </section>
   <!-- ================ End Popular Course Area ================= -->
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
 
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+var submitBtn = document.getElementById("submitBtn")
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+submitBtn.onclick = function(){
+modal.style.display = "none"
+}
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
   <!-- ================ Start Registration Area ================= -->
   <section class="registration-area">
     <div class="container">

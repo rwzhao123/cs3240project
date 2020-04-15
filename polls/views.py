@@ -188,8 +188,16 @@ def student_requests(request):
 
 
 def create_request(request):
-    TutorRequest.objects.create(student = request.Student, pub_date = timezone.now())
-    return render(request, "polls/request.html")
+
+    requested_user = User.objects.get(id=student_id)
+    tutor_requested = Student.objects.get(user=requested_user)
+    student_requester = Student.objects.get(user=request.user)
+    tr = TutorRequest.objects.create(student=student_requester, tutor=tutor_requested, pub_date=timezone.now())
+    tr.subject = request.POST['tutor_subject']
+    tr.subject_text = request.POST['tutor_additional']
+    tr.contact_info = request.POST['contact_method']
+    tr.save()
+    return redirect('quick-tutor:confirm')
 
 def send_request(request):
     if request.method == "POST":
