@@ -182,9 +182,31 @@ def show_requests(request):
     return render (request, "polls/tutor_page.html")
 
 def student_requests(request):
-    r = TutorRequest.objects.all(filter=request.Student)
-    args = {'sr' : r}
+
+    s = Student.objects.get(user = request.user)
+    print(s)
+    r = TutorRequest.objects.filter(student = s)
+    for obj in r:
+        if obj.is_old() and (obj.progress == 'Declined'or obj.progress == 'Canceled'):
+            TutorRequest.objects.filter(id=obj.id).delete()
+    print("Requests found",r)
+    if len(r) <=0:
+        r = 0
+    args = {'sr' : r }
     return render(request, "polls/student_requests.html", args)
+
+def tutor_requests(request):
+    t = Student.objects.get(user=request.user)
+    r = TutorRequest.objects.filter(tutor = t)
+    for obj in r:
+        if (obj.progress == 'Declined' or obj.progress == 'Canceled'):
+            TutorRequest.objects.filter(id=obj.id).delete()
+    print("Requests found", r)
+    if len(r) <= 0:
+        r = 0
+    args = {'tr': r}
+    return render(request, "polls/tutor_requests.html", args)
+
 
 
 def create_request(request):
@@ -218,3 +240,18 @@ class AllStudentsView(generic.ListView):
     template_name = 'polls/tutor_match.html'
     def get_queryset(self):
         return Student.objects.all()
+
+
+def cancel_onstudent(request, s_request_id):
+    canceled_request = TutorRequest.objects.get(id=s_request_id)
+    canceled_request.update_request('Declined')
+    canceled_request.save()
+    return redirect("quick-tutor:confirm_cancel")
+
+def cancel_ontutor(request, t_request_id):
+    tentative_request = TutorRequest.objects.get(id=t_request_id)
+    status = request.POST['request_status']
+    tentative_request.update_request(status)
+    tentative_request.save()
+    return redirect("quick-tutor:confirm_cancel")
+

@@ -21,6 +21,7 @@ class QuestionAdmin(admin.ModelAdmin):
 
 admin.site.register(Question, QuestionAdmin)
 
-from .models import Student
+from .models import Student, TutorRequest
 
 admin.site.register(Student)
+admin.site.register(TutorRequest)
