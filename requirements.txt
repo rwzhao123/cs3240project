@@ -50,12 +50,12 @@ Werkzeug==1.0.0
 whitenoise==5.0.1
 asgi-redis==0.8.3
 
-autobahn==0.12.1
+autobahn==0.18.0
 daphne==2.3.0
 haikunator==1.0.1
 msgpack-python==0.4.7
 redis==2.10.5
-Twisted==15.5.0
+Twisted==18.7.0
 txaio==2.2.1
 wheel==0.24.0
 zope.interface==4.1.3
