@@ -51,7 +51,7 @@ whitenoise==5.0.1
 asgi-redis==0.8.3
 
 autobahn==0.12.1
-daphne==0.9.1
+daphne==2.3.0
 haikunator==1.0.1
 msgpack-python==0.4.7
 redis==2.10.5
