@@ -44,7 +44,7 @@
 
 <body>
  <!-- ================ Start Header Area ================= -->
-  <header class="default-header">
+ <header class="default-header">
     <nav class="navbar navbar-expand-lg  navbar-light">
       <div class="container">
 <!--        <a class="navbar-brand" href="index.html">-->
@@ -113,10 +113,8 @@
         <div class="row justify-content-center align-items-center">
           <div class="col-lg-12 banner-right">
             <h1 class="text-white">
-              Who Requested You?
+              Your tutor has been cancelled.
             </h1>
-            <p class="mx-auto text-white  mt-20 mb-40">
-              In the history of modern astronomy, there is probably no one greater leap forward than the building.
             </p>
             <div class="link-nav">
               <span class="box">
@@ -179,14 +177,14 @@
       <div class="row justify-content-center section-title">
         <div class="col-lg-12">
           <h2>
-            Students Who <br />
-            Requested You
+            Tutors <br />
+            Available Right Now
           </h2>
         </div>
       </div>
-
-      {% if user.profile.requested.all %}
-        {% for student in user.profile.requested.all%}
+      {% if student_list %}
+      {% for student in student_list%}
+        {% if student.student_tutor == True %} 
       <div class="owl-carousel popuar-course-carusel">
         <div class="single-popular-course">
           <div class="thumb">
@@ -194,26 +192,27 @@
           </div>
           <div class="details">
             <div class="d-flex justify-content-between mb-20">
-              <p class="name">{{student.profile.location}}</p>
-              <p class="name"><a href="{% url 'quick-tutor:room' user.username%}">Chat with Student</a></p>
+              <p class="name">{{student.location}}</p>
+              <p class="value">$10</p>
             </div>
             <a href="#">
-              <h4>{{student.profile.preferred_name}} -- {{student.profile.need_help_with}} </h4>
+              <h4>{{student.preferred_name}} -- {{student.skills}} </h4>
             </a>
             <div class="bottom d-flex mt-15">
               <ul class="list">
                 <li>
                   <a href="#"><i class="fa fa-star"></i></a>
-                  <p class="ml-20">Click HERE to deny their request</p>
                 </li>
+
               </ul>
-              <p class="ml-20">Click HERE to accept their request</p>
+              <p class="ml-20">{{student.availability}}</p>
             </div>
           </div>
         </div>
+        {% endif %}
         {% endfor %}
         {% else %}
-        <p>No one has requested you.</p>
+        <p>No people are available.</p>
         {% endif %}
 
        

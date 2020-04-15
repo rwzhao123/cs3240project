@@ -113,7 +113,7 @@
         <div class="row justify-content-center align-items-center">
           <div class="col-lg-12 banner-right">
             <h1 class="text-white">
-              Who Requested You?
+              Who Have You Requested?
             </h1>
             <p class="mx-auto text-white  mt-20 mb-40">
               In the history of modern astronomy, there is probably no one greater leap forward than the building.
@@ -179,14 +179,13 @@
       <div class="row justify-content-center section-title">
         <div class="col-lg-12">
           <h2>
-            Students Who <br />
-            Requested You
+            Tutors You<br />
+            Have Requested
           </h2>
         </div>
       </div>
-
-      {% if user.profile.requested.all %}
-        {% for student in user.profile.requested.all%}
+      {% if user.profile.my_requests.all %}
+      {% for tutor in user.profile.my_requests.all%}
       <div class="owl-carousel popuar-course-carusel">
         <div class="single-popular-course">
           <div class="thumb">
@@ -194,26 +193,33 @@
           </div>
           <div class="details">
             <div class="d-flex justify-content-between mb-20">
-              <p class="name">{{student.profile.location}}</p>
-              <p class="name"><a href="{% url 'quick-tutor:room' user.username%}">Chat with Student</a></p>
+              <p class="name">{{tutor.profile.location}}</p>
+              <p class="name">Venmo: {{tutor.profile.venmo}}</p>
+              <p class="name">Availability: {{tutor.profile.availability}}</p>
+              <p class="name">Status: {{tutor.profile.status}}</p>
+              <p class="name"><a href="{% url 'quick-tutor:room' tutor.username%}">Chat with tutor</a></p>
             </div>
             <a href="#">
-              <h4>{{student.profile.preferred_name}} -- {{student.profile.need_help_with}} </h4>
+              <h4>{{tutor.profile.preferred_name}} -- {{tutor.profile.skills}} </h4>
             </a>
             <div class="bottom d-flex mt-15">
               <ul class="list">
                 <li>
                   <a href="#"><i class="fa fa-star"></i></a>
-                  <p class="ml-20">Click HERE to deny their request</p>
                 </li>
+
               </ul>
-              <p class="ml-20">Click HERE to accept their request</p>
+              <div class="d-flex justify-content-between mb-20">
+              <p class="ml-20"><a href="{% url 'quick-tutor:cancel_tutor' tutor.id %}">Click HERE to cancel</a></p>
+
+            </div>
+
             </div>
           </div>
         </div>
         {% endfor %}
         {% else %}
-        <p>No one has requested you.</p>
+        <p>No people are available.</p>
         {% endif %}
 
        
