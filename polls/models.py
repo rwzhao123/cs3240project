@@ -22,7 +22,7 @@ class Room(models.Model):
         return self.label
 
 class Message(models.Model):
-    room = models.ForeignKey(Room, related_name='messages')
+    room = models.ForeignKey(Room, related_name='messages', on_delete=models.CASCADE,)
     handle = models.TextField()
     message = models.TextField()
     timestamp = models.DateTimeField(default=timezone.now, db_index=True)
