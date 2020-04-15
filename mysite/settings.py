@@ -33,6 +33,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'chat',
+    'channels', 
     'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,8 +45,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'django_forms_bootstrap',
     'social_django',
-    'channels', 
-    'chat',
+   
 ]
 
 
