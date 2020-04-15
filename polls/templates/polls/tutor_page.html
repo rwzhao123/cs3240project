@@ -195,7 +195,7 @@
           <div class="details">
             <div class="d-flex justify-content-between mb-20">
               <p class="name">{{student.profile.location}}</p>
-              <p class="value">contact info or chat maybe</p>
+              <p class="name"><a href="{% url 'quick-tutor:room' user.username%}">Chat with Student</a></p>
             </div>
             <a href="#">
               <h4>{{student.profile.preferred_name}} -- {{student.profile.need_help_with}} </h4>
@@ -204,10 +204,10 @@
               <ul class="list">
                 <li>
                   <a href="#"><i class="fa fa-star"></i></a>
+                  <p class="ml-20">Click HERE to deny their request</p>
                 </li>
-
               </ul>
-              <p class="ml-20">Availability: {{student.profile.availability}}</p>
+              <p class="ml-20">Click HERE to accept their request</p>
             </div>
           </div>
         </div>

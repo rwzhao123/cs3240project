@@ -196,7 +196,8 @@
               <p class="name">{{tutor.profile.location}}</p>
               <p class="name">Venmo: {{tutor.profile.venmo}}</p>
               <p class="name">Availability: {{tutor.profile.availability}}</p>
-              <p class="name">maybe a chat</p>
+              <p class="name">Status: {{tutor.profile.status}}</p>
+              <p class="name"><a href="{% url 'quick-tutor:room' tutor.username%}">Chat with tutor</a></p>
             </div>
             <a href="#">
               <h4>{{tutor.profile.preferred_name}} -- {{tutor.profile.skills}} </h4>

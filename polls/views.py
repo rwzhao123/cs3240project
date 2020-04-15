@@ -161,6 +161,10 @@ def cancel_tutor(request, tutor_id):
 def confirm_cancel(request):
     return render(request, "polls/confirm_cancel.html")
 
+def deny_request(request, student_id):
+    
+    return render(request, "polls/tutor_page.html")
+
 
 @login_required
 def show_requests(request):
