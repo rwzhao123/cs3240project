@@ -1,0 +1,10 @@
+"formation": {
+        "web": {
+            "quantity": 1,
+          " size": "Free"
+        },
+        "worker": {
+            "quantity": 1,
+            "size": "Free"
+        }
+    }
