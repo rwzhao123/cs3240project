@@ -28,17 +28,17 @@ urlpatterns = [
     path('chat/', views.chat, name='chat'),
     path('chat/<str:room_name>/', views.room, name='room'),
 
-
     path('register_as_student/', views.create_student),
 
     path('tutor_match/<int:student_id>/', views.add_student, name='add_student'),
-
     path('about/', views.about),
     path('tutor_match/', views.AllStudentsView.as_view(), name='match'),
     path('tutor_match/confirm/', views.confirm_match, name='confirm'),
     path('tutor_match/error/', views.error_match, name='error_match'),
     path('tutor_page/', views.show_requests, name = 'show_requests'),
-
+    path('student_page/', views.student_page, name = 'student_page'),
+    path('student_page/<int:tutor_id>/', views.cancel_tutor, name = 'cancel_tutor'),
+    path('student_page/confirm_cancel/', views.confirm_cancel, name = 'confirm_cancel'),
     path('contact_us/', views.contact_us),
 
 ]

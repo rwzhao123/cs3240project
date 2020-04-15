@@ -72,10 +72,12 @@
 
       <div class="container">
         <h2><p class="text-black "> Welcome {{ user.first_name }}!</p></h2>
-          <h3><p class = "text-black"> Profile Information </p></h3>
+          <h3><a class="nav-link" href = "/quick-tutor/tutor_page" > Tutors: View Who Requested You </p></h3>
+            <h3><a class="nav-link" href = "/quick-tutor/student_page" > Students: View Your Requests </p></h3>
           <div class="col-md-3 mb-4">
               {% csrf_token %}
           <div class="container">
+
               <p class="text-black ">First Name: {{user.first_name}}</p>
               <p class="text-black " >Preferred Name: {{user.profile.preferred_name}}</p>
               <p class="text-black ">Last Name: {{user.last_name}}</p>
@@ -94,6 +96,7 @@
                     <li> Contact: {{ student.email }} </li>
                   {% endfor %}
               </ul>
+            </p>
 
 
 

@@ -54,8 +54,9 @@ class Student(models.Model):
     location = models.CharField(max_length=200, default="Somewhere")
     venmo = models.CharField(max_length=200, default="Venmo")
     
-    requested = models.ManyToManyField(User, blank=True)
+    requested = models.ManyToManyField(User, blank=True, related_name="student_requests")
     #my_requests = models.ForeignKey(TutorRequest, on_delete = models.CASCADE)
+    my_requests = models.ManyToManyField(User, blank=True, related_name="tutor_requests")
 
 
 

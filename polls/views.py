@@ -146,24 +146,36 @@ def add_student(request, student_id):
     #requested_user=User.objects.get(id=student_id) 
     requested_student = requested_user.profile
     requested_student.requested.add(request.user)
-    print("hello")
-    print(requested_student.requested.all())
+    request.user.profile.my_requests.add(requested_user)
     return redirect('quick-tutor:confirm')
-    
+
+def cancel_tutor(request, tutor_id):
+    canceled_user = User.objects.get(id=tutor_id)
+    canceled_tutor = canceled_user.profile
+    print(canceled_tutor.requested)
+    canceled_tutor.requested.remove(request.user)
+    request.user.profile.my_requests.remove(canceled_user)
+    return redirect('quick-tutor:confirm_cancel')
+
+
+def confirm_cancel(request):
+    return render(request, "polls/confirm_cancel.html")
+
 
 @login_required
 def show_requests(request):
-    if request.method == "POST":
-        print("TUTOR PAGE")
-        tutor_form = TutorForm(request.POST, instance=request.user.profile)
-        if tutor_form.is_valid():
-            tutor_form.save()
-            return HttpResponseRedirect("/quick-tutor/tutor_match") # later change this to be a page that says like tutor is on their way
-    else:
-        print("hm what is this")
-        tutor_form = TutorForm(instance=request.user.profile)
-        print(tutor_form)
-        return render(request, "polls/tutor_page.html", {"tutor_form": tutor_form})
+    # if request.method == "POST":
+    #     print("TUTOR PAGE")
+    #     tutor_form = TutorForm(request.POST, instance=request.user.profile)
+    #     if tutor_form.is_valid():
+    #         tutor_form.save()
+    #         return HttpResponseRedirect("/quick-tutor/tutor_match")
+    # else:
+    #     print("hm what is this")
+    #     tutor_form = TutorForm(instance=request.user.profile)
+    #     print(tutor_form)
+    #     return render(request, "polls/tutor_page.html", {"tutor_form": tutor_form})
+    return render (request, "polls/tutor_page.html")
 
 def student_requests(request):
     r = TutorRequest.objects.all(filter=request.Student)
@@ -185,6 +197,8 @@ def send_request(request):
         args = {'request_form': request_form}
         return render(request, "polls/request.html")
 
+def student_page(request):
+    return render(request, "polls/student_page.html")
 
 
 class AllStudentsView(generic.ListView):

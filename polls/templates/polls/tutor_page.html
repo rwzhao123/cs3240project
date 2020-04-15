@@ -113,7 +113,7 @@
         <div class="row justify-content-center align-items-center">
           <div class="col-lg-12 banner-right">
             <h1 class="text-white">
-              Who's Available?
+              Who Requested You?
             </h1>
             <p class="mx-auto text-white  mt-20 mb-40">
               In the history of modern astronomy, there is probably no one greater leap forward than the building.
@@ -179,14 +179,14 @@
       <div class="row justify-content-center section-title">
         <div class="col-lg-12">
           <h2>
-            Tutors <br />
-            Available Right Now
+            Students Who <br />
+            Requested You
           </h2>
         </div>
       </div>
-      {% if student_list %}
-      {% for student in student_list%}
-        {% if student.student_tutor == True %} 
+
+      {% if user.profile.requested.all %}
+        {% for student in user.profile.requested.all%}
       <div class="owl-carousel popuar-course-carusel">
         <div class="single-popular-course">
           <div class="thumb">
@@ -194,11 +194,11 @@
           </div>
           <div class="details">
             <div class="d-flex justify-content-between mb-20">
-              <p class="name">{{student.location}}</p>
-              <p class="value">$10</p>
+              <p class="name">{{student.profile.location}}</p>
+              <p class="value">contact info or chat maybe</p>
             </div>
             <a href="#">
-              <h4>{{student.preferred_name}} -- {{student.skills}} </h4>
+              <h4>{{student.profile.preferred_name}} -- {{student.profile.need_help_with}} </h4>
             </a>
             <div class="bottom d-flex mt-15">
               <ul class="list">
@@ -207,14 +207,13 @@
                 </li>
 
               </ul>
-              <p class="ml-20">{{student.availability}}</p>
+              <p class="ml-20">Availability: {{student.profile.availability}}</p>
             </div>
           </div>
         </div>
-        {% endif %}
         {% endfor %}
         {% else %}
-        <p>No people are available.</p>
+        <p>No one has requested you.</p>
         {% endif %}
 
        
