@@ -44,7 +44,7 @@ social-auth-core==3.2.0
 soupsieve==1.9.5
 sqlparse==0.3.0
 tqdm==4.41.0
-Twiseted==20.3.0
+Twisted==20.3.0
 urllib3==1.25.7
 Werkzeug==1.0.0
 whitenoise==5.0.1
