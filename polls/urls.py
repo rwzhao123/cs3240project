@@ -25,10 +25,10 @@ urlpatterns = [
     path('student_profile/requests/', views.student_requests),
     path('student_profile/requests/new_request', views.create_request),
 
-    path('chat/', views.chat, name='chat'),
+    #path('chat/', views.chat, name='chat'),
     path('chat/<str:room_name>/', views.room, name='room'),
 
-    path('register_as_student/', views.create_student),
+    #path('register_as_student/', views.create_student),
 
     path('tutor_match/<int:student_id>/', views.add_student, name='add_student'),
     path('tutor_match/<int:student_id>/', views.create_request, name ='create_request'),
@@ -40,7 +40,7 @@ urlpatterns = [
     path('student_page/', views.student_page, name = 'student_page'),
     path('student_page/<int:tutor_id>/', views.cancel_tutor, name = 'cancel_tutor'),
     path('student_page/confirm_cancel/', views.confirm_cancel, name = 'confirm_cancel'),
-    path('student_requests', views.student_requests, name = 'student_requests'),
+    path('student_requests/', views.student_requests, name = 'student_requests'),
     path('student_requests/<int:t_request_id>/', views.cancel_ontutor, name = 'cancel_ontutor'),
     path('tutor_requests/', views.tutor_requests, name = 'tutor_requests'),
     path('tutor_requests/<int:s_request_id>/', views.cancel_onstudent, name = 'cancel_onstudent'),

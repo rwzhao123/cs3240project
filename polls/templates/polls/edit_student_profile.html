@@ -1,114 +1,380 @@
-<!doctype html>
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
 
-
-{% load bootstrap4 %}
 {% load static %}
+{% load bootstrap4 %}
+<link rel="stylesheet"  href="{% static 'polls/availability-calendar.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/bootstrap.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/font-awesome.min.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/hexagons.min.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/ion.rangeSlider.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/ion.rangeSlider.skinFlat.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/jquerysctipttop.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/linearicons.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/magnific-popup.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/main.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/main.css.map' %}">
+<link rel="stylesheet"  href="{% static 'polls/nice-select.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/owl.carousel.css' %}">
+<link rel="stylesheet"  href="{% static 'polls/static/polls/main.scss' %}">
 
-<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+<head>
+  <!-- Mobile Specific Meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="img/fav.png" />
+  <!-- Author Meta -->
+  <meta name="author" content="colorlib" />
+  <!-- Meta Description -->
+  <meta name="description" content="" />
+  <!-- Meta Keyword -->
+  <meta name="keywords" content="" />
+  <!-- meta character set -->
+  <meta charset="UTF-8" />
+  <!-- Site Title -->
+  <title>Courses</title>
 
-<html lang="en">
-  <head>
-    <header class="default-header">
-        <nav class="navbar navbar-expand-lg  navbar-light">
-          <div class="container">
-    <!--        <a class="navbar-brand" href="index.html">-->
-    <!--          <img src="{% static '/polls/images/qt_logo.png' %}" alt="" />-->
-    <!--        </a>-->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="lnr lnr-menu"></span>
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:900|Roboto:400,400i,500,700" rel="stylesheet" />
+  <!--
+      CSS
+      =============================================
+    -->
+
+</head>
+
+<body>
+ <!-- ================ Start Header Area ================= -->
+ <header class="default-header">
+  <nav class="navbar navbar-expand-lg  navbar-light">
+    <div class="container">
+<!--        <a class="navbar-brand" href="index.html">-->
+<!--          <img src="{% static '/polls/images/qt_logo.png' %}" alt="" />-->
+<!--        </a>-->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="lnr lnr-menu"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li><a href="/quick-tutor/">Home</a></li>
+          <li><a href="/quick-tutor/tutor_match">Find a Tutor</a></li>
+          <li><a href="/quick-tutor/student_profile">Your Profile</a></li>
+
+
+<!--             <li><a href="tutor_match.html">Login/Register</a></li>-->
+          {% if user.is_authenticated %}
+              <li class="nav-item">
+                  <a class="nav-link disabled" href=""><p>Logged in as: {{ user.username }}</p><span class="sr-only">(current)</span></a>
+              </li>
+
+          <a class="nav-link" href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a>
+          {% else %}
+                  <li><a href="{% url 'social:begin' 'google-oauth2' %}">Login/Register</a></li>
+              </a>
+          {% endif %}
+      </li>
+
+
+
+          <li><a href="/quick-tutor/contact_us/">Contact Us</a></li>
+
+          <li>
+            <button class="search" >
+              <span class="lnr lnr-magnifier"></span>
             </button>
-    
-            <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
-              <ul class="navbar-nav">
-                <li><a href="/quick-tutor/">Home</a></li>
-                <li><a href="/quick-tutor/about">About</a></li>
-                <li><a href="/quick-tutor/tutor_match">Find a Tutor</a></li>
-                <li><a href="/quick-tutor/chat">Join a Chat Room</a></li>
-    
-    
-    <!--             <li><a href="tutor_match.html">Login/Register</a></li>-->
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href=""><p>Logged in as: {{ user.username }}</p><span class="sr-only">(current)</span></a>
-                    </li>
-    
-                <a class="nav-link" href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a>
-                {% else %}
-                        <li><a href="{% url 'social:begin' 'google-oauth2' %}">Login/Register</a></li>
-                    </a>
-                {% endif %}
-            </li>
-    
-    
-    
-                <li><a href="/quick-tutor/contact_us/">Contact Us</a></li>
-    
-                <li>
-                  <button class="search" >
-                    <span class="lnr lnr-magnifier"></span>
-                  </button>
-    
-    
-    
-                </li>
-              </ul>
+
+
+
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<!--<div class="search-input" id="search-input-box">-->
+<!--      <div class="container">-->
+
+<!--        <form class="d-flex justify-content-between">-->
+<!--          <input type="text" class="form-control" id="search-input" placeholder="Search Here" />-->
+<!--&lt;!&ndash;          <button class="navbar-toggle" type="submit" data-toggle="collapse" data-target="bs-navbar-collapse" ></button>&ndash;&gt;-->
+<!--          <button type="submit" class="btn"></button>-->
+<!--          <span class="lnr lnr-cross" id="close-search" title="Close Search"></span>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--    </div>-->
+</header>
+  <!-- ================ End Header Area ================= -->
+
+  <!-- ================ start banner Area ================= -->
+  <section class="banner-area">
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-lg-12 banner-right">
+            <h1 class="text-white">
+              Your Profile
+            </h1>
+            <p class="mx-auto text-white  mt-20 mb-40">
+              Edit your information everytime you use the app to reflect what you need. <br />
+              Tutors can view students who requested them and students can view who they have requested here too.
+            </p>
+ 
+          </div>
+        </div>
+      </div>
+    </section>
+  <!-- ================ End banner Area ================= -->
+
+  <!-- ================ Start Feature Area ================= -->
+  <section class="feature-area">
+    <div class="container-fluid">
+      <div class="feature-inner row">
+        <div class="col-lg-2 col-md-6">
+          <div class="feature-item d-flex">
+            <i class="ti-book"></i>
+            <div class="ml-20">
+              <h4>Are you a tutor?</h4>
+              <p>
+                If you want to be a tutor, be sure to click the button to show up as an available tutor. 
+                Once you are done, be sure to un-click the box so you will be removed from the list of available tutors.
+              </p>
             </div>
           </div>
-        </nav>
-    
-    <!--<div class="search-input" id="search-input-box">-->
-    <!--      <div class="container">-->
-    
-    <!--        <form class="d-flex justify-content-between">-->
-    <!--          <input type="text" class="form-control" id="search-input" placeholder="Search Here" />-->
-    <!--&lt;!&ndash;          <button class="navbar-toggle" type="submit" data-toggle="collapse" data-target="bs-navbar-collapse" ></button>&ndash;&gt;-->
-    <!--          <button type="submit" class="btn"></button>-->
-    <!--          <span class="lnr lnr-cross" id="close-search" title="Close Search"></span>-->
-    <!--        </form>-->
-    <!--      </div>-->
-    <!--    </div>-->
-      </header>
-
-      <div class="container">
-        <h2><p class="text-black "> Edit Your Information </p></h2>
-          <div class="col-md-3 mb-4">
-
-          <form method="post">
-               {% csrf_token %}
-               {{profile_form}}
-               {{request_form.as_p}}
-
-              <button type="submit">Save Changes</button>
-              <!-- <button type="submit"><a class="nav-link" href = "/quick-tutor/student_profile" >Save Changes</a></button> -->
-
-          </form>
-
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <div class="feature-item d-flex">
+            <i class="ti-cup"></i>
+            <div class="ml-20">
+              <h4>Tutor specific fields</h4>
+              <p>
+                If you're a tutor, be sure to fill in the preferred name, year, venmo, location, skills, and availability fields.
+              </p>
+            </div>
           </div>
-
-
-
-
-
-
-       <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    </body>
-
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <div class="feature-item d-flex border-right-0">
+            <i class="ti-desktop"></i>
+            <div class="ml-20">
+              <h4>Student specific fields</h4>
+              <p>
+                If you're a student, be sure to fill in the preferred name, year, need help with, location, and availability fields.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    </div>
+  </section>
+  <!-- ================ End Feature Area ================= -->
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- ================ Start Popular Course Area ================= -->
+  <section class="popular-course-area section-gap">
+    <div class="container-fluid">
 
-        <title>Suggest Another Poll</title>
-  </head>
+
+      <div class="container" style=text-align:center>
+          <h2><p class="text-black"><font size="8">Edit Your Information</font></p></h2>
+            <div class="col-md-3 mb-4" style = text-align:center>
+  
+            <form method="post" style=text-align:center>
+                 {% csrf_token %}
+                 <!-- {{profile_form}} -->
+
+                 <div class="container" style = text-align:center>
+                    <div class="row">
+                      <div class="col" style=text-align:center> 
+                        <font size="4">
+
+                 
+                 <label for="id_preferred_name">Preferred name:</label>
+                 <input type="text" name="preferred_name" value="Rwz4qy" maxlength="200" required="" id="id_preferred_name">
+                 <br/>
+                 <br/>
+                 <label for="id_student_year_in_school">Student year in school:</label>
+                 <select name="student_year_in_school" id="id_student_year_in_school">
+                    <option value="1Y" selected="">First Year</option>
+                  
+                    <option value="2Y">Second Year</option>
+                  
+                    <option value="3Y">Third Year</option>
+                  
+                    <option value="4Y">Fourth Year</option>
+                  
+                    <option value="GR">Graduate</option>
+                  
+                  </select>
+                  <br/>
+                  <label for="id_need_help_with">Need help with:</label>
+                  <input type="text" name="need_help_with" maxlength="200" id="id_need_help_with">
+                <br />
+                 <br/>
+              </div>
+              <div class="col" style=text-align:center>
+                  <label for="id_location">Location:</label>
+                  <input type="text" name="location" value="Somewhere" maxlength="200" required="" id="id_location">
+                  <br />
+                  <br/>
+                  <label for="id_availability">Availability:</label>
+                  <input type="text" name="availability" maxlength="200" id="id_availability">
+                  <br />
+                  <br/>
+                  <label for="id_student_tutor">Student tutor:</label>
+                  <input type="checkbox" name="student_tutor" id="id_student_tutor" checked="">
+                  <br />
+                  <br/>
+                  <label for="id_skills">Skills:</label>
+                  <input type="text" name="skills" maxlength="200" id="id_skills">
+                  <br />
+                  <br/>
+                  <label for="id_venmo">Venmo:</label>
+                  <input type="text" name="venmo" value="Venmo" maxlength="200" required="" id="id_venmo">
+                  <br/>
+                  <br/>
+                  <br/>
+
+
+
+
+                <button type="submit">Save Changes</button>
+                <!-- <button type="submit"><a class="nav-link" href = "/quick-tutor/student_profile" >Save Changes</a></button> -->
+  
+
+              </font>
+
+            </p>
+          </div>
+        </div>
+      </div>
+            </form>
+  
+            </div>
+          </div>
+    
+  </section>
+  <!-- ================ End Popular Course Area ================= -->
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+var submitBtn = document.getElementById("submitBtn")
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+submitBtn.onclick = function(){
+modal.style.display = "none"
+}
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+ 
+
+  <!-- ================ start footer Area ================= -->
+  <footer class="footer-area section-gap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-2 col-md-6 single-footer-widget">
+					<h4>Top Products</h4>
+					<ul>
+						<li><a href="#">Managed Website</a></li>
+						<li><a href="#">Manage Reputation</a></li>
+						<li><a href="#">Power Tools</a></li>
+						<li><a href="#">Marketing Service</a></li>
+					</ul>
+				</div>
+				<div class="col-lg-2 col-md-6 single-footer-widget">
+					<h4>Quick Links</h4>
+					<ul>
+						<li><a href="#">Jobs</a></li>
+						<li><a href="#">Brand Assets</a></li>
+						<li><a href="#">Investor Relations</a></li>
+						<li><a href="#">Terms of Service</a></li>
+					</ul>
+				</div>
+				<div class="col-lg-2 col-md-6 single-footer-widget">
+					<h4>Features</h4>
+					<ul>
+						<li><a href="#">Jobs</a></li>
+						<li><a href="#">Brand Assets</a></li>
+						<li><a href="#">Investor Relations</a></li>
+						<li><a href="#">Terms of Service</a></li>
+					</ul>
+				</div>
+				<div class="col-lg-2 col-md-6 single-footer-widget">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="#">Guides</a></li>
+						<li><a href="#">Research</a></li>
+						<li><a href="#">Experts</a></li>
+						<li><a href="#">Agencies</a></li>
+					</ul>
+				</div>
+				<div class="col-lg-4 col-md-6 single-footer-widget">
+					<h4>Newsletter</h4>
+					<p>You can trust us. we only send promo offers,</p>
+					<div class="form-wrap" id="mc_embed_signup">
+						<form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+						 method="get" class="form-inline">
+							<input class="form-control" name="EMAIL" placeholder="Your Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address '"
+							 required="" type="email">
+							<button class="click-btn btn btn-default text-uppercase">subscribe</button>
+							<div style="position: absolute; left: -5000px;">
+								<input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+							</div>
+
+							<div class="info"></div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom row align-items-center">
+				<p class="footer-text m-0 col-lg-8 col-md-12">
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+				<div class="col-lg-4 col-md-12 footer-social">
+					<a href="#"><i class="fa fa-facebook"></i></a>
+					<a href="#"><i class="fa fa-twitter"></i></a>
+					<a href="#"><i class="fa fa-dribbble"></i></a>
+					<a href="#"><i class="fa fa-behance"></i></a>
+				</div>
+			</div>
+		</div>
+	</footer>
+  <!-- ================ End footer Area ================= -->
+
+  <script src="js/vendor/jquery-2.2.4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+    crossorigin="anonymous"></script>
+  <script src="js/vendor/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+  <script src="js/jquery.ajaxchimp.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/parallax.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.sticky.js"></script>
+  <script src="js/hexagons.min.js"></script>
+  <script src="js/jquery.counterup.min.js"></script>
+  <script src="js/waypoints.min.js"></script>
+  <script src="js/jquery.nice-select.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
 
 </html>
-
-
