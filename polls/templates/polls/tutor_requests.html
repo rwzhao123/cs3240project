@@ -181,6 +181,14 @@
             Students Who <br />
             Requested You
           </h2>
+          <h3>Request Information</h3>
+          <ul>
+            <li>Declined Requests: {{ tr_d}}</li>
+            <li>Canceled Requests: {{ tr_c }}</li>
+            <li>Accepted Requests: {{ tr_a }}</li>
+            <li>Pending Requests: {{ tr_p }} </li>
+          </ul>
+
         </div>
       </div>
 
@@ -201,12 +209,16 @@
               <h4>{{s_request.student.preferred_name}} -- {{s_request.subject}} </h4>
             </a>
             <div class="bottom d-flex mt-15">
-              <form action="{% url 'quick-tutor:cancel_ontutor' s_request.id%}" method = "POST">
+              {% if s_request.progress == "Pending" %}
+              <form action="{% url 'quick-tutor:tutor_update_request' s_request.id%}" method = "POST">
                   {% csrf_token %}
                   <label for="accept_request">Accept Request</label><input type="radio" id="accept_request" name = "request_status" value = "Denied"><br>
                   <label for="deny_request"> Deny Request</label><input type = "radio" id = "deny_request" name = "request_status" value = "Accepted"><br>
                   <button type="submit">Update</button>
               </form>
+              {% else %}
+              <p class="name">This request has been {{s_request.progress}}</p>
+              {% endif %}
             </div>
           </div>
         </div>

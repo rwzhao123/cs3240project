@@ -182,7 +182,7 @@
       </div>
       {% if student_list %}
       {% for student in student_list%}
-        {% if student.student_tutor == True %} 
+        {% if student.student_tutor == True %}
       <div class="owl-carousel popuar-course-carusel">
         <div class="single-popular-course">
           <div class="thumb">
@@ -192,7 +192,6 @@
             <div class="d-flex justify-content-between mb-20">
               <p class="name">{{student.location}}</p>
               <p class="value">$10, Venmo: {{student.venmo}}</p>
-              <!-- <a href="{% url 'quick-tutor:add_student' student.user.id %}"> Click HERE to request tutor</a> -->
               <button id="myBtn"> click here to request tutor</button>
 
               <div id="myModal" class="modal">
@@ -226,7 +225,7 @@
 
 
                 <h4>{{student.preferred_name}} -- {{student.skills}} </h4>
-  
+
             <div class="bottom d-flex mt-15">
               <ul class="list">
                 <li>
