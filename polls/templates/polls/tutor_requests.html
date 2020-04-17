@@ -59,14 +59,15 @@
           <ul class="navbar-nav">
             <li><a href="/quick-tutor/">Home</a></li>
             <li><a href="/quick-tutor/tutor_match">Find a Tutor</a></li>
-            <li><a href="/quick-tutor/student_profile">Your Profile</a></li>
+            <li><a href="https://chat-site6.herokuapp.com/">Chat App</a></li>
 
 
 <!--             <li><a href="tutor_match.html">Login/Register</a></li>-->
             {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link disabled" href=""><p>Logged in as: {{ user.username }}</p><span class="sr-only">(current)</span></a>
+                <li>
+                    <a href=""><p>Logged in as: {{ user.username }}</p></a>
                 </li>
+                <li><a href="/quick-tutor/student_profile">Your Profile</a></li>
 
             <a class="nav-link" href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a>
             {% else %}
