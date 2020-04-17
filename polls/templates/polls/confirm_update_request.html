@@ -44,7 +44,7 @@
 
 <body>
  <!-- ================ Start Header Area ================= -->
-  <header class="default-header">
+ <header class="default-header">
     <nav class="navbar navbar-expand-lg  navbar-light">
       <div class="container">
 <!--        <a class="navbar-brand" href="index.html">-->
@@ -59,10 +59,8 @@
           <ul class="navbar-nav">
             <li><a href="/quick-tutor/">Home</a></li>
             <li><a href="/quick-tutor/tutor_match">Find a Tutor</a></li>
+            <li><a href="/quick-tutor/student_profile">Your Profile</a></li>
 
-            <li><a href =  "/quick-tutor/student_profile">Your Profile</a></li>
-
-            <li><a href="https://chat-site6.herokuapp.com/">Chat App</a></li>
 
 
 
@@ -71,7 +69,6 @@
                 <li class="nav-item">
                     <a class="nav-link disabled" href=""><p>Logged in as: {{ user.username }}</p><span class="sr-only">(current)</span></a>
                 </li>
-                <li><a href="/quick-tutor/student_profile">Your Profile</a></li>
 
             <a class="nav-link" href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a>
             {% else %}
@@ -91,7 +88,9 @@
 
 
 
+
             </li>
+
           </ul>
         </div>
       </div>
@@ -116,11 +115,18 @@
       <div class="container">
         <div class="row justify-content-center align-items-center">
           <div class="col-lg-12 banner-right">
+              {% if status == "Accepted" %}
             <h1 class="text-white">
-              Who Have You Requested?
+              Success! You have {{ status }} this Request.
             </h1>
-            <p class="mx-auto text-white  mt-20 mb-40">
-              Students, take a look at a list of the tutors you have requested.
+              {% else %}
+            <h1 class="text-white">
+              Success! You have {{ status }} this Request.
+            </h1>
+              <p class="mx-auto text-white  mt-20 mb-40">
+                We will let the student know you have denied their request.
+              </p>
+              {% endif %}
             </p>
           </div>
         </div>
@@ -129,61 +135,7 @@
   <!-- ================ End banner Area ================= -->
 
 
-  <!-- ================ Start Popular Course Area ================= -->
-  <section class="popular-course-area section-gap">
-    <div class="container-fluid">
-      <div class="row justify-content-center section-title">
-        <div class="col-lg-12">
-          <h2>
-            Tutors You<br />
-            Have Requested
-          </h2>
-        </div>
-      </div>
-      {% if sr != 0 %}
-      {% for t_request in sr %}
-      <div class="owl-carousel popuar-course-carusel">
-        <div class="single-popular-course">
-          <div class="thumb">
-            <img class="f-img img-fluid mx-auto" src="img/popular-course/p1.jpg" alt="" />
-          </div>
-          <div class="details">
-            <div class="d-flex justify-content-between mb-20">
-              <p class="name">{{t_request.tutor.location}}</p>
-              <p class="name">Venmo: {{t_request.tutor.venmo}}</p>
-              <p class="name">Availability: {{t_request.tutor.availability}}</p>
-              <p class="name">Status: {{t_request.progress}}</p>
-              <p class=""name> Date Requested: {{ t_request.pub_date }}</p>
-              <p class="name"><a href="{% url 'quick-tutor:room' t_request.tutor%}">Chat with tutor</a></p>
-            </div>
-            <a href="#">
-              <h4>{{t_request.tutor.preferred_name}} -- {{t_request.tutor.skills}} </h4>
-            </a>
-            <div class="bottom d-flex mt-15">
-              <ul class="list">
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
 
-              </ul>
-              <div class="d-flex justify-content-between mb-20">
-              <p class="ml-20"><a href="{% url 'quick-tutor:student_cancel' t_request.id %}">Click here to cancel</a></p>
-
-
-            </div>
-
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-        {% else %}
-        <p>No people are available.</p>
-        {% endif %}
-
-
-  <!-- ================ End Popular Course Area ================= -->
-
-  
   <!-- ================ start footer Area ================= -->
   <footer class="footer-area section-gap">
 		<div class="container">

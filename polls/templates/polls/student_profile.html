@@ -211,6 +211,12 @@
       <div class="col-lg-10">
         <font size="6">
     <a style="text-align: center" class="nav-link" href = "/quick-tutor/student_profile/edit" style="color:black">Edit Information</a>
+            {% if user.profile.student_tutor %}
+            <a style="text-align: center" class="nav-link" href = "/quick-tutor/tutor_requests" style="color:black">Tutor Requests</a>
+            {% else %}
+            {% endif %}
+            <a style="text-align: center" class="nav-link" href = "/quick-tutor/student_requests" style="color:black">My Requests</a>
+
   </font>
 </div>
 

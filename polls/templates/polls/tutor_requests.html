@@ -133,6 +133,14 @@
             Students Who <br />
             Requested You
           </h2>
+          <h3>Request Information</h3>
+          <ul>
+            <li>Declined Requests: {{ tr_d}}</li>
+            <li>Canceled Requests: {{ tr_c }}</li>
+            <li>Accepted Requests: {{ tr_a }}</li>
+            <li>Pending Requests: {{ tr_p }} </li>
+          </ul>
+
         </div>
       </div>
 
@@ -143,24 +151,38 @@
           <div class="thumb">
             <img class="f-img img-fluid mx-auto" src="img/popular-course/p1.jpg" alt="" />
           </div>
+
           <div class="details">
             <div class="d-flex justify-content-between mb-20">
+
               <p class="name">{{s_request.student.location}}</p>
              <p class="name">Status:{{s_request.progress }}</p>
               <p class="name"><a href="{% url 'quick-tutor:room' user.username%}">Chat with Student</a></p>
+              <details>
+                <summary>More Information</summary>
+                <p class = "name">Subject:{{s_request.subject}}</p>
+                <p class = "name"> Details: {{s_request.subject_text}}</p>
+                <p class = "value"> Contact Information:{{ s_request.contact_info }}</p>
+              </details>
             </div>
             <a href="#">
               <h4>{{s_request.student.preferred_name}} -- {{s_request.subject}} </h4>
             </a>
             <div class="bottom d-flex mt-15">
-              <form action="{% url 'quick-tutor:cancel_ontutor' s_request.id%}" method = "POST">
+              {% if s_request.progress == "Pending" %}
+              <form action="{% url 'quick-tutor:tutor_update_request' s_request.id%}" method = "POST">
                   {% csrf_token %}
-                  <label for="accept_request">Accept Request</label><input type="radio" id="accept_request" name = "request_status" value = "Denied"><br>
-                  <label for="deny_request"> Deny Request</label><input type = "radio" id = "deny_request" name = "request_status" value = "Accepted"><br>
+                  <label for="accept_request">Deny Request</label><input type="radio" id="accept_request" name = "request_status" value = "Denied"><br>
+                  <label for="deny_request"> Accept Request</label><input type = "radio" id = "deny_request" name = "request_status" value = "Accepted"><br>
                   <button type="submit">Update</button>
               </form>
+              {% else %}
+              <p class="name">This request has been {{s_request.progress}}</p>
+              {% endif %}
             </div>
           </div>
+
+
         </div>
         {% endfor %}
         {% else %}

@@ -197,21 +197,35 @@ def student_requests(request):
     return render(request, "polls/student_requests.html", args)
 
 def tutor_requests(request):
+    canceled = 0
+    declined = 0
+    pending = 0
+    accepted = 0
     t = Student.objects.get(user=request.user)
     r = TutorRequest.objects.filter(tutor = t)
+    r_num = len(r)
     for obj in r:
-        if (obj.progress == 'Declined' or obj.progress == 'Canceled'):
-            TutorRequest.objects.filter(id=obj.id).delete()
+        if obj.progress == 'Denied' or obj.progress == 'Canceled':
+            if obj.is_old():
+                TutorRequest.objects.filter(id=obj.id).delete()
+            elif obj.progress == 'Denied':
+                declined +=1
+            else:
+                canceled += 1
+        elif obj.progress == 'Pending':
+            pending += 1
+        elif obj.progress == 'Accepted':
+            accepted += 1
     print("Requests found", r)
     if len(r) <= 0:
         r = 0
-    args = {'tr': r}
+    args = {'tr': r, 'tr_num': r_num, 'tr_c': canceled, 'tr_d': declined, 'tr_a': accepted, 'tr_p': pending}
     return render(request, "polls/tutor_requests.html", args)
 
 
 
 
-def create_request(request):
+def create_request(request, student_id):
 
     requested_user = User.objects.get(id=student_id)
     tutor_requested = Student.objects.get(user=requested_user)
@@ -243,17 +257,21 @@ class AllStudentsView(generic.ListView):
     def get_queryset(self):
         return Student.objects.all()
 
+def additional_info(request):
+    tutor_id = request.POST['tutor']
+    tutor = Student.objects.get(id=tutor_id)
+    return render(request, 'polls/additional_info.html', {'tutor':tutor, 'tutor_id': tutor_id})
 
-def cancel_onstudent(request, s_request_id):
-    canceled_request = TutorRequest.objects.get(id=s_request_id)
-    canceled_request.update_request('Declined')
+def student_cancel(request, t_request_id):
+    canceled_request = TutorRequest.objects.get(id=t_request_id)
+    canceled_request.update_request('Canceled')
     canceled_request.save()
     return redirect("quick-tutor:confirm_cancel")
 
-def cancel_ontutor(request, t_request_id):
-    tentative_request = TutorRequest.objects.get(id=t_request_id)
+def tutor_update_request(request, s_request_id):
+    tentative_request = TutorRequest.objects.get(id=s_request_id)
     status = request.POST['request_status']
     tentative_request.update_request(status)
     tentative_request.save()
-    return redirect("quick-tutor:confirm_cancel")
+    return render(request,'polls/confirm_update_request.html',{'status':status})
 

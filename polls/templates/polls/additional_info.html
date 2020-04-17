@@ -44,58 +44,53 @@
 
 <body>
  <!-- ================ Start Header Area ================= -->
-  <header class="default-header">
-    <nav class="navbar navbar-expand-lg  navbar-light">
-      <div class="container">
+ <header class="default-header">
+  <nav class="navbar navbar-expand-lg  navbar-light">
+    <div class="container">
 <!--        <a class="navbar-brand" href="index.html">-->
 <!--          <img src="{% static '/polls/images/qt_logo.png' %}" alt="" />-->
 <!--        </a>-->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="lnr lnr-menu"></span>
-        </button>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="lnr lnr-menu"></span>
+      </button>
 
-        <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
-          <ul class="navbar-nav">
-            <li><a href="/quick-tutor/">Home</a></li>
-            <li><a href="/quick-tutor/tutor_match">Find a Tutor</a></li>
-
-            <li><a href =  "/quick-tutor/student_profile">Your Profile</a></li>
-
-            <li><a href="https://chat-site6.herokuapp.com/">Chat App</a></li>
-
+      <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li><a href="/quick-tutor/">Home</a></li>
+          <li><a href="/quick-tutor/tutor_match">Find a Tutor</a></li>
+          <li><a href="/quick-tutor/student_profile">Your Profile</a></li>
 
 
 <!--             <li><a href="tutor_match.html">Login/Register</a></li>-->
-            {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link disabled" href=""><p>Logged in as: {{ user.username }}</p><span class="sr-only">(current)</span></a>
-                </li>
-                <li><a href="/quick-tutor/student_profile">Your Profile</a></li>
+          {% if user.is_authenticated %}
+              <li class="nav-item">
+                  <a class="nav-link disabled" href=""><p>Logged in as: {{ user.username }}</p><span class="sr-only">(current)</span></a>
+              </li>
 
-            <a class="nav-link" href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a>
-            {% else %}
-                    <li><a href="{% url 'social:begin' 'google-oauth2' %}">Login/Register</a></li>
-                </a>
-            {% endif %}
-        </li>
-
-
-
-            <li><a href="/quick-tutor/contact_us/">Contact Us</a></li>
-
-            <li>
-              <button class="search" >
-                <span class="lnr lnr-magnifier"></span>
-              </button>
+          <a class="nav-link" href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a>
+          {% else %}
+                  <li><a href="{% url 'social:begin' 'google-oauth2' %}">Login/Register</a></li>
+              </a>
+          {% endif %}
+      </li>
 
 
 
-            </li>
-          </ul>
-        </div>
+          <li><a href="/quick-tutor/contact_us/">Contact Us</a></li>
+
+          <li>
+            <button class="search" >
+              <span class="lnr lnr-magnifier"></span>
+            </button>
+
+
+
+          </li>
+        </ul>
       </div>
-    </nav>
+    </div>
+  </nav>
 
 <!--<div class="search-input" id="search-input-box">-->
 <!--      <div class="container">-->
@@ -108,7 +103,7 @@
 <!--        </form>-->
 <!--      </div>-->
 <!--    </div>-->
-  </header>
+</header>
   <!-- ================ End Header Area ================= -->
 
   <!-- ================ start banner Area ================= -->
@@ -117,73 +112,66 @@
         <div class="row justify-content-center align-items-center">
           <div class="col-lg-12 banner-right">
             <h1 class="text-white">
-              Who Have You Requested?
+              Additional Information
             </h1>
             <p class="mx-auto text-white  mt-20 mb-40">
-              Students, take a look at a list of the tutors you have requested.
+              Please fill out the following fields before submitting your Request
             </p>
+
           </div>
         </div>
       </div>
     </section>
   <!-- ================ End banner Area ================= -->
+<!-- WHAT U NEED TO LOOK AT RN -->
+<section class="popular-course-area section-gap">
+    <div class="container-fluid">
+        <div class = "row justify-content-center section-title">
+            <div class ="col-lg-12">
+                <h2></h2>
+
+
+            </div>
+        </div>
+    </div>
+
+
+                <div class="owl-carousel popuar-course-carusel">
+                    <div class="single-popular-course">
+                        <div class="thumb">
+                            <img class="f-img img-fluid mx-auto" src="img/popular-course/p1.jpg" alt="" />
+
+                        </div>
+                        <div class="details">
+                            <div class="d-flex justify-content-between mb-20">
+                                <form action="{% url 'quick-tutor:create_request' tutor_id %}" method = "POST">
+                                    {% csrf_token %}
+                                    <p class = "name" > Tutor Selected:{{ tutor.first_name}}</p>
+                                    <p class = "name"> Price: $10 to {{tutor.venmo}}</p>
+                                    <label for = "tutor_subject"> What subject do you need help with?</label><br>
+                                    <input type = "text" id="tutor_subject" name = "tutor_subject"><br>
+                                    <label for = "tutor_additional">Additional Notes</label><br>
+                                    <input type = "text" id = "tutor_additional" name = "tutor_additional"><br>
+                                    <label for = "contact_method"> Please provide the easiest way to contact you</label><br>
+                                    <input type = "text" id = "contact_method" name = "contact_method"><br>
+                                    <button type = "submit" id="submitBtn">Request Tutor</button>
+                                  </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+</section>
 
 
   <!-- ================ Start Popular Course Area ================= -->
-  <section class="popular-course-area section-gap">
-    <div class="container-fluid">
-      <div class="row justify-content-center section-title">
-        <div class="col-lg-12">
-          <h2>
-            Tutors You<br />
-            Have Requested
-          </h2>
-        </div>
-      </div>
-      {% if sr != 0 %}
-      {% for t_request in sr %}
-      <div class="owl-carousel popuar-course-carusel">
-        <div class="single-popular-course">
-          <div class="thumb">
-            <img class="f-img img-fluid mx-auto" src="img/popular-course/p1.jpg" alt="" />
-          </div>
-          <div class="details">
-            <div class="d-flex justify-content-between mb-20">
-              <p class="name">{{t_request.tutor.location}}</p>
-              <p class="name">Venmo: {{t_request.tutor.venmo}}</p>
-              <p class="name">Availability: {{t_request.tutor.availability}}</p>
-              <p class="name">Status: {{t_request.progress}}</p>
-              <p class=""name> Date Requested: {{ t_request.pub_date }}</p>
-              <p class="name"><a href="{% url 'quick-tutor:room' t_request.tutor%}">Chat with tutor</a></p>
-            </div>
-            <a href="#">
-              <h4>{{t_request.tutor.preferred_name}} -- {{t_request.tutor.skills}} </h4>
-            </a>
-            <div class="bottom d-flex mt-15">
-              <ul class="list">
-                <li>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                </li>
-
-              </ul>
-              <div class="d-flex justify-content-between mb-20">
-              <p class="ml-20"><a href="{% url 'quick-tutor:student_cancel' t_request.id %}">Click here to cancel</a></p>
 
 
-            </div>
-
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-        {% else %}
-        <p>No people are available.</p>
-        {% endif %}
-
+<!-- Modal -->
 
   <!-- ================ End Popular Course Area ================= -->
 
-  
+
   <!-- ================ start footer Area ================= -->
   <footer class="footer-area section-gap">
 		<div class="container">
