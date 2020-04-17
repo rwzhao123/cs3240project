@@ -255,6 +255,10 @@ class AllStudentsView(generic.ListView):
     def get_queryset(self):
         return Student.objects.all()
 
+def additional_info(request):
+    tutor_id = request.POST['tutor']
+    tutor = Student.objects.get(id=tutor_id)
+    return render(request, 'polls/additional_info.html', {'tutor':tutor, 'tutor_id': tutor_id})
 
 def student_cancel(request, t_request_id):
     canceled_request = TutorRequest.objects.get(id=t_request_id)

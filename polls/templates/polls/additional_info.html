@@ -112,10 +112,10 @@
         <div class="row justify-content-center align-items-center">
           <div class="col-lg-12 banner-right">
             <h1 class="text-white">
-              Who's Available?
+              Additional Information
             </h1>
             <p class="mx-auto text-white  mt-20 mb-40">
-              Check out a list of tutors that are available.
+              Please fill out the following fields before submitting your Request
             </p>
 
           </div>
@@ -128,17 +128,13 @@
     <div class="container-fluid">
         <div class = "row justify-content-center section-title">
             <div class ="col-lg-12">
-                <h2>Tutors Available Right Now</h2>
+                <h2></h2>
 
 
             </div>
         </div>
     </div>
-    {% if student_list %}
-        <form id = "tutor_form" action="{% url 'quick-tutor:additional_info'%}" method = "POST">
-            {% csrf_token %}
-        {% for student in student_list %}
-            {% if student.student_tutor == True %}
+
 
                 <div class="owl-carousel popuar-course-carusel">
                     <div class="single-popular-course">
@@ -148,23 +144,23 @@
                         </div>
                         <div class="details">
                             <div class="d-flex justify-content-between mb-20">
-                                <p class="name"> {{student.location}}</p>
-                                <p class="value">$10 Venmo: {{student.venmo}}</p>
-                                <label for= student.user.id> Select Tutor</label>
-                                <input type="radio" id=student.user.id name = "tutor" value = {{student.user.id}}>
-                                <h4>{{student.preferred_name}} -- {{student.skills}} </h4>
-                                <p class="ml-20">{{student.availability}}</p>
+                                <form action="{% url 'quick-tutor:create_request' tutor_id %}" method = "POST">
+                                    {% csrf_token %}
+                                    <p class = "name" > Tutor Selected:{{ tutor.first_name}}</p>
+                                    <p class = "name"> Price: $10 to {{tutor.venmo}}</p>
+                                    <label for = "tutor_subject"> What subject do you need help with?</label><br>
+                                    <input type = "text" id="tutor_subject" name = "tutor_subject"><br>
+                                    <label for = "tutor_additional">Additional Notes</label><br>
+                                    <input type = "text" id = "tutor_additional" name = "tutor_additional"><br>
+                                    <label for = "contact_method"> Please provide the easiest way to contact you</label><br>
+                                    <input type = "text" id = "contact_method" name = "contact_method"><br>
+                                    <button type = "submit" id="submitBtn">Request Tutor</button>
+                                  </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            {% endif %}
-        {% endfor %}
-            <button type="submit"> Request Tutor</button>
-        </form>
-    {% else %}
-    <p>No tutors are available.</p>
-    {% endif %}
+
 </section>
 
 

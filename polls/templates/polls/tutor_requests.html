@@ -199,11 +199,19 @@
           <div class="thumb">
             <img class="f-img img-fluid mx-auto" src="img/popular-course/p1.jpg" alt="" />
           </div>
+
           <div class="details">
             <div class="d-flex justify-content-between mb-20">
+
               <p class="name">{{s_request.student.location}}</p>
              <p class="name">Status:{{s_request.progress }}</p>
               <p class="name"><a href="{% url 'quick-tutor:room' user.username%}">Chat with Student</a></p>
+              <details>
+                <summary>More Information</summary>
+                <p class = "name">Subject:{{s_request.subject}}</p>
+                <p class = "name"> Details: {{s_request.subject_text}}</p>
+                <p class = "value"> Contact Information:{{ s_request.contact_info }}</p>
+              </details>
             </div>
             <a href="#">
               <h4>{{s_request.student.preferred_name}} -- {{s_request.subject}} </h4>
@@ -221,6 +229,8 @@
               {% endif %}
             </div>
           </div>
+
+
         </div>
         {% endfor %}
         {% else %}
