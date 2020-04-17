@@ -271,5 +271,5 @@ def tutor_update_request(request, s_request_id):
     status = request.POST['request_status']
     tentative_request.update_request(status)
     tentative_request.save()
-    return redirect("quick-tutor:confirm_update_request",{'status':staus})
+    return render(request,'polls/confirm_update_request.html',{'status':status})
 

@@ -220,8 +220,8 @@
               {% if s_request.progress == "Pending" %}
               <form action="{% url 'quick-tutor:tutor_update_request' s_request.id%}" method = "POST">
                   {% csrf_token %}
-                  <label for="accept_request">Accept Request</label><input type="radio" id="accept_request" name = "request_status" value = "Denied"><br>
-                  <label for="deny_request"> Deny Request</label><input type = "radio" id = "deny_request" name = "request_status" value = "Accepted"><br>
+                  <label for="accept_request">Deny Request</label><input type="radio" id="accept_request" name = "request_status" value = "Denied"><br>
+                  <label for="deny_request"> Accept Request</label><input type = "radio" id = "deny_request" name = "request_status" value = "Accepted"><br>
                   <button type="submit">Update</button>
               </form>
               {% else %}
