@@ -185,7 +185,8 @@ def student_requests(request):
 
     s = Student.objects.get(user = request.user)
     print(s)
-    r = TutorRequest.objects.filter(student = s)
+    r = TutorRequest.objects.get(student = s)
+    print(r)
     for obj in r:
         if obj.is_old() and (obj.progress == 'Declined'or obj.progress == 'Canceled'):
             TutorRequest.objects.filter(id=obj.id).delete()
@@ -223,8 +224,9 @@ def tutor_requests(request):
 
 
 
+
 def create_request(request, student_id):
-    print("request created")
+
     requested_user = User.objects.get(id=student_id)
     tutor_requested = Student.objects.get(user=requested_user)
     student_requester = Student.objects.get(user=request.user)
