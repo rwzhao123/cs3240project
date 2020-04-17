@@ -19,6 +19,7 @@
 <link rel="stylesheet"  href="{% static 'polls/static/polls/main.scss' %}">
 
 <head>
+ 
   <!-- Mobile Specific Meta -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <!-- Favicon -->
@@ -59,7 +60,7 @@
         <ul class="navbar-nav">
           <li><a href="/quick-tutor/">Home</a></li>
           <li><a href="/quick-tutor/tutor_match">Find a Tutor</a></li>
-          <li><a href="/quick-tutor/student_profile">Your Profile</a></li>
+          <li><a href="https://chat-site6.herokuapp.com/">Chat App</a></li>
 
 
 <!--             <li><a href="tutor_match.html">Login/Register</a></li>-->
@@ -67,6 +68,7 @@
               <li class="nav-item">
                   <a class="nav-link disabled" href=""><p>Logged in as: {{ user.username }}</p><span class="sr-only">(current)</span></a>
               </li>
+              <li><a href="/quick-tutor/student_profile">Your Profile</a></li>
 
           <a class="nav-link" href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a>
           {% else %}
@@ -170,88 +172,81 @@
 
   <!-- ================ Start Popular Course Area ================= -->
   <section class="popular-course-area section-gap">
-    <div class="container-fluid">
-
-
-      <div class="container" style=text-align:center>
-          <h2><p class="text-black"><font size="8">Edit Your Information</font></p></h2>
-            <div class="col-md-3 mb-4" style = text-align:center>
+      <div class="container-fluid">
   
-            <form method="post" style=text-align:center>
-                 {% csrf_token %}
-                 <!-- {{profile_form}} -->
-
-                 <div class="container" style = text-align:center>
-                    <div class="row">
-                      <div class="col" style=text-align:center> 
-                        <font size="4">
-
-                 
-                 <label for="id_preferred_name">Preferred name:</label>
-                 <input type="text" name="preferred_name" value="Rwz4qy" maxlength="200" required="" id="id_preferred_name">
-                 <br/>
-                 <br/>
-                 <label for="id_student_year_in_school">Student year in school:</label>
-                 <select name="student_year_in_school" id="id_student_year_in_school">
-                    <option value="1Y" selected="">First Year</option>
-                  
-                    <option value="2Y">Second Year</option>
-                  
-                    <option value="3Y">Third Year</option>
-                  
-                    <option value="4Y">Fourth Year</option>
-                  
-                    <option value="GR">Graduate</option>
-                  
-                  </select>
-                  <br/>
-                  <label for="id_need_help_with">Need help with:</label>
-                  <input type="text" name="need_help_with" maxlength="200" id="id_need_help_with">
-                <br />
-                 <br/>
-              </div>
-              <div class="col" style=text-align:center>
-                  <label for="id_location">Location:</label>
-                  <input type="text" name="location" value="Somewhere" maxlength="200" required="" id="id_location">
-                  <br />
-                  <br/>
-                  <label for="id_availability">Availability:</label>
-                  <input type="text" name="availability" maxlength="200" id="id_availability">
-                  <br />
-                  <br/>
-                  <label for="id_student_tutor">Student tutor:</label>
-                  <input type="checkbox" name="student_tutor" id="id_student_tutor" checked="">
-                  <br />
-                  <br/>
-                  <label for="id_skills">Skills:</label>
-                  <input type="text" name="skills" maxlength="200" id="id_skills">
-                  <br />
-                  <br/>
-                  <label for="id_venmo">Venmo:</label>
-                  <input type="text" name="venmo" value="Venmo" maxlength="200" required="" id="id_venmo">
-                  <br/>
-                  <br/>
-                  <br/>
-
-
-
-
-                <button type="submit">Save Changes</button>
-                <!-- <button type="submit"><a class="nav-link" href = "/quick-tutor/student_profile" >Save Changes</a></button> -->
   
-
-              </font>
-
-            </p>
-          </div>
+        <div class="container" style=text-align:center>
+            <h2><p class="text-black"><font size="8">Edit Your Information</font></p></h2>
         </div>
-      </div>
-            </form>
+    
+              <form method="post" style=text-align:center>
+                   {% csrf_token %}
+  
+                   <div class="container">
+                      <div class="row">
+                        <div class="col" style=text-align:center> 
+                          <font size="4">
+  
+                   
+                   <label for="id_preferred_name">Preferred name: </label>
+                   <input type="text" name="preferred_name" value="Rwz4qy" maxlength="200" required="" id="id_preferred_name">
+                   <br/>
+                   <br/>
+                   <label for="id_student_year_in_school">Student year in school:</label>
+                   <select name="student_year_in_school" id="id_student_year_in_school" style="text-align:right">
+                      <option value="1Y" selected="">First Year</option>
+                    
+                      <option value="2Y">Second Year</option>
+                    
+                      <option value="3Y">Third Year</option>
+                    
+                      <option value="4Y">Fourth Year</option>
+                    
+                      <option value="GR">Graduate</option>
+                    
+                    </select>
+                    <br/>
+                    <label for="id_need_help_with">Need help with (for students only):</label>
+                    <input type="text" name="need_help_with" maxlength="200" id="id_need_help_with">
+                  <br />
+                   <br/>
+                    <label for="id_location">Location:</label>
+                    <input type="text" name="location" value="Somewhere" maxlength="200" required="" id="id_location">
+                    <br />
+                    <br/>
+                  </div>
+                  <div class="col" style=text-align:center>
+                    <label for="id_availability">Availability:</label>
+                    <input type="text" name="availability" maxlength="200" id="id_availability">
+                    <br />
+                    <br/>
+                    <label for="id_student_tutor">Student tutor:</label>
+                    <input type="checkbox" name="student_tutor" id="id_student_tutor" checked="">
+                    <br />
+                    <br/>
+                    <label for="id_skills">Skills (for tutors only):</label>
+                    <input type="text" name="skills" maxlength="200" id="id_skills">
+                    <br />
+                    <br/>
+                    <label for="id_venmo">Venmo (for tutors only):</label>
+                    <input type="text" name="venmo" value="Venmo" maxlength="200" required="" id="id_venmo">
+                    <br/>
+                    <br/>
+                    <br/>    
+  
+                </font>
   
             </div>
+
           </div>
+          <button type="submit">Save Changes</button>
+
+        </div>
+              </form>
     
-  </section>
+            </div>
+      
+    </section>
   <!-- ================ End Popular Course Area ================= -->
 <script>
 // Get the modal
