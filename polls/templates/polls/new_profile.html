@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html>
+
+
+<title>W3.CSS Template</title>
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% load static %}
+{% load bootstrap4 %}
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+
+body, html {
+  height: 100%;
+  line-height: 1.8;
+}
+
+/* Full height image header */
+.bgimg-1 {
+  background-position: center;
+  background-size: cover;
+  background-image: url("/w3images/mac.jpg");
+  min-height: 100%;
+}
+
+.w3-bar .w3-button {
+  padding: 16px;
+}
+</style>
+<body>
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-card" id="myNavbar">
+    <a href="#home" class="w3-bar-item w3-button w3-wide">QUICK TUTOR</a>
+    <!-- Right-sided navbar links -->
+    <div class="w3-right w3-hide-small">
+        {% if user.is_authenticated %}
+            <!-- add drop down -->
+            <div class="w3-dropdown-hover">
+                <button class="w3-button">Welcome, {{ user.first_name }}</button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                    <a href="/quick-tutor/student_profile" class = "w3-bar-item w3-button">MY PROFILE</a>
+                    <a href="{% url 'logout' %}" class = "w3-bar-item w3-button">LOGOUT</a>
+                </div>
+            </div>
+        {% else %}
+            <a href="{% url 'social:begin' 'google-oauth2' %}" class="w3-bar-item w3-button">LOGIN</a>
+        {% endif %}
+      <a href="/quick-tutor/" class="w3-bar-item w3-button">HOME</a>
+      <a href="/quick-tutor/tutor_match/" class="w3-bar-item w3-button">FIND A TUTOR</a>
+      <a href="https://chat-site6.herokuapp.com/" class="w3-bar-item w3-button">CHAT APP</a>
+      <a href="/quick-tutor/contact_us" class="w3-bar-item w3-button">CONTACT</a>
+
+    </div>
+    <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+</div>
+
+<!-- Sidebar on small screens when clicking the menu icon -->
+<nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
+  <a href="/quick-tutor/" class="w3-bar-item w3-button">HOME</a>
+  <a href="/quick-tutor/tutor_match/" onclick="w3_close()" class="w3-bar-item w3-button">FIND A TUTOR</a>
+  <a href="https://chat-site6.herokuapp.com/" onclick="w3_close()" class="w3-bar-item w3-button">CHAT APP</a>
+  <a href="/quick-tutor/contact_us" class="w3-bar-item w3-button">CONTACT</a>
+        {% if user.is_authenticated %}
+            <a href="/quick-tutor/student_profile" class = "w3-bar-item w3-button">MY PROFILE</a>
+            <a href="{% url 'logout' %}" class = "w3-bar-item w3-button">LOGOUT</a>
+        {% else %}
+            <a href="{% url 'social:begin' 'google-oauth2' %}" class="w3-bar-item w3-button">LOGIN</a>
+        {% endif %}
+</nav>
+
+
+
+<!-- Contact Section -->
+<div class="w3-container w3-light-grey" style="padding:128px 16px" id="contact">
+  <h3 class="w3-center">YOUR PROFILE</h3>
+  <p class="w3-center w3-large">Here is your profile information</p>
+  <div style="margin-top:48px">
+    <p><i class="w3-xxlarge w3-margin-right"></i> Name: {{user.first_name }}</p>
+    <p><i class="w3-xxlarge w3-margin-right"></i> Preferred Name: {{ user.profile.preferred_name }}</p>
+    <p><i class="w3-xxlarge w3-margin-right"> </i> Email: {{ user.email}}</p>
+    <p><i class="w3-xxlarge w3-margin-right"> </i> Location: {{ user.profile.location}}</p>
+    <p><i class="w3-xxlarge w3-margin-right"> </i> Availability: {{ user.profile.availability}}</p>
+    <p><i class="w3-xxlarge w3-margin-right"> </i> Are you a Tutor: {{user.profile.student_tutor}}</p>
+    <p><i class="w3-xxlarge w3-margin-right"> </i> Venmo: {{ user.profile.venmo }}</p>
+    <p><i class="w3-xxlarge w3-margin-right"> </i> Bio: {{user.profile.skills }}</p>
+      {% if user.profile.student_tutor %}
+        <p><a class="w3-button w3-xxlarge w3-margin-left" href="quick-tutor/tutor_requests"> View who has requested you</a></p>
+      {% else %}
+      {% endif %}
+      <p><a class="w3-button w3-xxlarge w3-margin-left" href="quick-tutor/student_requests"> View your requests</a></p>
+    <br>
+
+    <form action="/action_page.php" target="_blank">
+      <p><input class="w3-input w3-border" type="text" placeholder="Name" required name="Name"></p>
+      <p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email"></p>
+      <p><input class="w3-input w3-border" type="text" placeholder="Subject" required name="Subject"></p>
+      <p><input class="w3-input w3-border" type="text" placeholder="Message" required name="Message"></p>
+      <p>
+        <button class="w3-button w3-black" type="submit">
+          <i class="fa fa-paper-plane"></i> SEND MESSAGE
+        </button>
+      </p>
+    </form>
+    <!-- Image of location/map -->
+    <img src="/w3images/map.jpg" class="w3-image w3-greyscale" style="width:100%;margin-top:48px">
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="w3-center w3-black w3-padding-64">
+  <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+  <div class="w3-xlarge w3-section">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+  </div>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+</footer>
+
+<script>
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+
+
+// Toggle between showing and hiding the sidebar when clicking the menu icon
+var mySidebar = document.getElementById("mySidebar");
+
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+  } else {
+    mySidebar.style.display = 'block';
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+    mySidebar.style.display = "none";
+}
+</script>
+</body>
+</html>

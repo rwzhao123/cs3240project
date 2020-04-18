@@ -72,8 +72,7 @@ def suggestions_list(request):
 
 
 def index(request):
-    print("this was called")
-    return render(request, "polls/index.html")
+    return render(request, "polls/new_index.html")
 
 
 def chat(request):
@@ -97,7 +96,7 @@ def student_profile(request):
 @login_required
 def update_profile(request):
     print("this was called")
-    return render(request,"polls/student_profile.html")
+    return render(request,"polls/new_profile.html")
 
         #return render(request,"polls/edit_student_profile.html",{"user_form": user_form, "profile_form": profile_form, "choice_form": choice_form})
 @login_required
