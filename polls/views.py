@@ -184,7 +184,7 @@ def student_requests(request):
 
     s = Student.objects.get(user = request.user)
     print(s)
-    r = TutorRequest.objects.get(student = s)
+    r = TutorRequest.objects.filter(student = s)
     print(r)
     for obj in r:
         if obj.is_old() and (obj.progress == 'Declined'or obj.progress == 'Canceled'):
