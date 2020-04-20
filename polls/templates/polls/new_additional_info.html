@@ -6,7 +6,7 @@
 <title>Qtees</title>
 
 
-<meta charset="UTF-8">
+meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
@@ -65,7 +65,25 @@ body, html {
     </a>
   </div>
 </div>
-
+<!-- Tutor Request Form -->
+<div class="w3-container w3-light-grey" style="padding:128px 16px" id="edit">
+  <h3 class="w3-center">Almost Done!</h3>
+  <p class="w3-center w3-large">Please fill the following fields for your tutor</p>
+  <div class= "w3 center" style="margin-top:48px">
+      <form action="{% url 'quick-tutor:create_request' tutor_id %}" method = "POST">
+        {% csrf_token %}
+        <p class = "name" > Tutor Selected:{{ tutor.preferred_name}}</p>
+        <p class = "name"> Price: $10 to {{tutor.venmo}}</p>
+        <label for = "tutor_subject"> What subject do you need help with?</label><br>
+        <input type = "text" id="tutor_subject" name = "tutor_subject" requred=""><br>
+        <label for = "tutor_additional">Additional Notes:</label><br>
+        <input type = "text" id = "tutor_additional" name = "tutor_additional"><br>
+        <label for = "contact_method"> Please provide the easiest way to contact you</label><br>
+        <input type = "text" id = "contact_method" name = "contact_method"><br>
+        <button class= "w3-button w3-black" type = "submit" id="submitBtn">Request Tutor</button>
+      </form>
+  </div>
+</div>
 <!-- Sidebar on small screens when clicking the menu icon -->
 <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
   <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
@@ -81,33 +99,7 @@ body, html {
         {% endif %}
 </nav>
 
-<!-- Tutor Match Cards -->
 
-<div class="w3-container" style="padding:128px 16px" id="tutors">
-  <h3 class="w3-center">AVAILABLE TUTORS</h3>
-  <p class="w3-center w3-large">Here are the tutors who are currently available</p>
-  <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
-
-    {% if student_list %}
-        {% for student in student_list %}
-            {% if student.student_tutor %}
-                <div class="w3-col l3 m6 w3-margin-bottom">
-                  <div class="w3-card">
-                    <div class="w3-container">
-                      <h3>{{student.preferred_name }}</h3>
-                      <p class="w3-opacity "id="skills">{{student.skills}}</p>
-                      <p id="loc">{{ student.location }}</p>
-                      <p><a href="{% url 'quick-tutor:additional_info' student.id %}" class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> REQUEST </a></p>
-                    </div>
-                  </div>
-                </div>
-            {% endif %}
-        {% endfor %}
-      {% else %}
-      <p class="w3-large">Sorry, no tutors are available at this time</p>
-      {% endif %}
-  </div>
-</div>
 
 
 

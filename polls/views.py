@@ -12,7 +12,7 @@ from .models import Choice, Question, Suggestion, Student, TutorRequest
 from .forms import RequestForm
 
 #from .forms import UserForm, ProfileForm, ChoiceForm
-from .forms import ProfileForm, TutorForm
+from .forms import ProfileForm
 
 
 
@@ -112,11 +112,10 @@ def edit_info(request):
             return HttpResponseRedirect("/quick-tutor/student_profile")
             #return render(request, "polls/student_profile.html")
     else:
-        print("this happend")
+        print("...saving form...")
 
         profile_form = ProfileForm(instance=request.user.profile)
         #request_form = RequestForm(instance=request.user.profile)
-        print(profile_form)
         return render(request,"polls/new_edit_profile.html", {"profile_form" : profile_form})
         #return render(request,"polls/edit_student_profile.html", {"profile_form" : profile_form, "request_form": request_form})
 
@@ -252,14 +251,14 @@ def student_page(request):
 
 class AllStudentsView(generic.ListView):
     student_list = Student.objects.all()
-    template_name = 'polls/tutor_match.html'
+    template_name = 'polls/new_tutor_match.html'
     def get_queryset(self):
         return Student.objects.all()
 
-def additional_info(request):
-    tutor_id = request.POST['tutor']
-    tutor = Student.objects.get(id=tutor_id)
-    return render(request, 'polls/additional_info.html', {'tutor':tutor, 'tutor_id': tutor_id})
+
+def additional_info(request, student_id):
+    tutor = Student.objects.get(id=student_id)
+    return render(request, 'polls/new_additional_info.html', {'tutor':tutor, 'tutor_id': student_id})
 
 def student_cancel(request, t_request_id):
     canceled_request = TutorRequest.objects.get(id=t_request_id)

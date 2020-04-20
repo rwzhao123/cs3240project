@@ -18,7 +18,7 @@ urlpatterns = [
     path('', include('social_django.urls', namespace='social')),
     path(r'^logout/$', LogoutView, {'next_page': settings.LOGOUT_REDIRECT_URL},
          name='logout'),
-    path('additional_info/', views.additional_info, name='additional_info'),
+    path('tutor_match/new_additional_info/<int:student_id>', views.additional_info, name='additional_info'),
     path('student_profile/', views.update_profile, name = 'student_profile'),
     path('student_profile/edit/', views.edit_info, name = 'edit'),
     path(r'^profile/$',views.update_profile),

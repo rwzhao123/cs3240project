@@ -85,39 +85,12 @@ body, html {
 <div class="w3-container w3-light-grey" style="padding:128px 16px" id="edit">
   <h3 class="w3-center">Profile</h3>
   <p class="w3-center w3-large">Add to or update your profile</p>
-  <div style="margin-top:48px">
-    <form method = "post">
-        {% csrf_token %}
-
-          <label for="id_preferred_name">Preferred Name:</label>
-          <p><input class="w3-input w3-border" name = "preferred_name" id="id_preferred_name" type="text" maxlength= "200" placeholder="Preferred Name" required=""></p>
-          <label for="id_student_year_in_school">Year:</label>
-          <select name="student_year_in_school" id="id_student_year_in_school">
-              <option value="1Y" selected="">First Year</option>
-              <option value="2Y">Second Year</option>
-              <option value="3Y">Third Year</option>
-              <option value="4Y">Fourth Year</option>
-          </select>
-          <label for="id_need_help_with">Academic Focus:</label>
-          <p><input class="w3-input w3-border" id="id_need_help_with" name="need_help_with" type="text" placeholder="Academic Focus"></p>
-          <label for="id_location">Location:</label>
-          <p><input class="w3-input w3-border" id="id_location" name ="location" required="" type="text" maxlength= "200" placeholder="Location"></p>
-          <label for="id_student_tutor">Register as a Tutor:</label>
-          <p><input class="w3-input w3-border" id = "id_student_tutor" name="student_tutor" type="checkbox" checked=""></p>
-          <label for="id_availability">Availability:</label>
-          <p><input class="w3-input w3-border" id="id_availability" name="availability" type="text" maxlength="200"></p>
-          <label for="id_skills">Skills:</label>
-          <p><input class="w3-input w3-border" type="text" id="id_skills" name="skills" maxlength="200"></p>
-          <label for="id_venmo">Venmo:</label>
-          <p><input class="w3-input w3-border" id="id_venmo" name="venmo" type="text" maxlength="200" required=""></p>
-          <p>
-            <button class="w3-button w3-black" type="submit">
-                SAVE CHANGES
-            </button>
-          </p>
-    </form>
-    <!-- Image of location/map -->
-    <img src="/w3images/map.jpg" class="w3-image w3-greyscale" style="width:100%;margin-top:48px">
+  <div class= "w3 center" style="margin-top:48px">
+      <form action="" method="POST">
+          {% csrf_token %}
+          {{ profile_form.as_p }}
+          <input type="submit" class="w3-button w3-black">
+      </form>
   </div>
 </div>
 
