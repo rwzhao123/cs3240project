@@ -42,7 +42,7 @@ body, html {
     <div class="w3-right w3-hide-small">
         {% if user.is_authenticated %}
             <!-- add drop down -->
-            <div class="w3-dropdown-hover">
+            <div class="w3-dropdown-hover w3-white">
                 <button class="w3-button w3-white">Welcome, {{ user.first_name }}</button>
                 <div class="w3-dropdown-content w3-bar-block w3-card-4">
                     <a href="/quick-tutor/student_profile" class = "w3-bar-item w3-button">MY PROFILE</a>
@@ -83,40 +83,9 @@ body, html {
 
 
 
-<!-- Profile Section -->
-<div class="w3-container w3-light-grey" style="padding:128px 16px" id="contact">
-  <h3 class="w3-center">YOUR PROFILE</h3>
-  <p class="w3-center w3-large">Here is your profile information</p>
-   <div class="w3-col m6 w3-left" style="margin-top:10px">
-       <div class="w3-content" style="padding-left:300px">
-           <p class="w3-wide"><b>Name:</b>{{user.first_name}} {{user.last_name}}</p>
-           <p class="w3-wide"><b>Preferred Name</b>:{{user.profile.preferred_name}}</p>
-           <p class="w3-wide"><b>Year:</b>{{user.profile.student_year_in_school}}</p>
-           <p class="w3-wide"><b>Academic Focuses:</b>{{user.profile.need_help_with}}</p>
-           <p class="w3-wide"><b>Location:</b>{{user.profile.location}}</p>
-           <p class="w3-wide"><b>Availability:</b>{{user.profile.availability}}</p>
-           <p class="w3-wide"><b>Venmo:</b>{{user.profile.venmo}}</p>
-           {% if user.profile.student_tutor %}
-           <p class="w3-wide"><b>Are you a tutor:</b>Yes</p>
-           <p class="w3-wide"><b>Skills:</b> {{user.profile.skills}}</p>
-           {% else %}
-           {% endif %}
-           <a href="/quick-tutor/student_profile/edit/" class="w3-button w3-black w3-margin-top">Edit Information</a>
-       </div>
-   </div>
-    <div class="w3-col m6 w3-right">
-        <p><a href="/quick-tutor/student_requests/" class="w3-button w3-black w3-margin-top">My Requests</a></p>
-        {% if user.profile.student_tutor %}
-        <p><a href="/quick-tutor/tutor_requests" class="w3-button w3-black w3-margin-top">See Who Requested Me</a></p>
-        {% else %}
-        {% endif %}
-    </div>
-</div>
-
-
 <!-- Footer -->
 <footer class="w3-center w3-black w3-padding-64">
-  <a href="/quick-tutor/" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>Home</a>
+  <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
   <div class="w3-xlarge w3-section">
     <i class="fa fa-facebook-official w3-hover-opacity"></i>
     <i class="fa fa-instagram w3-hover-opacity"></i>

@@ -89,7 +89,7 @@ class StudentView(ListView):
     template_name = ""
 
 def student_profile(request):
-    return render(request, "polls/edit_student_profile.html")
+    return render(request, "polls/new_edit_profile.html")
 
 #def my_requests(request):
 
@@ -117,7 +117,7 @@ def edit_info(request):
         profile_form = ProfileForm(instance=request.user.profile)
         #request_form = RequestForm(instance=request.user.profile)
         print(profile_form)
-        return render(request,"polls/edit_student_profile.html", {"profile_form" : profile_form})
+        return render(request,"polls/new_edit_profile.html", {"profile_form" : profile_form})
         #return render(request,"polls/edit_student_profile.html", {"profile_form" : profile_form, "request_form": request_form})
 
 def create_student(request):
