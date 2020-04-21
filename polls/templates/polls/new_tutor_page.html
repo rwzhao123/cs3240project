@@ -81,27 +81,32 @@ body, html {
         {% endif %}
 </nav>
 
-<!-- Tutor Match Cards -->
+<!-- Tutor Request Cards -->
 
 <div class="w3-container" style="padding:128px 16px" id="tutors">
-  <h3 class="w3-center">AVAILABLE TUTORS</h3>
-  <p class="w3-center w3-large">Here are the tutors who are currently available</p>
+  <h3 class="w3-center">REQUESTS</h3>
+  <p class="w3-center w3-large">Here who has requested you to tutor</p>
   <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
-
-    {% if student_list %}
-        {% for student in student_list %}
-            {% if student.student_tutor %}
-                <div class="w3-col l3 m6 w3-margin-bottom">
-                  <div class="w3-card">
-                    <div class="w3-container">
-                      <h3>{{student.preferred_name }}</h3>
-                      <p class="w3-opacity "id="skills">{{student.skills}}</p>
-                      <p id="loc">{{ student.location }}</p>
-                      <p><a href="{% url 'quick-tutor:additional_info' student.id %}" class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> REQUEST </a></p>
-                    </div>
-                  </div>
+    {% if tr != 0 %}
+        {% for s_request in tr %}
+            <div class="w3-col l3 m6 w3-margin-bottom">
+              <div class="w3-card">
+                <div class="w3-container">
+                  <h3>{{ s_request.student.preferred_name }}</h3>
+                  <p class="w3-opacity "id="skills">Contact: {{ s_request.contact_info }}</p>
+                  <p>Subject: {{ s_request.subject }}</p>
+                  <p>{{s_request.subject_text}}</p>
+                  <form action="{% url 'quick-tutor:tutor_update_request' s_request.id%}" method = "POST">
+                      {% csrf_token %}
+                    <label for = "accept_request">ACCEPT</label>
+                      <input type="radio" class="w3-button w3-lightgrey w3-block" name="request_status" id="accept_request" value = Accepted><br>
+                    <label for="deny_request">DECLINE</label>
+                      <input type = "radio" class= "w3-button w3-lightgrey w3-block" id = "deny_request" name = "request_status" value = "Declined"><br>
+                    <p><input type="submit" class="w3-button w3-lightgrey w3-block"> </input></p>
+                  </form>
                 </div>
-            {% endif %}
+              </div>
+            </div>
         {% endfor %}
       {% else %}
       <p class="w3-large">Sorry, no tutors are available at this time</p>

@@ -157,7 +157,7 @@ def cancel_tutor(request, tutor_id):
 
 
 def confirm_cancel(request):
-    return render(request, "polls/confirm_cancel.html")
+    return render(request, "polls/new_confirm_cancel.html")
 
 def deny_request(request, student_id):
     
@@ -192,7 +192,7 @@ def student_requests(request):
     if len(r) <=0:
         r = 0
     args = {'sr' : r }
-    return render(request, "polls/student_requests.html", args)
+    return render(request, "polls/new_student_page.html", args)
 
 def tutor_requests(request):
     canceled = 0
@@ -203,7 +203,7 @@ def tutor_requests(request):
     r = TutorRequest.objects.filter(tutor = t)
     r_num = len(r)
     for obj in r:
-        if obj.progress == 'Denied' or obj.progress == 'Canceled':
+        if obj.progress == 'Declined' or obj.progress == 'Canceled':
             if obj.is_old():
                 TutorRequest.objects.filter(id=obj.id).delete()
             elif obj.progress == 'Denied':
@@ -218,7 +218,7 @@ def tutor_requests(request):
     if len(r) <= 0:
         r = 0
     args = {'tr': r, 'tr_num': r_num, 'tr_c': canceled, 'tr_d': declined, 'tr_a': accepted, 'tr_p': pending}
-    return render(request, "polls/tutor_requests.html", args)
+    return render(request, "polls/new_tutor_page.html", args)
 
 
 
@@ -271,5 +271,4 @@ def tutor_update_request(request, s_request_id):
     status = request.POST['request_status']
     tentative_request.update_request(status)
     tentative_request.save()
-    return render(request,'polls/confirm_update_request.html',{'status':status})
-
+    return render(request, "polls/confirm_update.html", {'status': status})

@@ -81,30 +81,28 @@ body, html {
         {% endif %}
 </nav>
 
-<!-- Tutor Match Cards -->
+<!-- Tutor Request Cards -->
 
 <div class="w3-container" style="padding:128px 16px" id="tutors">
-  <h3 class="w3-center">AVAILABLE TUTORS</h3>
-  <p class="w3-center w3-large">Here are the tutors who are currently available</p>
+  <h3 class="w3-center">REQUESTS</h3>
+  <p class="w3-center w3-large">Here the tutors you have requested</p>
   <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
-
-    {% if student_list %}
-        {% for student in student_list %}
-            {% if student.student_tutor %}
-                <div class="w3-col l3 m6 w3-margin-bottom">
-                  <div class="w3-card">
-                    <div class="w3-container">
-                      <h3>{{student.preferred_name }}</h3>
-                      <p class="w3-opacity "id="skills">{{student.skills}}</p>
-                      <p id="loc">{{ student.location }}</p>
-                      <p><a href="{% url 'quick-tutor:additional_info' student.id %}" class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> REQUEST </a></p>
-                    </div>
-                  </div>
+    {% if sr != 0 %}
+        {% for t_request in sr %}
+            <div class="w3-col l3 m6 w3-margin-bottom">
+              <div class="w3-card">
+                <div class="w3-container">
+                  <h3>Subject: {{ t_request.subject }}</h3>
+                  <p class="w3-opacity "id="skills">Tutor: {{ t_request.tutor.preferred_name }}</p>
+                  <p>Venmo: {{ t_request.tutor.venmo }}</p>
+                  <p>Request Submitted on: {{t_request.pub_date}}</p>
+                  <a href="{% url 'quick-tutor:student_cancel' t_request.id%}" class="w3-button w3-lightgray w3-block">Cancel</a>
                 </div>
-            {% endif %}
+              </div>
+            </div>
         {% endfor %}
       {% else %}
-      <p class="w3-large">Sorry, no tutors are available at this time</p>
+      <p class="w3-large">You don't have any requests right now <a href="/quick-tutor/tutor_match">click here</a> to request one</p>
       <a class="w3-large w3-button w3-black" href="/quick-tutor/">HOME</a>
       {% endif %}
   </div>
