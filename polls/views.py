@@ -12,7 +12,7 @@ from .models import Choice, Question, Suggestion, Student, TutorRequest
 from .forms import RequestForm
 
 #from .forms import UserForm, ProfileForm, ChoiceForm
-from .forms import ProfileForm, TutorForm
+from .forms import ProfileForm
 
 
 
@@ -72,8 +72,7 @@ def suggestions_list(request):
 
 
 def index(request):
-    print("this was called")
-    return render(request, "polls/index.html")
+    return render(request, "polls/new_index.html")
 
 
 def chat(request):
@@ -90,14 +89,14 @@ class StudentView(ListView):
     template_name = ""
 
 def student_profile(request):
-    return render(request, "polls/edit_student_profile.html")
+    return render(request, "polls/new_edit_profile.html")
 
 #def my_requests(request):
 
 @login_required
 def update_profile(request):
     print("this was called")
-    return render(request,"polls/student_profile.html")
+    return render(request,"polls/new_profile.html")
 
         #return render(request,"polls/edit_student_profile.html",{"user_form": user_form, "profile_form": profile_form, "choice_form": choice_form})
 @login_required
@@ -113,12 +112,11 @@ def edit_info(request):
             return HttpResponseRedirect("/quick-tutor/student_profile")
             #return render(request, "polls/student_profile.html")
     else:
-        print("this happend")
+        print("...saving form...")
 
         profile_form = ProfileForm(instance=request.user.profile)
         #request_form = RequestForm(instance=request.user.profile)
-        print(profile_form)
-        return render(request,"polls/edit_student_profile.html", {"profile_form" : profile_form})
+        return render(request,"polls/new_edit_profile.html", {"profile_form" : profile_form})
         #return render(request,"polls/edit_student_profile.html", {"profile_form" : profile_form, "request_form": request_form})
 
 def create_student(request):
@@ -159,7 +157,7 @@ def cancel_tutor(request, tutor_id):
 
 
 def confirm_cancel(request):
-    return render(request, "polls/confirm_cancel.html")
+    return render(request, "polls/new_confirm_cancel.html")
 
 def deny_request(request, student_id):
     
@@ -185,7 +183,7 @@ def student_requests(request):
 
     s = Student.objects.get(user = request.user)
     print(s)
-    r = TutorRequest.objects.get(student = s)
+    r = TutorRequest.objects.filter(student = s)
     print(r)
     for obj in r:
         if obj.is_old() and (obj.progress == 'Declined'or obj.progress == 'Canceled'):
@@ -194,7 +192,7 @@ def student_requests(request):
     if len(r) <=0:
         r = 0
     args = {'sr' : r }
-    return render(request, "polls/student_requests.html", args)
+    return render(request, "polls/new_student_page.html", args)
 
 def tutor_requests(request):
     canceled = 0
@@ -205,7 +203,7 @@ def tutor_requests(request):
     r = TutorRequest.objects.filter(tutor = t)
     r_num = len(r)
     for obj in r:
-        if obj.progress == 'Denied' or obj.progress == 'Canceled':
+        if obj.progress == 'Declined' or obj.progress == 'Canceled':
             if obj.is_old():
                 TutorRequest.objects.filter(id=obj.id).delete()
             elif obj.progress == 'Denied':
@@ -220,7 +218,7 @@ def tutor_requests(request):
     if len(r) <= 0:
         r = 0
     args = {'tr': r, 'tr_num': r_num, 'tr_c': canceled, 'tr_d': declined, 'tr_a': accepted, 'tr_p': pending}
-    return render(request, "polls/tutor_requests.html", args)
+    return render(request, "polls/new_tutor_page.html", args)
 
 
 
@@ -253,14 +251,14 @@ def student_page(request):
 
 class AllStudentsView(generic.ListView):
     student_list = Student.objects.all()
-    template_name = 'polls/tutor_match.html'
+    template_name = 'polls/new_tutor_match.html'
     def get_queryset(self):
         return Student.objects.all()
 
-def additional_info(request):
-    tutor_id = request.POST['tutor']
-    tutor = Student.objects.get(id=tutor_id)
-    return render(request, 'polls/additional_info.html', {'tutor':tutor, 'tutor_id': tutor_id})
+
+def additional_info(request, student_id):
+    tutor = Student.objects.get(id=student_id)
+    return render(request, 'polls/new_additional_info.html', {'tutor':tutor, 'tutor_id': student_id})
 
 def student_cancel(request, t_request_id):
     canceled_request = TutorRequest.objects.get(id=t_request_id)
@@ -273,5 +271,4 @@ def tutor_update_request(request, s_request_id):
     status = request.POST['request_status']
     tentative_request.update_request(status)
     tentative_request.save()
-    return render(request,'polls/confirm_update_request.html',{'status':status})
-
+    return render(request, "polls/confirm_update.html", {'status': status})

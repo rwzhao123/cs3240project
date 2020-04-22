@@ -146,7 +146,7 @@
                             <div class="d-flex justify-content-between mb-20">
                                 <form action="{% url 'quick-tutor:create_request' tutor_id %}" method = "POST">
                                     {% csrf_token %}
-                                    <p class = "name" > Tutor Selected:{{ tutor.first_name}}</p>
+                                    <p class = "name" > Tutor Selected:{{ tutor.preferred_name}}</p>
                                     <p class = "name"> Price: $10 to {{tutor.venmo}}</p>
                                     <label for = "tutor_subject"> What subject do you need help with?</label><br>
                                     <input type = "text" id="tutor_subject" name = "tutor_subject"><br>

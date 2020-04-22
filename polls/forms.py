@@ -47,15 +47,18 @@ class RequestForm(forms.ModelForm):
 
 class TutorForm(forms.ModelForm):
     class Meta:
-        model = Student
-        fields = ('requested',)
+        model= TutorRequest
+        fields={'tutor','student', 'subject','subject_text', 'contact_info'}
     def save(self, commit=True):
-        print("requested stuff here")
-        requests = super(TutorForm, self).save(commit=True)
-        requests.requested = self.cleaned_data['requested']
+        tutor_request = super(TutorForm, self).save(commit=True)
+        tutor_request.tutor = self.cleaned_data['tutor']
+        tutor_request.student=self.cleaned_data['student']
+        tutor_request.subject=self.cleaned_data['subject']
+        tutor_request.subject_text=self.cleaned_data['subject_text']
+        tutor_request.contact_info = self.cleaned_data['contact_info']
         if commit:
-            requests.save()
-        return requests
+            tutor_request.save()
+        return tutor_request
 
 
 # class RequestForm(forms.ModelForm):
