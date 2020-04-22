@@ -183,8 +183,9 @@ def student_requests(request):
 
     s = Student.objects.get(user = request.user)
     print(s)
-    r = TutorRequest.objects.filter(student = s)
-    print(r)
+
+    r = TutorRequest.objects.filter(student = s).order_by('pub_date')
+
     for obj in r:
         if obj.is_old() and (obj.progress == 'Declined'or obj.progress == 'Canceled'):
             TutorRequest.objects.filter(id=obj.id).delete()
@@ -200,7 +201,7 @@ def tutor_requests(request):
     pending = 0
     accepted = 0
     t = Student.objects.get(user=request.user)
-    r = TutorRequest.objects.filter(tutor = t)
+    r = TutorRequest.objects.filter(tutor = t).order_by('pub_date')
     r_num = len(r)
     for obj in r:
         if obj.progress == 'Declined' or obj.progress == 'Canceled':
@@ -219,6 +220,8 @@ def tutor_requests(request):
         r = 0
     args = {'tr': r, 'tr_num': r_num, 'tr_c': canceled, 'tr_d': declined, 'tr_a': accepted, 'tr_p': pending}
     return render(request, "polls/new_tutor_page.html", args)
+
+
 
 
 
@@ -254,6 +257,7 @@ class AllStudentsView(generic.ListView):
     template_name = 'polls/new_tutor_match.html'
     def get_queryset(self):
         return Student.objects.all()
+
 
 
 def additional_info(request, student_id):
