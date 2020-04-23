@@ -67,45 +67,29 @@ body, html {
 
 <!-- Sidebar on small screens when clicking the menu icon -->
 <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
-    <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
-    <a href="/quick-tutor/" class="w3-bar-item w3-button">HOME</a>
-    <a href="https://chat-site6.herokuapp.com/" onclick="w3_close()" class="w3-bar-item w3-button">CHAT APP</a>
-          {% if user.is_authenticated %}
-              <a href="/quick-tutor/student_profile" class = "w3-bar-item w3-button">MY PROFILE</a>
-              <a href="{% url 'logout' %}" class = "w3-bar-item w3-button">LOGOUT</a>
-              <a href="/quick-tutor/tutor_match/" onclick="w3_close()" class="w3-bar-item w3-button">FIND A TUTOR</a>
-          {% else %}
-              <a href="{% url 'social:begin' 'google-oauth2' %}" class="w3-bar-item w3-button">LOGIN</a>
-          {% endif %}
-  </nav>
+        <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
+        <a href="/quick-tutor/" class="w3-bar-item w3-button">HOME</a>
+        <a href="https://chat-site6.herokuapp.com/" onclick="w3_close()" class="w3-bar-item w3-button">CHAT APP</a>
+              {% if user.is_authenticated %}
+                  <a href="/quick-tutor/student_profile" class = "w3-bar-item w3-button">MY PROFILE</a>
+                  <a href="{% url 'logout' %}" class = "w3-bar-item w3-button">LOGOUT</a>
+                  <a href="/quick-tutor/tutor_match/" onclick="w3_close()" class="w3-bar-item w3-button">FIND A TUTOR</a>
+              {% else %}
+                  <a href="{% url 'social:begin' 'google-oauth2' %}" class="w3-bar-item w3-button">LOGIN</a>
+              {% endif %}
+      </nav>
 
-<!-- Tutor Match Cards -->
 
-<div class="w3-container" style="padding:128px 16px" id="tutors">
-  <h3 class="w3-center">AVAILABLE TUTORS</h3>
-  <p class="w3-center w3-large">Here are the tutors who are currently available</p>
-  <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
+<!-- Other Side bar -->
 
-    {% if student_list %}
-        {% for student in student_list %}
-            {% if student.student_tutor %}
-                <div class="w3-col l3 m6 w3-margin-bottom">
-                  <div class="w3-card">
-                    <div class="w3-container">
-                      <h3>{{student.preferred_name }}</h3>
-                      <p class="w3-opacity "id="skills">{{student.skills}}</p>
-                      <p id="loc">{{ student.location }}</p>
-                      <p><a href="{% url 'quick-tutor:additional_info' student.id %}" class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> REQUEST </a></p>
-                    </div>
-                  </div>
-                </div>
-            {% endif %}
-        {% endfor %}
-      {% else %}
-      <p class="w3-large">Sorry, no tutors are available at this time</p>
-      <a class="w3-large w3-button w3-black" href="/quick-tutor/">HOME</a>
-      {% endif %}
-  </div>
+<!-- Header with full-height image -->
+<<div class="w3-container w3-black" style="padding:300px 16px" id="confirm">
+    <div class="w3-display-left w3-text-white" style="padding:48px">
+        <span class="w3-jumbo w3-hide-small">Success!</span><br>
+        <span class="w3-xxlarge w3-hide-large w3-hide-medium">Success!</span><br>
+        <span class="w3-large">The tutor has been notified of your request. Check your profile to see if they've accepted or denied your request. </span>
+        <p><a href="/quick-tutor/" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Home</a></p>
+    </div>
 </div>
 
 
@@ -125,7 +109,13 @@ body, html {
 </footer>
 
 <script>
-
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
 
 
 // Toggle between showing and hiding the sidebar when clicking the menu icon
