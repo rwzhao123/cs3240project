@@ -132,7 +132,7 @@ def contact_us(request):
     return render(request, "polls/contact_us.html")
 
 def confirm_match(request):
-    return render(request, "polls/confirm_match.html")
+    return render(request, "polls/new_confirm_match.html")
 
 def error_match(request):
     return render(request, "polls/error_match.html")
@@ -207,7 +207,7 @@ def tutor_requests(request):
         if obj.progress == 'Declined' or obj.progress == 'Canceled':
             if obj.is_old():
                 TutorRequest.objects.filter(id=obj.id).delete()
-            elif obj.progress == 'Denied':
+            elif obj.progress == 'Declined':
                 declined +=1
             else:
                 canceled += 1
@@ -268,6 +268,9 @@ def student_cancel(request, t_request_id):
     canceled_request = TutorRequest.objects.get(id=t_request_id)
     canceled_request.update_request('Canceled')
     canceled_request.save()
+    
+    #TutorRequest.objects.filter(id=t_request_id).delete()
+
     return redirect("quick-tutor:confirm_cancel")
 
 def tutor_update_request(request, s_request_id):

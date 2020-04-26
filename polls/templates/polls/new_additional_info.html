@@ -36,28 +36,27 @@ body, html {
 <body>
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
-  <div class="w3-bar w3-white w3-card" id="myNavbar">
-    <a href="#home" class="w3-bar-item w3-button w3-wide">QUICK TUTOR</a>
-    <!-- Right-sided navbar links -->
-    <div class="w3-right w3-hide-small">
-        {% if user.is_authenticated %}
-            <!-- add drop down -->
-            <div class="w3-dropdown-hover w3-white">
-                <button class="w3-button w3-white">Welcome, {{ user.first_name }}</button>
-                <div class="w3-dropdown-content w3-bar-block w3-card-4">
-                    <a href="/quick-tutor/student_profile" class = "w3-bar-item w3-button">MY PROFILE</a>
-                    <a href="{% url 'logout' %}" class = "w3-bar-item w3-button">LOGOUT</a>
-                </div>
-            </div>
-        {% else %}
-            <a href="{% url 'social:begin' 'google-oauth2' %}" class="w3-bar-item w3-button">LOGIN</a>
-        {% endif %}
-      <a href="/quick-tutor/" class="w3-bar-item w3-button">HOME</a>
-      <a href="/quick-tutor/tutor_match/" class="w3-bar-item w3-button">FIND A TUTOR</a>
-      <a href="https://chat-site6.herokuapp.com/" class="w3-bar-item w3-button">CHAT APP</a>
-      <a href="/quick-tutor/contact_us" class="w3-bar-item w3-button">CONTACT</a>
-
-    </div>
+    <div class="w3-bar w3-white w3-card" id="myNavbar">
+      <a href="/quick-tutor/" class="w3-bar-item w3-button w3-wide">QUICK TUTOR</a>
+      <!-- Right-sided navbar links -->
+      <div class="w3-right w3-hide-small">
+          <a href="/quick-tutor/" class="w3-bar-item w3-button">HOME</a>
+          {% if user.is_authenticated %}
+              <!-- add drop down -->
+              <div class="w3-dropdown-hover w3-white">
+                  <button class="w3-button">Welcome, {{ user.first_name }}</button>
+                  <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                      <a href="/quick-tutor/student_profile" class = "w3-bar-item w3-button">MY PROFILE</a>
+                      <a href="{% url 'logout' %}" class = "w3-bar-item w3-button">LOGOUT</a>
+                  </div>
+              </div>
+              <a href="/quick-tutor/tutor_match/" class="w3-bar-item w3-button">FIND A TUTOR</a>
+          {% else %}
+              <a href="{% url 'social:begin' 'google-oauth2' %}" class="w3-bar-item w3-button">LOGIN</a>
+          {% endif %}
+        <a href="https://chat-site6.herokuapp.com/" class="w3-bar-item w3-button">CHAT APP</a>
+  
+      </div>
     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
     <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
@@ -74,9 +73,9 @@ body, html {
         {% csrf_token %}
         <p class = "name" > Tutor Selected:{{ tutor.preferred_name}}</p>
         <p class = "name"> Price: $10 to {{tutor.venmo}}</p>
-        <label for = "tutor_subject"> What subject do you need help with?</label><br>
+        <label for = "tutor_subject"> What subject do you need help with? </label><br>
         <input type = "text" id="tutor_subject" name = "tutor_subject" requred=""><br>
-        <label for = "tutor_additional">Additional Notes:</label><br>
+        <label for = "tutor_additional">Additional Notes: </label><br>
         <input type = "text" id = "tutor_additional" name = "tutor_additional"><br>
         <label for = "contact_method"> Please provide the easiest way to contact you</label><br>
         <input type = "text" id = "contact_method" name = "contact_method"><br>
@@ -86,18 +85,17 @@ body, html {
 </div>
 <!-- Sidebar on small screens when clicking the menu icon -->
 <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
-  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
-  <a href="/quick-tutor/" class="w3-bar-item w3-button">HOME</a>
-  <a href="/quick-tutor/tutor_match/" onclick="w3_close()" class="w3-bar-item w3-button">FIND A TUTOR</a>
-  <a href="https://chat-site6.herokuapp.com/" onclick="w3_close()" class="w3-bar-item w3-button">CHAT APP</a>
-  <a href="/quick-tutor/contact_us" class="w3-bar-item w3-button">CONTACT</a>
-        {% if user.is_authenticated %}
-            <a href="/quick-tutor/student_profile" class = "w3-bar-item w3-button">MY PROFILE</a>
-            <a href="{% url 'logout' %}" class = "w3-bar-item w3-button">LOGOUT</a>
-        {% else %}
-            <a href="{% url 'social:begin' 'google-oauth2' %}" class="w3-bar-item w3-button">LOGIN</a>
-        {% endif %}
-</nav>
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
+    <a href="/quick-tutor/" class="w3-bar-item w3-button">HOME</a>
+    <a href="https://chat-site6.herokuapp.com/" onclick="w3_close()" class="w3-bar-item w3-button">CHAT APP</a>
+          {% if user.is_authenticated %}
+              <a href="/quick-tutor/student_profile" class = "w3-bar-item w3-button">MY PROFILE</a>
+              <a href="{% url 'logout' %}" class = "w3-bar-item w3-button">LOGOUT</a>
+              <a href="/quick-tutor/tutor_match/" onclick="w3_close()" class="w3-bar-item w3-button">FIND A TUTOR</a>
+          {% else %}
+              <a href="{% url 'social:begin' 'google-oauth2' %}" class="w3-bar-item w3-button">LOGIN</a>
+          {% endif %}
+  </nav>
 
 
 
