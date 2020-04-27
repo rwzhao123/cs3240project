@@ -44,9 +44,22 @@ body, html {
         {% if user.is_authenticated %}
             <!-- add drop down -->
             <div class="w3-dropdown-hover w3-white">
-                <button class="w3-button">Welcome, {{ user.first_name }}</button>
-                <div class="w3-dropdown-content w3-bar-block w3-card-4">
-                    <a href="/quick-tutor/student_profile" class = "w3-bar-item w3-button">MY PROFILE</a>
+                <button class="w3-button">
+                      <span>Welcome, {{ user.first_name }} </span>
+                      {% if user.profile.student_notifications > 0 or user.profile.tutor_notifications > 0 %}
+                        <span class = "w3-badge w3-blue"><i class="fa fa-bell" style="font-size:12px"></i></span>
+
+                      {% else %}
+                      {% endif %}
+                  </button>
+                  <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                      <a href="/quick-tutor/student_profile" class = "w3-bar-item w3-button">
+                          <span>MY PROFILE </span>
+                            {% if user.profile.student_notifications > 0 or user.profile.tutor_notifications > 0 %}
+                            <span class = "w3-badge w3-blue"><i class="fa fa-bell" style="font-size:12px"></i></span>
+                            {% else %}
+                            {% endif %}
+                      </a>
                     <a href="{% url 'logout' %}" class = "w3-bar-item w3-button">LOGOUT</a>
                 </div>
             </div>
@@ -88,7 +101,11 @@ body, html {
         <span class="w3-jumbo w3-hide-small">Tutoring. Whenever. Wherever</span><br>
         <span class="w3-xxlarge w3-hide-large w3-hide-medium">Tutoring. Whenever. Wherever</span><br>
         <span class="w3-large">Start helping students or get help with your classes.</span>
-        <p><a href="{% url 'social:begin' 'google-oauth2' %}" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Create Account</a></p>
+        {% if user.is_authenticated %}
+        <p><a href="quick-tutor/tutor_match" class ="w3-button w3-blue w3-padding-large w3-large w3-margin-top">Find a tutor</a>
+        {% else %}
+        <p><a href="{% url 'social:begin' 'google-oauth2' %}" class="w3-button w3-blue w3-padding-large w3-large w3-margin-top">Create Account</a></p>
+        {% endif %}
     </div>
 </div>
 

@@ -44,9 +44,22 @@ body, html {
           {% if user.is_authenticated %}
               <!-- add drop down -->
               <div class="w3-dropdown-hover w3-white">
-                  <button class="w3-button">Welcome, {{ user.first_name }}</button>
+                  <button class="w3-button">
+                      <span>Welcome, {{ user.first_name }} </span>
+                      {% if user.profile.student_notifications > 0 or user.profile.tutor_notifications > 0 %}
+                        <span class = "w3-badge w3-blue"><i class="fa fa-bell" style="font-size:12px"></i></span>
+
+                      {% else %}
+                      {% endif %}
+                  </button>
                   <div class="w3-dropdown-content w3-bar-block w3-card-4">
-                      <a href="/quick-tutor/student_profile" class = "w3-bar-item w3-button">MY PROFILE</a>
+                      <a href="/quick-tutor/student_profile" class = "w3-bar-item w3-button">
+                          <span>MY PROFILE </span>
+                            {% if user.profile.student_notifications > 0 or user.profile.tutor_notifications > 0 %}
+                            <span class = "w3-badge w3-blue"><i class="fa fa-bell" style="font-size:12px"></i></span>
+                            {% else %}
+                            {% endif %}
+                      </a>
                       <a href="{% url 'logout' %}" class = "w3-bar-item w3-button">LOGOUT</a>
                   </div>
               </div>
@@ -79,6 +92,8 @@ body, html {
         <input type = "text" id = "tutor_additional" name = "tutor_additional"><br>
         <label for = "contact_method"> Please provide the easiest way to contact you</label><br>
         <input type = "text" id = "contact_method" name = "contact_method"><br>
+        <label for = "location">Location: </label><br>
+        <input type = "text" id = "location" name = "location"><br>
         <button class= "w3-button w3-black" type = "submit" id="submitBtn">Request Tutor</button>
       </form>
   </div>

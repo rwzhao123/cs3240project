@@ -42,8 +42,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'django_forms_bootstrap',
     'social_django',
-
-    'channels',    
+    'channels',
 ]
 
 
@@ -126,7 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'GMT'
+TIME_ZONE = 'EST'
 
 USE_I18N = True
 
