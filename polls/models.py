@@ -128,17 +128,28 @@ class TutorRequest(models.Model):
                 (5, 'COMPLETED')]
 
     progress = models.IntegerField(choices=PROGRESS, default=1)
-
     def update_request(self, progress_update):
         self.progress = progress_update
         self.modified_date = timezone.now()
         self.save()
 
+
+
+    def configure_url(self):
+        CHAT_URL = "https://chat-site6.herokuapp.com/"
+        s = self.student.user.username
+        t = self.tutor.user.username
+        new_url = CHAT_URL + s + "-" + t
+        return new_url
+
     def is_old(self):
         now = timezone.now()
         return not (now - datetime.timedelta(days=1) <= self.pub_date <= now)
+
     def archive(self, tutor=False):
         if tutor:
             self.archived_tutor = True
         else:
             self.archived_student = True
+        self.save()
+

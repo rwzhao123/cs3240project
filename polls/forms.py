@@ -4,13 +4,9 @@ from django.contrib.auth.models import User
 from .models import Student, TutorRequest
 from django import forms
 
-#class UserForm(forms.ModelForm):
-    #class Meta:
-        #model = Student
-        #fields = ('student_first_name', 'student_last_name', 'student_email')
 
 class ProfileForm(forms.ModelForm):
-    #requested=forms.ModelMultipleChoiceField(queryset=User.objects.all()[:2])
+
     class Meta:
         model = Student
         fields = ('preferred_name', 'student_year_in_school', 'student_tutor', 'bio', 'venmo')

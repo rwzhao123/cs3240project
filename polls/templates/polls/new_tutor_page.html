@@ -96,8 +96,8 @@ body, html {
 
 <div class="w3-container" style="padding:128px 16px" id="tutors">
   <h3 class="w3-center">REQUESTS</h3>
-  <p class="w3-center w3-large">Here's who has requested you to tutor. Requests that require no action will be deleted once you refresh </p>
-  <p class = "w3-center w3-large">You have {{ notifs }} updates to existing requests and/or new requests</p>
+  <p class="w3-center w3-large">Here's who has requested you to tutor. Choose to accept, decline or complete your requests. Once you're done they can be archived</p>
+  <p class = "w3-center w3-large">You have {{ notifs }} update(s) to existing requests and/or new requests</p>
   <div class="w3-row-padding" style="margin-top:64px">
     {% if requests != null %}
         {% for s_request in requests %}
@@ -115,6 +115,7 @@ body, html {
                     <a href = "{% url 'quick-tutor:tutor_decline' s_request.id %}" class = "w3-button w3-red w3-margin-right">Decline</a>
                   {% elif s_request.progress == 3 %}
                     <a href = "{% url 'quick-tutor:tutor_complete' s_request.id %}" class = "w3-button w3-center w3-blue ">Complete</a>
+                    <a href="{% url 'quick-tutor:redirect_chat_tutor' s_request.id %}" class = "w3-button w3-blue-grey">Message</a>
                     {% else %}
                     <a href="{% url 'quick-tutor:archive_request_tutor' s_request.id %}" class = "w3-button w3-center w3-grey">Archive</a>
                     {% endif %}

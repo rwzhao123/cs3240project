@@ -5,16 +5,10 @@ from django.contrib.auth.views import LogoutView
 from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
-
+from django.views.generic.base import RedirectView
 app_name = 'quick-tutor'
 urlpatterns = [
     url(r'$^', views.index),
-    path('', views.IndexView.as_view(), name='index'),
-    path('<int:pk>/', views.DetailView.as_view(), name='detail'),
-    path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
-    path('<int:question_id>/vote/', views.vote, name='vote'),
-    path('suggestions/', views.suggestions, name='suggestions'),
-    path('suggestions/list/', views.suggestions_list, name='suggestions_lists'),
     path('', include('social_django.urls', namespace='social')),
     path(r'^logout/$', LogoutView, {'next_page': settings.LOGOUT_REDIRECT_URL},
          name='logout'),
@@ -47,5 +41,7 @@ urlpatterns = [
     path('confirm_cancel/', views.confirm_cancel, name = 'confirm_cancel'),
     path('student-archive/<int:t_request_id>', views.archive_request_student, name = 'archive_request_student'),
     path('tutor-archive/<int:s_request_id>', views.archive_request_tutor, name = 'archive_request_tutor'),
+    path('chat/<int:t_request_id>', views.redirect_chat_student, name='redirect_chat_student'),
+    path('chat/<int:s_request_id>', views.redirect_chat_tutor, name='redirect_chat_tutor')
 
 ]

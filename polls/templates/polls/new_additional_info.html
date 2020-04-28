@@ -81,21 +81,23 @@ body, html {
 <div class="w3-container w3-light-grey" style="padding:128px 16px" id="edit">
   <h3 class="w3-center">Almost Done!</h3>
   <p class="w3-center w3-large">Please fill the following fields for your tutor</p>
-  <div class= "w3 center" style="margin-top:48px">
-      <form action="{% url 'quick-tutor:create_request' tutor_id %}" method = "POST">
-        {% csrf_token %}
-        <p class = "name" > Tutor Selected:{{ tutor.preferred_name}}</p>
-        <p class = "name"> Price: $10 to {{tutor.venmo}}</p>
-        <label for = "tutor_subject"> What subject do you need help with? </label><br>
-        <input type = "text" id="tutor_subject" name = "tutor_subject" requred=""><br>
-        <label for = "tutor_additional">Additional Notes: </label><br>
-        <input type = "text" id = "tutor_additional" name = "tutor_additional"><br>
-        <label for = "contact_method"> Please provide the easiest way to contact you</label><br>
-        <input type = "text" id = "contact_method" name = "contact_method"><br>
-        <label for = "location">Location: </label><br>
-        <input type = "text" id = "location" name = "location"><br>
-        <button class= "w3-button w3-black" type = "submit" id="submitBtn">Request Tutor</button>
-      </form>
+  <div class = "w3-container" style="padding:16px 0px 0px 350px">
+      <div class="w3-panel">
+          <form action="{% url 'quick-tutor:create_request' tutor_id %}" method = "POST">
+            {% csrf_token %}
+            <p class = "name" > Tutor Selected:{{ tutor.preferred_name}}</p>
+            <p class = "name"> Price: $10 to {{tutor.venmo}}</p>
+            <label for = "tutor_subject"> What subject do you need help with? </label><br>
+            <input type = "text" id="tutor_subject" name = "tutor_subject" required=""><br>
+            <label for = "tutor_additional">Additional Notes: </label><br>
+            <input type = "text" id = "tutor_additional" name = "tutor_additional"><br>
+            <label for = "contact_method"> Please provide the easiest way to contact you</label><br>
+            <input type = "text" id = "contact_method" name = "contact_method"><br>
+            <label for = "location">Location: </label><br>
+            <input type = "text" id = "location" name = "location"><br>
+            <button class= "w3-button w3-black" type = "submit" id="submitBtn">Request Tutor</button>
+          </form>
+      </div>
   </div>
 </div>
 <!-- Sidebar on small screens when clicking the menu icon -->
