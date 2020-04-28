@@ -136,10 +136,9 @@ class TutorRequest(models.Model):
 
 
     def configure_url(self):
+
         CHAT_URL = "https://chat-site6.herokuapp.com/"
-        s = self.student.user.username
-        t = self.tutor.user.username
-        new_url = CHAT_URL + s + "-" + t
+        new_url = CHAT_URL + "chat-room-" + str(self.id)
         return new_url
 
     def is_old(self):
